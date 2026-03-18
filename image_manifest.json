@@ -1,0 +1,471 @@
+{
+  "version": "1.0",
+  "created": "2026-03-18",
+  "note": "Image manifest for Viva Landscape & Design Internal Sales Catalog. Sources: vendor product pages (verified public URLs) and Google Drive internal folders (folder structure mapped, images pending direct access).",
+  "drive_folders_searched": [
+    {
+      "name": "Media",
+      "id": "1ZHQDTRVGxtgWV8DmwMTtgU0r68R1os3L",
+      "subfolders": [
+        "Sod",
+        "Mixed drone images",
+        "New good images/videos",
+        "Edward Fountain Hills",
+        "Russ Gilmore",
+        "Charles Lee",
+        "Nicole Balboa",
+        "Caesar Benitez",
+        "plus 20+ client project folders"
+      ]
+    },
+    {
+      "name": "Viva Media Library",
+      "id": "1uY35Jd7sqx52bnGQQr_vgNZFfe6teyyT",
+      "subfolders": [
+        "Categories/Pergolas",
+        "Categories/Hardscape",
+        "Categories/Landscape",
+        "Collections/Best Pics",
+        "Collections/Before and After",
+        "Collections/Website media",
+        "Collections/Testimonials",
+        "Clients",
+        "Internal Resources",
+        "Marketing Assets"
+      ]
+    },
+    {
+      "name": "Categories > Pergolas",
+      "id": "1SCz6SgXIOt5h3_4HGOobNYIkggio3NPw",
+      "subfolders": [
+        "Lattice",
+        "Cantilever",
+        "4k aluminum (expensive)"
+      ]
+    },
+    {
+      "name": "Categories > Hardscape",
+      "id": "1KDIVWX-2iWauy2wWU4roBvah6t5JZoz8",
+      "subfolders": [
+        "Pavers",
+        "Artificial Turf",
+        "Travertine",
+        "Curbing",
+        "Outdoor Lighting",
+        "Fire Pits",
+        "Rock"
+      ]
+    }
+  ],
+  "drive_limitation": "Google Drive connector (Anthropic Claude connector) can search folder structure but cannot access/read image files (only Google Docs). Image files in the folders listed above exist but require direct Google Drive API or manual download to integrate. The folder structure confirms Viva has substantial internal project photography organized by client and category.",
+  "images": {
+    "pergolas": [
+      {
+        "id": "pergola-hero",
+        "url": "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-6.jpg",
+        "placement": "hero",
+        "source": "vendor",
+        "vendor": "Duralum",
+        "note": "Solid patio cover hero shot - high quality installation photo"
+      },
+      {
+        "id": "pergola-lattice-1",
+        "url": "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-1.jpg",
+        "placement": "lattice-section",
+        "source": "vendor",
+        "vendor": "Duralum",
+        "note": "Lattice patio cover - clean installation view"
+      },
+      {
+        "id": "pergola-lattice-2",
+        "url": "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-3.jpg",
+        "placement": "lattice-section",
+        "source": "vendor",
+        "vendor": "Duralum",
+        "note": "Lattice patio cover - backyard setting"
+      },
+      {
+        "id": "pergola-lattice-3",
+        "url": "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-5.jpg",
+        "placement": "gallery",
+        "source": "vendor",
+        "vendor": "Duralum",
+        "note": "Lattice cover gallery image"
+      },
+      {
+        "id": "pergola-lattice-4",
+        "url": "https://duralum.com/wp-content/uploads/2013/10/duralum-phoenix-lattice-patio-cover-1.jpg",
+        "placement": "gallery",
+        "source": "vendor",
+        "vendor": "Duralum",
+        "note": "Phoenix lattice cover installation"
+      },
+      {
+        "id": "pergola-solid-1",
+        "url": "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-7.jpg",
+        "placement": "solid-section",
+        "source": "vendor",
+        "vendor": "Duralum",
+        "note": "Solid cover - premium feel"
+      },
+      {
+        "id": "pergola-solid-2",
+        "url": "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-8.jpg",
+        "placement": "solid-section",
+        "source": "vendor",
+        "vendor": "Duralum",
+        "note": "Solid cover - outdoor living area"
+      },
+      {
+        "id": "pergola-solid-3",
+        "url": "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-9.jpg",
+        "placement": "gallery",
+        "source": "vendor",
+        "vendor": "Duralum",
+        "note": "Solid cover gallery"
+      },
+      {
+        "id": "pergola-solid-4",
+        "url": "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-10.jpg",
+        "placement": "gallery",
+        "source": "vendor",
+        "vendor": "Duralum",
+        "note": "Solid cover detail"
+      },
+      {
+        "id": "pergola-lattice-gallery-1",
+        "url": "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-8.jpg",
+        "placement": "gallery",
+        "source": "vendor",
+        "vendor": "Duralum",
+        "note": "Gallery lattice image"
+      },
+      {
+        "id": "pergola-lattice-gallery-2",
+        "url": "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-12.jpg",
+        "placement": "gallery",
+        "source": "vendor",
+        "vendor": "Duralum",
+        "note": "Gallery lattice image 2"
+      },
+      {
+        "id": "pergola-solid-gallery-1",
+        "url": "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-11.jpg",
+        "placement": "gallery",
+        "source": "vendor",
+        "vendor": "Duralum",
+        "note": "Gallery solid image"
+      },
+      {
+        "id": "pergola-solid-gallery-2",
+        "url": "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-12.jpg",
+        "placement": "gallery",
+        "source": "vendor",
+        "vendor": "Duralum",
+        "note": "Gallery solid image 2"
+      }
+    ],
+    "pavers": [
+      {
+        "id": "paver-hero",
+        "url": "https://phoenixpaver.com/wp-content/uploads/2025/09/townscape-patio.jpg",
+        "placement": "hero",
+        "source": "vendor",
+        "vendor": "Phoenix Paver",
+        "note": "Townscape patio hero - flagship product showcase"
+      },
+      {
+        "id": "paver-townscape-1",
+        "url": "https://phoenixpaver.com/wp-content/uploads/2025/09/Townscape_3_pieces.jpg",
+        "placement": "townscape-section",
+        "source": "vendor",
+        "vendor": "Phoenix Paver",
+        "note": "Three-piece combo set view"
+      },
+      {
+        "id": "paver-townscape-2",
+        "url": "https://phoenixpaver.com/wp-content/uploads/2025/09/townscape_driveway.jpg",
+        "placement": "townscape-section",
+        "source": "vendor",
+        "vendor": "Phoenix Paver",
+        "note": "Townscape driveway installation"
+      },
+      {
+        "id": "paver-townscape-3",
+        "url": "https://phoenixpaver.com/wp-content/uploads/2025/09/tonscape_territorial_atrium.jpg",
+        "placement": "townscape-section",
+        "source": "vendor",
+        "vendor": "Phoenix Paver",
+        "note": "Territorial color atrium application"
+      },
+      {
+        "id": "paver-townscape-4",
+        "url": "https://phoenixpaver.com/wp-content/uploads/2025/09/TownScape_Territorial_Parkinglot.jpg",
+        "placement": "gallery",
+        "source": "vendor",
+        "vendor": "Phoenix Paver",
+        "note": "Territorial commercial application"
+      },
+      {
+        "id": "paver-holland-1",
+        "url": "https://phoenixpaver.com/wp-content/uploads/2025/09/holland-pavers-driveway.jpg",
+        "placement": "holland-section",
+        "source": "vendor",
+        "vendor": "Phoenix Paver",
+        "note": "Holland pavers driveway hero"
+      },
+      {
+        "id": "paver-holland-2",
+        "url": "https://phoenixpaver.com/wp-content/uploads/2025/09/Holland_Slate_Pathway.jpg",
+        "placement": "holland-section",
+        "source": "vendor",
+        "vendor": "Phoenix Paver",
+        "note": "Holland slate pathway"
+      },
+      {
+        "id": "paver-holland-3",
+        "url": "https://phoenixpaver.com/wp-content/uploads/2025/09/holland-paver-walkway-residential.jpg",
+        "placement": "gallery",
+        "source": "vendor",
+        "vendor": "Phoenix Paver",
+        "note": "Residential walkway"
+      },
+      {
+        "id": "paver-aztec-1",
+        "url": "https://phoenixpaver.com/wp-content/uploads/2025/09/Pool-at-Night.jpg",
+        "placement": "aztec-section",
+        "source": "vendor",
+        "vendor": "Phoenix Paver",
+        "note": "Aztec pool area at night - premium feel"
+      },
+      {
+        "id": "paver-aztec-2",
+        "url": "https://phoenixpaver.com/wp-content/uploads/2025/09/Aztec_stone_territorial.jpg",
+        "placement": "aztec-section",
+        "source": "vendor",
+        "vendor": "Phoenix Paver",
+        "note": "Aztec territorial stone"
+      },
+      {
+        "id": "paver-aztec-3",
+        "url": "https://phoenixpaver.com/wp-content/uploads/2025/09/Aztec_Slate_paver.jpg",
+        "placement": "gallery",
+        "source": "vendor",
+        "vendor": "Phoenix Paver",
+        "note": "Aztec slate paver"
+      },
+      {
+        "id": "paver-veneer-1",
+        "url": "https://phoenixpaver.com/wp-content/uploads/2025/09/veneer-paver-poolside.jpg",
+        "placement": "veneer-section",
+        "source": "vendor",
+        "vendor": "Phoenix Paver",
+        "note": "Veneer paver poolside application"
+      },
+      {
+        "id": "paver-veneer-2",
+        "url": "https://phoenixpaver.com/wp-content/uploads/2025/09/veneer-pool-deck.jpg",
+        "placement": "veneer-section",
+        "source": "vendor",
+        "vendor": "Phoenix Paver",
+        "note": "Veneer pool deck overlay"
+      },
+      {
+        "id": "paver-colors",
+        "url": "https://phoenixpaver.com/wp-content/uploads/2025/09/paver-color-examples.png",
+        "placement": "colors-section",
+        "source": "vendor",
+        "vendor": "Phoenix Paver",
+        "note": "Color swatch examples for all paver lines"
+      }
+    ],
+    "turf": [
+      {
+        "id": "turf-hero",
+        "url": "https://nolimitturf.com/wp-content/uploads/2023/12/IMG_7258-scaled.jpg",
+        "placement": "hero",
+        "source": "vendor",
+        "vendor": "No Limit Turf",
+        "note": "Beautiful turf installation hero shot"
+      },
+      {
+        "id": "turf-standard-1",
+        "url": "https://nolimitturf.com/wp-content/uploads/2023/12/EVO-60-Lime-scaled-e1705619911645.jpeg",
+        "placement": "standard-section",
+        "source": "vendor",
+        "vendor": "No Limit Turf",
+        "note": "EVO 60 Lime - standard tier"
+      },
+      {
+        "id": "turf-standard-2",
+        "url": "https://nolimitturf.com/wp-content/uploads/2023/12/lime80_3.jpg",
+        "placement": "standard-section",
+        "source": "vendor",
+        "vendor": "No Limit Turf",
+        "note": "80oz Lime turf installation"
+      },
+      {
+        "id": "turf-standard-3",
+        "url": "https://nolimitturf.com/wp-content/uploads/2023/12/evo60lime_3.jpg",
+        "placement": "standard-section",
+        "source": "vendor",
+        "vendor": "No Limit Turf",
+        "note": "EVO 60 Lime yard view"
+      },
+      {
+        "id": "turf-premium-1",
+        "url": "https://nolimitturf.com/wp-content/uploads/2023/12/premium96_3-scaled.jpg",
+        "placement": "premium-section",
+        "source": "vendor",
+        "vendor": "No Limit Turf",
+        "note": "Premium 96oz turf - top tier look"
+      },
+      {
+        "id": "turf-premium-2",
+        "url": "https://nolimitturf.com/wp-content/uploads/2023/12/nolimit84_3-scaled.jpg",
+        "placement": "premium-section",
+        "source": "vendor",
+        "vendor": "No Limit Turf",
+        "note": "No Limit 84oz premium installation"
+      },
+      {
+        "id": "turf-pet-1",
+        "url": "https://nolimitturf.com/wp-content/uploads/2023/12/IMG_4137-scaled-e1740087246834.jpg",
+        "placement": "pet-section",
+        "source": "vendor",
+        "vendor": "No Limit Turf",
+        "note": "Pet-friendly turf installation"
+      },
+      {
+        "id": "turf-pet-2",
+        "url": "https://nolimitturf.com/wp-content/uploads/2025/02/IMG_5124-scaled-e1740087437629.jpg",
+        "placement": "pet-section",
+        "source": "vendor",
+        "vendor": "No Limit Turf",
+        "note": "Pet area turf install"
+      },
+      {
+        "id": "turf-putting-1",
+        "url": "https://nolimitturf.com/wp-content/uploads/2023/12/augusta_2.jpg",
+        "placement": "putting-section",
+        "source": "vendor",
+        "vendor": "No Limit Turf",
+        "note": "Augusta putting green installation"
+      },
+      {
+        "id": "turf-choice-1",
+        "url": "https://nolimitturf.com/wp-content/uploads/2023/12/Choice-74-scaled-e1705620518237.jpeg",
+        "placement": "gallery",
+        "source": "vendor",
+        "vendor": "No Limit Turf",
+        "note": "Choice 74 turf installation"
+      },
+      {
+        "id": "turf-gallery-1",
+        "url": "https://nolimitturf.com/wp-content/uploads/2023/12/IMG_6383-225x300.jpg",
+        "placement": "gallery",
+        "source": "vendor",
+        "vendor": "No Limit Turf",
+        "note": "Turf installation detail"
+      },
+      {
+        "id": "turf-az-blend",
+        "url": "https://arizonaturfdepot.com/wp-content/uploads/2022/05/AZ-Turf-Depot-AZ-BLEND-PRODUCT-IMAGE.jpg",
+        "placement": "premium-section",
+        "source": "vendor",
+        "vendor": "Arizona Turf Depot",
+        "note": "AZ Blend 105 product image"
+      },
+      {
+        "id": "turf-fescue",
+        "url": "https://arizonaturfdepot.com/wp-content/uploads/2022/05/AZ-Turf-Depot-FESCUE-PRODUCT-IMAGE.jpg",
+        "placement": "premium-section",
+        "source": "vendor",
+        "vendor": "Arizona Turf Depot",
+        "note": "Fescue 105 product image"
+      }
+    ],
+    "sod": [
+      {
+        "id": "sod-hero",
+        "url": "https://www.evergreenturf.com/_images/home-page/carousel-images/residential1.jpg",
+        "placement": "hero",
+        "source": "vendor",
+        "vendor": "Evergreen Turf",
+        "note": "Lush residential lawn hero shot"
+      },
+      {
+        "id": "sod-midiron",
+        "url": "https://www.evergreenturf.com/_images/closeup-midiron.jpg",
+        "placement": "midiron-section",
+        "source": "vendor",
+        "vendor": "Evergreen Turf",
+        "note": "Midiron grass closeup - product identification"
+      },
+      {
+        "id": "sod-tifway",
+        "url": "https://www.evergreenturf.com/_images/closeup-tifway.jpg",
+        "placement": "tifway-section",
+        "source": "vendor",
+        "vendor": "Evergreen Turf",
+        "note": "Tifway 419 grass closeup - product identification"
+      },
+      {
+        "id": "sod-tifgrand",
+        "url": "https://www.evergreenturf.com/_images/closeup-tifgrand.jpg",
+        "placement": "shade-section",
+        "source": "vendor",
+        "vendor": "Evergreen Turf",
+        "note": "TifGrand shade-tolerant closeup"
+      },
+      {
+        "id": "sod-palmetto",
+        "url": "https://www.evergreenturf.com/_images/closeup-palmetto.jpg",
+        "placement": "augustine-section",
+        "source": "vendor",
+        "vendor": "Evergreen Turf",
+        "note": "Palmetto St. Augustine closeup"
+      },
+      {
+        "id": "sod-residential-2",
+        "url": "https://www.evergreenturf.com/_images/home-page/carousel-images/residential2.jpg",
+        "placement": "gallery",
+        "source": "vendor",
+        "vendor": "Evergreen Turf",
+        "note": "Residential lawn installation"
+      },
+      {
+        "id": "sod-residential-3",
+        "url": "https://www.evergreenturf.com/_images/home-page/carousel-images/residential3.jpg",
+        "placement": "gallery",
+        "source": "vendor",
+        "vendor": "Evergreen Turf",
+        "note": "Residential lawn - front yard"
+      },
+      {
+        "id": "sod-residential-4",
+        "url": "https://www.evergreenturf.com/_images/home-page/carousel-images/residential4.jpg",
+        "placement": "gallery",
+        "source": "vendor",
+        "vendor": "Evergreen Turf",
+        "note": "Residential lawn view"
+      },
+      {
+        "id": "sod-commercial-1",
+        "url": "https://www.evergreenturf.com/_images/home-page/carousel-images/commercial1.jpg",
+        "placement": "gallery",
+        "source": "vendor",
+        "vendor": "Evergreen Turf",
+        "note": "Commercial-grade sod application"
+      },
+      {
+        "id": "sod-tiftuf",
+        "url": "https://www.evergreenturf.com/_images/closeup-tiftuf.jpg",
+        "placement": "comparison",
+        "source": "vendor",
+        "vendor": "Evergreen Turf",
+        "note": "TifTuf variety closeup"
+      }
+    ]
+  }
+}

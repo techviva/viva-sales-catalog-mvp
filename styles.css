@@ -1307,11 +1307,163 @@ a:hover { color: var(--brand-primary-light); }
   .card-grid-2, .card-grid-3, .card-grid-4 { grid-template-columns: 1fr; }
   .home-hero h2 { font-size: 26px; }
   .service-hero h2 { font-size: 22px; }
-  .tabs-bar { overflow-x: auto; flex-wrap: nowrap; }
-  .tab-btn { flex-shrink: 0; }
+  .anchor-nav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .anchor-link { flex-shrink: 0; }
+  .option-extra-images { grid-template-columns: 1fr !important; }
 }
 
 @media (max-width: 480px) {
   .content-area { padding: var(--space-md); }
   .service-hero { padding: var(--space-lg) var(--space-md); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   V2.0 — SCROLLABLE SERVICE PAGES + ANCHOR NAVIGATION
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── HERO WITH BACKGROUND IMAGE ───────────────────────────── */
+.service-hero.has-hero-image {
+  position: relative;
+  min-height: 280px;
+  display: flex;
+  align-items: flex-end;
+  padding: 0;
+  overflow: hidden;
+}
+
+.hero-image-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.hero-image-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(26, 26, 26, 0.88) 0%,
+    rgba(26, 26, 26, 0.6) 40%,
+    rgba(26, 26, 26, 0.25) 100%
+  );
+}
+
+.hero-content-overlay {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-2xl) var(--space-xl);
+  width: 100%;
+}
+
+.service-hero.has-hero-image h2 {
+  color: #fff;
+}
+
+.service-hero.has-hero-image .hero-desc {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.service-hero.has-hero-image .badge-brand {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.service-hero:not(.has-hero-image) .hero-content-overlay {
+  padding: 0;
+}
+
+/* ── STICKY ANCHOR NAVIGATION ─────────────────────────────── */
+.anchor-nav {
+  display: flex;
+  gap: 4px;
+  background: var(--surface);
+  padding: 6px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-xl);
+  border: 1px solid var(--border-soft);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  flex-wrap: wrap;
+}
+
+.anchor-link {
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.anchor-link:hover {
+  background: var(--surface-alt);
+  color: var(--text-primary);
+}
+
+.anchor-link.active {
+  background: var(--brand-primary);
+  color: var(--text-on-brand);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── SECTION DIVIDERS ─────────────────────────────────────── */
+.catalog-section {
+  margin-bottom: var(--space-2xl);
+  scroll-margin-top: 80px;
+}
+
+.section-divider {
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--border-soft);
+}
+
+.section-divider h3 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+}
+
+/* ── EXPANDED CARD (for specific product views) ────────────── */
+.card-expanded {
+  max-width: 700px;
+}
+
+/* ── EXTRA IMAGES GRID (for products with multiple images) ── */
+.option-extra-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.option-extra-images .gallery-item {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-soft);
+}
+
+.option-extra-images .gallery-item:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* ── MAIN CONTENT SCROLL BEHAVIOR ─────────────────────────── */
+.main-content {
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }

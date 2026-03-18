@@ -1,16 +1,11 @@
 /**
  * ═══════════════════════════════════════════════════════════════
  * VIVA LANDSCAPE & DESIGN — INTERNAL SALES CATALOG
- * Application Logic (app.js)
+ * Application Logic (app.js) — v2.0 (Scrollable Pages + Anchor Nav)
  * ═══════════════════════════════════════════════════════════════
  *
- * This file handles:
- * - Sidebar navigation and routing
- * - Tab switching within services
- * - Component rendering (cards, galleries, FAQs, comparisons, etc.)
- * - Lightbox for image enlargement
- * - Search/filter functionality
- * - Mobile sidebar toggle
+ * KEY CHANGE: Service pages are now single vertically-scrollable
+ * pages with sticky anchor navigation instead of tabbed sub-views.
  *
  * All content comes from content.js — this file only renders.
  * ═══════════════════════════════════════════════════════════════
@@ -18,38 +13,16 @@
 
 // ── STATE ────────────────────────────────────────────────────
 let currentPage = "home";
-let currentTab = 0;
 
-// ── ICON MAP (simple emoji-based — replace with SVG/icon library) ──
+// ── ICON MAP ─────────────────────────────────────────────────
 const ICONS = {
-  pergola: "🏛️",
-  paver: "🧱",
-  turf: "🌿",
-  sod: "🌱",
-  rock: "🪨",
-  fire: "🔥",
-  outdoor: "☀️",
-  plant: "🌳",
-  irrigation: "💧",
-  wall: "🧱",
-  home: "🏠",
-  gallery: "🖼️",
-  faq: "❓",
-  notes: "📋",
-  light: "💡",
-  fan: "🌀",
-  electric: "⚡",
-  screen: "🪟",
-  gutter: "🌧️",
-  border: "📏",
-  seal: "🛡️",
-  infill: "🫧",
-  seed: "🌾",
-  fertilizer: "🧪",
-  sidebar: "📑",
-  tabs: "📂",
-  compare: "⚖️",
-  search: "🔍",
+  pergola: "🏛️", paver: "🧱", turf: "🌿", sod: "🌱",
+  rock: "🪨", fire: "🔥", outdoor: "☀️", plant: "🌳",
+  irrigation: "💧", wall: "🧱", home: "🏠", gallery: "🖼️",
+  faq: "❓", notes: "📋", light: "💡", fan: "🌀",
+  electric: "⚡", screen: "🪟", gutter: "🌧️", border: "📏",
+  seal: "🛡️", infill: "🫧", seed: "🌾", fertilizer: "🧪",
+  sidebar: "📑", tabs: "📂", compare: "⚖️", search: "🔍",
 };
 
 // ── INITIALIZATION ───────────────────────────────────────────
@@ -57,41 +30,29 @@ document.addEventListener("DOMContentLoaded", () => {
   renderSidebar();
   navigateTo("home");
   setupMobileToggle();
-  setupSearch();
 });
 
 // ── SIDEBAR ──────────────────────────────────────────────────
 function renderSidebar() {
   const nav = document.getElementById("sidebar-nav");
   let html = "";
-
-  // Section: Main
   html += `<div class="sidebar-section-label">Main</div>`;
   html += navItem("home", "Home", ICONS.home);
-  
-  // Section: Services
   html += `<div class="sidebar-section-label" style="margin-top:12px">Services</div>`;
   SERVICES.forEach(s => {
     html += navItem(s.id, s.title, ICONS[s.icon] || "📄");
   });
-
-  // Section: Global
   html += `<div class="sidebar-section-label" style="margin-top:12px">Global</div>`;
   html += navItem("before-after", "Before & After Gallery", ICONS.gallery);
   html += navItem("faqs", "FAQs", ICONS.faq);
   html += navItem("research-flags", "Internal Notes / Flags", ICONS.notes);
-
-  // Section: Future
   html += `<div class="future-services-group">`;
   html += `<div class="sidebar-section-label">Coming Soon</div>`;
   FUTURE_SERVICES.forEach(s => {
     html += `<div class="nav-item future"><span class="nav-icon">${ICONS[s.icon] || "📄"}</span>${s.title}</div>`;
   });
   html += `</div>`;
-
   nav.innerHTML = html;
-
-  // Attach click handlers
   nav.querySelectorAll(".nav-item[data-page]").forEach(btn => {
     btn.addEventListener("click", () => {
       navigateTo(btn.dataset.page);
@@ -107,16 +68,10 @@ function navItem(id, label, icon) {
 // ── NAVIGATION ───────────────────────────────────────────────
 function navigateTo(page) {
   currentPage = page;
-  currentTab = 0;
-
-  // Update active nav
   document.querySelectorAll(".nav-item[data-page]").forEach(btn => {
     btn.classList.toggle("active", btn.dataset.page === page);
   });
-
-  // Render page
   const content = document.getElementById("content-area");
-  
   if (page === "home") {
     content.innerHTML = renderHomePage();
   } else if (page === "before-after") {
@@ -129,45 +84,31 @@ function navigateTo(page) {
     const service = SERVICES.find(s => s.id === page);
     if (service) {
       content.innerHTML = renderServicePage(service);
+      setupStickyNav(service);
     }
   }
-
-  // Scroll to top
   document.querySelector(".main-content").scrollTo(0, 0);
-
-  // Setup interactive elements
   setupAccordions();
   setupGalleryClicks();
 }
 
-// ── HOME PAGE RENDER ─────────────────────────────────────────
+// ── HOME PAGE ────────────────────────────────────────────────
 function renderHomePage() {
-  let html = "";
-
-  // Hero
-  html += `
+  let html = `
     <div class="home-hero">
       <div class="home-brand-name">${BRAND.name}</div>
       <h2>${HOME.heroTitle}</h2>
       <p>${HOME.toolDescription}</p>
     </div>
-  `;
-
-  // Service cards
-  html += `<div class="home-services-grid">`;
-  SERVICES.forEach(s => {
-    html += `
-      <div class="home-service-card" onclick="navigateTo('${s.id}')">
-        <div class="home-service-icon">${ICONS[s.icon] || "📄"}</div>
-        <h3>${s.title}</h3>
-        <p>${s.shortDesc}</p>
-      </div>
-    `;
-  });
-  html += `</div>`;
-
-  // How to use
-  html += `
+    <div class="home-services-grid">
+      ${SERVICES.map(s => `
+        <div class="home-service-card" onclick="navigateTo('${s.id}')">
+          <div class="home-service-icon">${ICONS[s.icon] || "📄"}</div>
+          <h3>${s.title}</h3>
+          <p>${s.shortDesc}</p>
+        </div>
+      `).join("")}
+    </div>
     <div class="how-to-use">
       <h3>📖 How to Use This During a Presentation</h3>
       <div class="how-to-grid">
@@ -180,20 +121,12 @@ function renderHomePage() {
         `).join("")}
       </div>
     </div>
-  `;
-
-  // Recommended flow
-  html += `
     <div class="how-to-use">
       <h3>🎯 Recommended Presentation Flow</h3>
       <ol style="padding-left:20px; margin-top:16px;">
         ${HOME.recommendedFlow.map(step => `<li style="padding:6px 0; font-size:14px; color:var(--text-secondary);">${step}</li>`).join("")}
       </ol>
     </div>
-  `;
-
-  // Content status
-  html += `
     <div class="updates-section" style="margin-top: var(--space-xl);">
       <h3>📊 Content Status</h3>
       ${HOME.recentUpdates.map(u => `
@@ -205,98 +138,176 @@ function renderHomePage() {
       `).join("")}
     </div>
   `;
-
   return html;
 }
 
-// ── SERVICE PAGE RENDER ──────────────────────────────────────
+// ══════════════════════════════════════════════════════════════
+// SERVICE PAGE — SCROLLABLE LAYOUT WITH ANCHOR NAV
+// ══════════════════════════════════════════════════════════════
 function renderServicePage(service) {
   let html = "";
 
-  // Hero
+  // Hero with image
   html += `
-    <div class="service-hero">
-      <h2>${service.title}</h2>
-      <p class="hero-desc">${service.shortDesc}</p>
-      <div class="hero-badges">
-        ${service.heroBadges.map(b => `<span class="badge badge-brand">${b}</span>`).join("")}
+    <div class="service-hero ${service.heroImage ? 'has-hero-image' : ''}">
+      ${service.heroImage ? `<div class="hero-image-bg" style="background-image:url('${service.heroImage}')"></div>` : ''}
+      <div class="hero-content-overlay">
+        <h2>${service.title}</h2>
+        <p class="hero-desc">${service.shortDesc}</p>
+        <div class="hero-badges">
+          ${service.heroBadges.map(b => `<span class="badge badge-brand">${b}</span>`).join("")}
+        </div>
       </div>
     </div>
   `;
 
-  // Tabs bar
-  html += `<div class="tabs-bar">`;
-  service.tabs.forEach((tab, i) => {
-    html += `<button class="tab-btn ${i === 0 ? "active" : ""}" data-tab="${i}" onclick="switchTab(${i}, '${service.id}')">${tab}</button>`;
+  // Sticky anchor nav
+  const sections = service.sections || [];
+  html += `<nav class="anchor-nav" id="anchor-nav">`;
+  sections.forEach((s, i) => {
+    const slug = slugify(s);
+    html += `<a href="#section-${slug}" class="anchor-link ${i === 0 ? 'active' : ''}" data-anchor="${slug}">${s}</a>`;
   });
-  html += `</div>`;
+  html += `</nav>`;
 
-  // Tab contents
-  service.tabs.forEach((tab, i) => {
-    html += `<div class="tab-content ${i === 0 ? "active" : ""}" data-tab-content="${i}">`;
-    html += renderTabContent(service, tab, i);
-    html += `</div>`;
+  // Render all sections vertically
+  sections.forEach(sectionName => {
+    const slug = slugify(sectionName);
+    const name = sectionName.toLowerCase();
+    html += `<section class="catalog-section" id="section-${slug}">`;
+    html += `<div class="section-divider"><h3>${sectionName}</h3></div>`;
+
+    if (name === "overview") {
+      html += renderOverview(service);
+    } else if (name.includes("vs") || name.includes("attached")) {
+      html += renderComparisons(service, sectionName);
+    } else if (name.includes("faq")) {
+      html += renderFAQs(service.faqs, service.title);
+    } else if (name === "gallery") {
+      html += renderGallery(service.gallery);
+    } else if (name.includes("before") && name.includes("after")) {
+      html += renderBeforeAfter(service.beforeAfter);
+    } else if (name.includes("add-on") || name === "add-ons") {
+      html += renderAddOns(service);
+    } else if (name.includes("color") || name.includes("finish")) {
+      html += renderColorOptions(service);
+    } else if (name.includes("two-post") || name.includes("cantilever")) {
+      html += renderTwoPost(service);
+    } else if (name.includes("seasonal") || name.includes("care")) {
+      html += renderSeasonalCare(service);
+    } else if (name.includes("irrigation")) {
+      html += renderIrrigationBasics(service);
+    } else if (name.includes("shade")) {
+      html += renderShadeOptions(service);
+    } else if (name.includes("st. augustine") || name.includes("augustine")) {
+      html += renderStAugustine(service);
+    } else if (name.includes("product comparison")) {
+      html += renderProductComparison(service);
+    } else if (name.includes("pet")) {
+      html += renderTierOptions(service, "premium-pet", "Pet-Friendly Options");
+    } else if (name.includes("putting")) {
+      html += renderTierOptions(service, "specialty", "Putting Green");
+    } else if (name.includes("standard")) {
+      html += renderTierOptions(service, "standard", "Standard Tier");
+    } else if (name.includes("premium") && !name.includes("pet")) {
+      html += renderTierOptions(service, "premium", "Premium Tier");
+    } else if (name === "townscape") {
+      html += renderSpecificOption(service, "Townscape Paver Sets");
+    } else if (name === "holland") {
+      html += renderSpecificOption(service, "Holland Pavers");
+    } else if (name.includes("veneer")) {
+      html += renderSpecificOption(service, "Veneer Pavers / Pool Coping");
+    } else if (name.includes("aztec")) {
+      html += renderSpecificOption(service, "Aztec Stone Sets");
+    } else if (name.includes("12×12") || name.includes("12x12") || name.includes("economy")) {
+      html += renderSpecificOption(service, "12×12 Square Step Stone");
+    } else if (name.includes("midiron")) {
+      html += renderComparisons(service, sectionName);
+    } else {
+      html += `<p style="color:var(--text-muted);">Content for this section is being prepared.</p>`;
+    }
+
+    html += `</section>`;
   });
 
   return html;
 }
 
-function renderTabContent(service, tabName, index) {
-  const name = tabName.toLowerCase();
+// ── STICKY ANCHOR NAV BEHAVIOR ───────────────────────────────
+function setupStickyNav(service) {
+  const mainContent = document.querySelector(".main-content");
+  const anchorNav = document.getElementById("anchor-nav");
+  if (!anchorNav || !mainContent) return;
 
-  if (name === "overview") return renderOverview(service);
-  if (name.includes("vs") || name.includes("attached") || name === "lattice vs solid") return renderComparisons(service, tabName);
-  if (name.includes("faq")) return renderFAQs(service.faqs, service.title);
-  if (name === "gallery") return renderGallery(service.gallery);
-  if (name.includes("before") && name.includes("after")) return renderBeforeAfter(service.beforeAfter);
-  if (name.includes("add-on") || name === "add-ons") return renderAddOns(service);
-  if (name.includes("color") || name.includes("finish")) return renderColorOptions(service);
-  if (name.includes("two-post") || name.includes("cantilever")) return renderTwoPost(service);
-  if (name.includes("seasonal") || name.includes("care")) return renderSeasonalCare(service);
-  if (name.includes("irrigation")) return renderIrrigationBasics(service);
-  if (name.includes("shade")) return renderShadeOptions(service);
-  if (name.includes("st. augustine") || name.includes("augustine")) return renderStAugustine(service);
-  if (name.includes("product comparison")) return renderProductComparison(service);
-  if (name.includes("pet")) return renderTierOptions(service, "premium-pet", "Pet-Friendly Options");
-  if (name.includes("putting")) return renderTierOptions(service, "specialty", "Putting Green");
-  if (name.includes("standard")) return renderTierOptions(service, "standard", "Standard Tier");
-  if (name.includes("premium") && !name.includes("pet")) return renderTierOptions(service, "premium", "Premium Tier");
+  // Click handler for anchor links
+  anchorNav.querySelectorAll(".anchor-link").forEach(link => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute("href").slice(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        const offset = anchorNav.offsetHeight + 20;
+        const top = target.offsetTop - offset;
+        mainContent.scrollTo({ top, behavior: "smooth" });
+      }
+      anchorNav.querySelectorAll(".anchor-link").forEach(l => l.classList.remove("active"));
+      link.classList.add("active");
+    });
+  });
 
-  // For paver-specific tabs
-  if (name === "townscape") return renderSpecificOption(service, "Townscape Paver Sets");
-  if (name === "holland") return renderSpecificOption(service, "Holland Pavers");
-  if (name.includes("veneer")) return renderSpecificOption(service, "Veneer Pavers / Pool Coping");
-  if (name.includes("aztec")) return renderSpecificOption(service, "Aztec Stone Sets");
-  if (name.includes("12×12") || name.includes("12x12") || name.includes("economy")) return renderSpecificOption(service, "12×12 Square Step Stone");
-
-  // For sod tabs
-  if (name.includes("midiron")) return renderComparisons(service, tabName);
-
-  // Fallback — render options if available
-  if (service.options && service.options.length > 0) {
-    return renderAllOptions(service);
-  }
-
-  return `<p style="color:var(--text-muted); padding:var(--space-xl);">Content for this tab is being prepared.</p>`;
+  // Scroll spy
+  let ticking = false;
+  mainContent.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateActiveAnchor();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
 }
 
-// ── OVERVIEW RENDERER ────────────────────────────────────────
+function updateActiveAnchor() {
+  const sections = document.querySelectorAll(".catalog-section");
+  const anchorNav = document.getElementById("anchor-nav");
+  if (!anchorNav) return;
+  const mainContent = document.querySelector(".main-content");
+  const scrollTop = mainContent.scrollTop;
+  const offset = 200;
+
+  let activeId = null;
+  sections.forEach(section => {
+    if (section.offsetTop - offset <= scrollTop) {
+      activeId = section.id;
+    }
+  });
+
+  if (activeId) {
+    anchorNav.querySelectorAll(".anchor-link").forEach(link => {
+      const href = link.getAttribute("href").slice(1);
+      link.classList.toggle("active", href === activeId);
+    });
+  }
+}
+
+function slugify(text) {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+// ── OVERVIEW ─────────────────────────────────────────────────
 function renderOverview(service) {
   const o = service.overview;
   let html = `<div class="overview-section">`;
-  
   html += `<p class="overview-intro">${o.intro}</p>`;
-
   if (o.vendorNote) {
     html += `<div class="vendor-note">📦 ${o.vendorNote}</div>`;
   }
-
   if (o.keyPoints) {
     html += `<ul class="overview-key-points">`;
     o.keyPoints.forEach(p => { html += `<li>${p}</li>`; });
     html += `</ul>`;
   }
-
   if (o.consultant_tip) {
     html += `
       <div class="consultant-tip">
@@ -305,30 +316,25 @@ function renderOverview(service) {
       </div>
     `;
   }
-
   html += `</div>`;
   return html;
 }
 
-// ── COMPARISONS RENDERER ─────────────────────────────────────
-function renderComparisons(service, tabName) {
+// ── COMPARISONS ──────────────────────────────────────────────
+function renderComparisons(service, sectionName) {
   let html = "";
   const comps = service.comparisons || [];
-  
-  // Try to match by tab name
   let relevantComps = comps;
-  if (tabName.toLowerCase().includes("vs")) {
-    relevantComps = comps.filter(c => 
-      c.title.toLowerCase().includes(tabName.toLowerCase().split(" vs ")[0].trim().split(" ").pop()) ||
-      c.title.toLowerCase().includes(tabName.toLowerCase())
+  if (sectionName && sectionName.toLowerCase().includes("vs")) {
+    relevantComps = comps.filter(c =>
+      c.title.toLowerCase().includes(sectionName.toLowerCase().split(" vs ")[0].trim().split(" ").pop()) ||
+      c.title.toLowerCase().includes(sectionName.toLowerCase())
     );
     if (relevantComps.length === 0) relevantComps = comps;
   }
-
   relevantComps.forEach(comp => {
     html += `
       <div class="comparison-section">
-        <h3>${comp.title}</h3>
         ${comp.subtitle ? `<p style="color:var(--text-muted);margin-bottom:var(--space-lg);font-size:14px;">${comp.subtitle}</p>` : ""}
         <div class="comparison-grid">
           ${comp.items.map(item => `
@@ -348,25 +354,16 @@ function renderComparisons(service, tabName) {
       </div>
     `;
   });
-
   if (html === "") {
     html = `<p style="color:var(--text-muted);padding:var(--space-lg);">Comparison data for this section is being prepared.</p>`;
   }
-
   return html;
 }
 
 // ── OPTIONS RENDERERS ────────────────────────────────────────
-function renderAllOptions(service) {
-  let html = `<div class="card-grid card-grid-2">`;
-  service.options.forEach(opt => { html += renderOptionCard(opt); });
-  html += `</div>`;
-  return html;
-}
-
 function renderTierOptions(service, tier, title) {
   const opts = (service.options || []).filter(o => o.tier === tier || o.tier?.includes(tier));
-  let html = `<div class="section-header"><h3>${title}</h3></div>`;
+  let html = "";
   if (opts.length === 0) {
     html += `<p style="color:var(--text-muted)">Options for this tier are being prepared.</p>`;
     return html;
@@ -374,43 +371,45 @@ function renderTierOptions(service, tier, title) {
   html += `<div class="card-grid card-grid-2">`;
   opts.forEach(opt => { html += renderOptionCard(opt); });
   html += `</div>`;
-
-  // Product comparison at bottom
-  if (service.comparisons && service.comparisons.length > 0) {
-    html += `<div style="margin-top:var(--space-xl)">`;
-    html += renderComparisons(service, title);
-    html += `</div>`;
-  }
-
   return html;
 }
 
 function renderSpecificOption(service, optionName) {
   const opt = (service.options || []).find(o => o.name === optionName);
   if (!opt) return `<p style="color:var(--text-muted);padding:var(--space-lg);">This product section is being prepared.</p>`;
-  
-  let html = `<div style="max-width:700px;">`;
-  html += renderOptionCard(opt, true);
-  html += `</div>`;
+  let html = renderOptionCard(opt, true);
+  // Show extra images if available
+  if (opt.images && opt.images.length > 0) {
+    html += `<div class="option-extra-images">`;
+    opt.images.forEach(imgUrl => {
+      html += `<div class="gallery-item" data-lightbox="${opt.name}">
+        <div class="gallery-image-wrap"><img src="${imgUrl}" alt="${opt.name}" loading="lazy"></div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
   return html;
 }
 
 function renderProductComparison(service) {
   let html = renderComparisons(service, "comparison");
-  if (service.options && service.options.length > 1) {
-    html += `<div class="section-header" style="margin-top:var(--space-xl)"><h3>All Product Options</h3></div>`;
-    html += `<div class="card-grid card-grid-2">`;
-    service.options.forEach(opt => { html += renderOptionCard(opt); });
-    html += `</div>`;
+  if (service.colorSwatchImage) {
+    html += `
+      <div style="margin-top:var(--space-xl);">
+        <div class="section-header"><h3>Color Options</h3><p>Available colors across paver product lines</p></div>
+        <div class="card" style="text-align:center;padding:var(--space-lg);">
+          <img src="${service.colorSwatchImage}" alt="Paver color options" style="max-width:100%;border-radius:var(--radius-md);" loading="lazy">
+        </div>
+      </div>
+    `;
   }
   return html;
 }
 
 function renderOptionCard(opt, expanded = false) {
   const tierClass = opt.tier?.includes("premium") ? "premium" : opt.tier === "economy" ? "economy" : opt.tier === "specialty" ? "specialty" : opt.tier?.includes("pet") ? "pet" : "brand";
-  
   let html = `
-    <div class="card">
+    <div class="card ${expanded ? 'card-expanded' : ''}">
       ${renderImageOrPlaceholder(opt.image, opt.name)}
       <div class="card-title">${opt.name}</div>
       <div class="card-subtitle">${opt.subtitle || ""}</div>
@@ -419,7 +418,6 @@ function renderOptionCard(opt, expanded = false) {
       </div>
       <div class="card-desc">${opt.description}</div>
   `;
-
   if (opt.specs) {
     html += `<table class="specs-table">`;
     opt.specs.forEach(s => {
@@ -427,7 +425,6 @@ function renderOptionCard(opt, expanded = false) {
     });
     html += `</table>`;
   }
-
   if (opt.colorOptions) {
     html += `
       <div style="margin-top:var(--space-md)">
@@ -438,21 +435,18 @@ function renderOptionCard(opt, expanded = false) {
       </div>
     `;
   }
-
   if (opt.note) {
     html += `<div class="internal-note">${opt.note.replace("⚠️ ", "")}</div>`;
   }
-
   html += `</div>`;
   return html;
 }
 
-// ── ADD-ONS RENDERER ─────────────────────────────────────────
+// ── ADD-ONS ──────────────────────────────────────────────────
 function renderAddOns(service) {
   if (!service.addOns) return "";
   let html = `
-    <div class="section-header"><h3>Available Add-Ons & Upgrades</h3>
-    <p>These options can be included in the project to enhance the installation.</p></div>
+    <p style="color:var(--text-secondary);margin-bottom:var(--space-lg);font-size:14px;">These options can be included in the project to enhance the installation.</p>
     <div class="addons-grid">
   `;
   service.addOns.forEach(a => {
@@ -468,12 +462,11 @@ function renderAddOns(service) {
   return html;
 }
 
-// ── COLOR OPTIONS RENDERER ───────────────────────────────────
+// ── COLOR OPTIONS ────────────────────────────────────────────
 function renderColorOptions(service) {
   if (!service.colorOptions) return `<p style="color:var(--text-muted)">Color options section is being prepared.</p>`;
   const co = service.colorOptions;
-  let html = `<div class="section-header"><h3>Colors & Finishes</h3></div>`;
-  
+  let html = "";
   co.categories.forEach(cat => {
     html += `
       <div class="color-category">
@@ -484,20 +477,17 @@ function renderColorOptions(service) {
       </div>
     `;
   });
-
   if (co.placeholder) {
     html += `<div class="internal-note">${co.placeholder}</div>`;
   }
-
   return html;
 }
 
-// ── TWO-POST SECTION ─────────────────────────────────────────
+// ── TWO-POST ─────────────────────────────────────────────────
 function renderTwoPost(service) {
   if (!service.twoPostSection) return "";
   const tp = service.twoPostSection;
   let html = `
-    <div class="section-header"><h3>${tp.title}</h3></div>
     <div class="card" style="max-width:700px;">
       ${renderImageOrPlaceholder(tp.image, tp.title)}
       <p class="card-desc">${tp.description}</p>
@@ -510,12 +500,11 @@ function renderTwoPost(service) {
   return html;
 }
 
-// ── SEASONAL CARE RENDERER ───────────────────────────────────
+// ── SEASONAL CARE ────────────────────────────────────────────
 function renderSeasonalCare(service) {
   if (!service.seasonalCare) return `<p style="color:var(--text-muted)">Seasonal care content is being prepared.</p>`;
   const sc = service.seasonalCare;
   let html = `
-    <div class="section-header"><h3>${sc.title}</h3></div>
     <div class="season-grid">
       ${sc.items.map(item => `
         <div class="season-card">
@@ -539,7 +528,6 @@ function renderIrrigationBasics(service) {
   if (!service.irrigationBasics) return "";
   const ib = service.irrigationBasics;
   let html = `
-    <div class="section-header"><h3>${ib.title}</h3></div>
     <ul class="overview-key-points">
       ${ib.points.map(p => `<li>${p}</li>`).join("")}
     </ul>
@@ -553,11 +541,11 @@ function renderIrrigationBasics(service) {
   return html;
 }
 
-// ── SHADE OPTIONS RENDERER ───────────────────────────────────
+// ── SHADE / ST AUGUSTINE ─────────────────────────────────────
 function renderShadeOptions(service) {
   const opts = (service.options || []).filter(o => o.name.toLowerCase().includes("tifgrand") || o.name.toLowerCase().includes("shade") || o.name.toLowerCase().includes("palmetto"));
   if (opts.length === 0) return `<p style="color:var(--text-muted)">Shade-tolerant options are being documented.</p>`;
-  let html = `<div class="section-header"><h3>Shade-Tolerant Options</h3><p>For areas with limited sun exposure from trees, structures, or north-facing orientation.</p></div>`;
+  let html = `<p style="color:var(--text-secondary);margin-bottom:var(--space-lg);font-size:14px;">For areas with limited sun exposure from trees, structures, or north-facing orientation.</p>`;
   html += `<div class="card-grid card-grid-2">`;
   opts.forEach(opt => { html += renderOptionCard(opt); });
   html += `</div>`;
@@ -570,11 +558,11 @@ function renderStAugustine(service) {
   return `<div style="max-width:700px;">${renderOptionCard(opt, true)}</div>`;
 }
 
-// ── FAQ RENDERER ─────────────────────────────────────────────
+// ── FAQ ──────────────────────────────────────────────────────
 function renderFAQs(faqs, title) {
   if (!faqs || faqs.length === 0) return `<p style="color:var(--text-muted)">FAQs are being prepared.</p>`;
-  let html = `<div class="section-header"><h3>Frequently Asked Questions</h3></div>`;
-  faqs.forEach((faq, i) => {
+  let html = "";
+  faqs.forEach(faq => {
     const tagClass = faq.tag === "client" ? "client" : faq.tag === "internal" ? "internal" : "both";
     const tagLabel = faq.tag === "client" ? "Client" : faq.tag === "internal" ? "Internal" : "Both";
     html += `
@@ -592,10 +580,10 @@ function renderFAQs(faqs, title) {
   return html;
 }
 
-// ── GALLERY RENDERER ─────────────────────────────────────────
+// ── GALLERY ──────────────────────────────────────────────────
 function renderGallery(items) {
   if (!items || items.length === 0) return `<p style="color:var(--text-muted)">Gallery images are being collected.</p>`;
-  let html = `<div class="section-header"><h3>Photo Gallery</h3><p>Click any image to enlarge during a presentation.</p></div>`;
+  let html = `<p style="color:var(--text-muted);margin-bottom:var(--space-lg);font-size:14px;">Click any image to enlarge during a presentation.</p>`;
   html += `<div class="gallery-grid">`;
   items.forEach(item => {
     html += `
@@ -614,10 +602,10 @@ function renderGallery(items) {
   return html;
 }
 
-// ── BEFORE / AFTER RENDERER ──────────────────────────────────
+// ── BEFORE / AFTER ───────────────────────────────────────────
 function renderBeforeAfter(items) {
-  if (!items || items.length === 0) return `<p style="color:var(--text-muted)">Before & After images are being collected.</p>`;
-  let html = `<div class="section-header"><h3>Before & After</h3><p>Transformation visuals for client presentations.</p></div>`;
+  if (!items || items.length === 0) return `<p style="color:var(--text-muted)">Before & After images are being collected from Google Drive.</p>`;
+  let html = `<p style="color:var(--text-muted);margin-bottom:var(--space-lg);font-size:14px;">Transformation visuals for client presentations.</p>`;
   html += `<div class="before-after-grid">`;
   items.forEach(item => {
     html += `
@@ -626,14 +614,14 @@ function renderBeforeAfter(items) {
           <div class="ba-image-side before">
             <span class="ba-label">Before</span>
             ${item.before
-              ? `<img src="${item.before}" alt="Before">`
+              ? `<img src="${item.before}" alt="Before" style="width:100%;height:100%;object-fit:cover;">`
               : `<div class="ba-placeholder">${item.beforePlaceholder || "Before photo pending"}</div>`
             }
           </div>
           <div class="ba-image-side after">
             <span class="ba-label">After</span>
             ${item.after
-              ? `<img src="${item.after}" alt="After">`
+              ? `<img src="${item.after}" alt="After" style="width:100%;height:100%;object-fit:cover;">`
               : `<div class="ba-placeholder">${item.afterPlaceholder || "After photo pending"}</div>`
             }
           </div>
@@ -646,7 +634,7 @@ function renderBeforeAfter(items) {
   return html;
 }
 
-// ── GLOBAL BEFORE & AFTER ────────────────────────────────────
+// ── GLOBAL PAGES ─────────────────────────────────────────────
 function renderGlobalBeforeAfter() {
   let html = `
     <div class="service-hero">
@@ -654,25 +642,19 @@ function renderGlobalBeforeAfter() {
       <p class="hero-desc">Transformation visuals organized by service. Use these during presentations to show clients the impact of each project type.</p>
     </div>
   `;
-
-  // Service-specific B&A
   SERVICES.forEach(service => {
     if (service.beforeAfter && service.beforeAfter.length > 0) {
       html += `<div class="section-header" style="margin-top:var(--space-xl)"><h3>${service.title}</h3></div>`;
       html += renderBeforeAfter(service.beforeAfter);
     }
   });
-
-  // Global B&A
   if (GLOBAL_BEFORE_AFTER.length > 0) {
     html += `<div class="section-header" style="margin-top:var(--space-xl)"><h3>Additional Transformations</h3></div>`;
     html += renderBeforeAfter(GLOBAL_BEFORE_AFTER);
   }
-
   return html;
 }
 
-// ── GLOBAL FAQs ──────────────────────────────────────────────
 function renderGlobalFAQs() {
   let html = `
     <div class="service-hero">
@@ -680,42 +662,26 @@ function renderGlobalFAQs() {
       <p class="hero-desc">All FAQs across services. Use the search bar to find specific questions quickly.</p>
     </div>
   `;
-
-  // Global
   html += `<div class="section-header"><h3>General Questions</h3></div>`;
   html += renderFAQs(GLOBAL_FAQS, "General");
-
-  // Per service
   SERVICES.forEach(service => {
     if (service.faqs && service.faqs.length > 0) {
       html += `<div class="section-header" style="margin-top:var(--space-xl)"><h3>${service.title}</h3></div>`;
       html += renderFAQs(service.faqs, service.title);
     }
   });
-
   return html;
 }
 
-// ── RESEARCH FLAGS ───────────────────────────────────────────
 function renderResearchFlags() {
   let html = `
     <div class="service-hero" style="border-left:4px solid var(--warning);">
       <h2>📋 Internal Notes & Research Flags</h2>
       <p class="hero-desc">Items that need internal confirmation, missing assets, and open research questions. This section is for the team only — not for client presentations.</p>
     </div>
-  `;
-
-  // Global flags table
-  html += `
     <div class="card" style="margin-bottom:var(--space-xl);overflow-x:auto;">
       <table class="flags-table">
-        <thead>
-          <tr>
-            <th>Priority</th>
-            <th>Category</th>
-            <th>Item</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Priority</th><th>Category</th><th>Item</th></tr></thead>
         <tbody>
           ${RESEARCH_FLAGS.map(f => `
             <tr>
@@ -728,8 +694,6 @@ function renderResearchFlags() {
       </table>
     </div>
   `;
-
-  // Per-service notes
   SERVICES.forEach(service => {
     if (service.internalNotes && service.internalNotes.length > 0) {
       html += `
@@ -742,29 +706,15 @@ function renderResearchFlags() {
       `;
     }
   });
-
   return html;
 }
 
-// ── IMAGE / PLACEHOLDER HELPER ───────────────────────────────
+// ── IMAGE HELPER ─────────────────────────────────────────────
 function renderImageOrPlaceholder(src, alt) {
   if (src) {
     return `<div class="gallery-image-wrap" style="margin-bottom:var(--space-md);border-radius:var(--radius-md);overflow:hidden;"><img src="${src}" alt="${alt}" loading="lazy"></div>`;
   }
   return "";
-}
-
-// ── TAB SWITCHING ────────────────────────────────────────────
-function switchTab(index, serviceId) {
-  currentTab = index;
-  document.querySelectorAll(".tab-btn").forEach(btn => {
-    btn.classList.toggle("active", parseInt(btn.dataset.tab) === index);
-  });
-  document.querySelectorAll(".tab-content").forEach(tc => {
-    tc.classList.toggle("active", parseInt(tc.dataset.tabContent) === index);
-  });
-  setupAccordions();
-  setupGalleryClicks();
 }
 
 // ── ACCORDION SETUP ──────────────────────────────────────────
@@ -788,9 +738,7 @@ function setupGalleryClicks() {
       item.addEventListener("click", () => {
         const img = item.querySelector("img");
         const caption = item.dataset.lightbox;
-        if (img) {
-          openLightbox(img.src, caption);
-        }
+        if (img) openLightbox(img.src, caption);
       });
     }
   });
@@ -811,14 +759,12 @@ function closeLightbox() {
 function setupMobileToggle() {
   const toggle = document.getElementById("sidebar-toggle");
   const overlay = document.getElementById("sidebar-overlay");
-
   if (toggle) {
     toggle.addEventListener("click", () => {
       document.getElementById("sidebar").classList.toggle("open");
       overlay.classList.toggle("visible");
     });
   }
-
   if (overlay) {
     overlay.addEventListener("click", closeMobileSidebar);
   }
@@ -830,24 +776,17 @@ function closeMobileSidebar() {
 }
 
 // ── SEARCH ───────────────────────────────────────────────────
-function setupSearch() {
-  // Search is set up in index.html; this handles the logic
-}
-
 function handleSearch(query) {
   if (!query || query.length < 2) return;
   const q = query.toLowerCase();
-
-  // Search through services, FAQs, options
   let results = [];
-
   SERVICES.forEach(service => {
     if (service.title.toLowerCase().includes(q) || service.shortDesc.toLowerCase().includes(q)) {
       results.push({ type: "service", label: service.title, page: service.id });
     }
     (service.faqs || []).forEach(faq => {
       if (faq.q.toLowerCase().includes(q) || faq.a.toLowerCase().includes(q)) {
-        results.push({ type: "faq", label: faq.q, page: service.id, tab: "FAQs" });
+        results.push({ type: "faq", label: faq.q, page: service.id });
       }
     });
     (service.options || []).forEach(opt => {
@@ -856,26 +795,22 @@ function handleSearch(query) {
       }
     });
   });
-
   GLOBAL_FAQS.forEach(faq => {
     if (faq.q.toLowerCase().includes(q) || faq.a.toLowerCase().includes(q)) {
       results.push({ type: "faq", label: faq.q, page: "faqs" });
     }
   });
-
   renderSearchResults(results);
 }
 
 function renderSearchResults(results) {
   const container = document.getElementById("search-results");
   if (!container) return;
-
   if (results.length === 0) {
     container.innerHTML = `<div style="padding:var(--space-md);color:var(--text-muted);font-size:13px;">No results found.</div>`;
     container.style.display = "block";
     return;
   }
-
   container.innerHTML = results.slice(0, 8).map(r => `
     <button class="search-result-item" onclick="navigateTo('${r.page}');document.getElementById('search-results').style.display='none';document.getElementById('search-input').value='';">
       <span class="search-result-type">${r.type}</span>

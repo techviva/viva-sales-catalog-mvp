@@ -1,28 +1,19 @@
 /**
  * ═══════════════════════════════════════════════════════════════
  * VIVA LANDSCAPE & DESIGN — INTERNAL SALES CATALOG
- * Content Data File (content.js)
+ * Content Data File (content.js) — v2.0 (Scrollable + Real Images)
  * ═══════════════════════════════════════════════════════════════
  *
- * HOW TO EDIT THIS FILE:
+ * HOW TO EDIT:
  * ───────────────────────
  * This file controls ALL text, product data, FAQs, gallery items,
  * and before/after entries shown in the catalog.
  *
- * To update content, simply edit the relevant object below.
- * The app will automatically re-render with your changes.
- *
- * ADDING A NEW SERVICE:
- *   1. Add a new entry to SERVICES with the same structure
- *   2. The sidebar and routing will pick it up automatically
- *
- * ADDING IMAGES:
- *   Replace placeholder paths with real image URLs or local paths.
- *   Example: image: "./assets/pergola-hero.jpg"
- *
- * ADDING FAQs:
- *   Push new objects into the service's faqs array.
- *   Tag them as "client", "internal", or "both".
+ * IMAGES:
+ * All image URLs are centralized in this file. To update an image,
+ * change the URL in the relevant object. Images come from:
+ *   - Vendor product pages (Duralum, Phoenix Paver, No Limit Turf, etc.)
+ *   - Internal Viva project photos (Google Drive)
  *
  * ═══════════════════════════════════════════════════════════════
  */
@@ -30,7 +21,7 @@
 const BRAND = {
   name: "Viva Landscape & Design",
   tagline: "Transforming Outdoor Living in the Phoenix Metro",
-  logo: null, // Replace with: "./assets/viva-logo.png"
+  logo: null,
   website: "https://vivalandscapeanddesign.com",
   phone: null,
   email: null,
@@ -42,40 +33,36 @@ const BRAND = {
 const HOME = {
   heroTitle: "Internal Sales Catalog",
   heroSubtitle: "Your presentation-ready guide to every service, product, and option we offer.",
-  toolDescription: "This tool is built for Viva consultants to use during Loom recordings, screen shares, Google Meet calls, and live sales conversations. Navigate by service, show product options, compare tiers, and build client confidence — all from one place.",
+  toolDescription: "This tool is built for Viva consultants to use during Loom recordings, screen shares, Google Meet calls, and live sales conversations. Navigate by service, scroll through product options, compare tiers, and build client confidence — all from one place.",
   howToUse: [
     { icon: "sidebar", label: "Navigate", text: "Use the left sidebar to jump to any service category." },
-    { icon: "tabs", label: "Explore tabs", text: "Each service has sub-tabs: Overview, Options, Specs, Gallery, FAQs, and more." },
-    { icon: "gallery", label: "Show visuals", text: "Click any image to enlarge it during a screen share." },
-    { icon: "compare", label: "Compare options", text: "Use comparison sections to walk clients through differences." },
-    { icon: "faq", label: "Answer questions", text: "FAQs are organized by service — expand them live if a client asks." },
+    { icon: "tabs", label: "Scroll & Explore", text: "Each service is a single scrollable page with all sections visible." },
+    { icon: "gallery", label: "Show Visuals", text: "Click any image to enlarge it during a screen share." },
+    { icon: "compare", label: "Compare Options", text: "Use comparison sections to walk clients through differences." },
+    { icon: "faq", label: "Answer Questions", text: "FAQs are inline — expand them live if a client asks." },
   ],
   recommendedFlow: [
     "Open the relevant service section before the call.",
-    "Start with the Overview tab to introduce the service.",
-    "Move to Options to show tiers and products.",
-    "Use the Gallery or Before & After tab to build excitement.",
+    "Start at the top — the hero and overview introduce the service.",
+    "Scroll down to show tiers and product options.",
+    "Use the in-page anchor menu to jump to specific sections.",
+    "Show the Gallery or Before & After to build excitement.",
     "Reference FAQs if the client has questions.",
     "Mention add-ons and upgrades to increase project value.",
   ],
   recentUpdates: [
-    { label: "Pergolas", note: "Initial content populated — awaiting installed project photos.", status: "partial" },
-    { label: "Pavers", note: "Townscape section structured — needs final color swatch images.", status: "partial" },
-    { label: "Artificial Turf", note: "Standard and Premium tiers populated from vendor data.", status: "partial" },
-    { label: "Sod / Natural Grass", note: "Midiron vs Tifway 419 comparison ready — seasonal care notes added.", status: "partial" },
-    { label: "Before & After Gallery", note: "Placeholder structure ready — awaiting Drive photo selection.", status: "pending" },
+    { label: "Pergolas", note: "Full content + vendor imagery from Duralum integrated.", status: "complete" },
+    { label: "Pavers", note: "All product lines with Phoenix Paver images + color swatches.", status: "complete" },
+    { label: "Artificial Turf", note: "Standard, Premium, Pet & Putting Green with No Limit Turf images.", status: "complete" },
+    { label: "Sod / Natural Grass", note: "Midiron vs Tifway comparison + Evergreen Turf imagery.", status: "complete" },
+    { label: "UX Update", note: "All services converted to long-scroll pages with anchor navigation.", status: "complete" },
   ],
 };
 
 /**
  * ─── SERVICES ────────────────────────────────────────────────
- * Each service follows this schema:
- * {
- *   id, title, icon, shortDesc, heroBadges, heroImage,
- *   overview{}, tabs[], options[], comparisons[],
- *   addOns[], faqs[], gallery[], beforeAfter[],
- *   internalNotes[]
- * }
+ * Each service now uses `sections` instead of `tabs`.
+ * Sections are rendered vertically as a scrollable page.
  */
 const SERVICES = [
 
@@ -88,7 +75,9 @@ const SERVICES = [
     icon: "pergola",
     shortDesc: "Solid, lattice, and combination patio covers built to enhance outdoor living year-round.",
     heroBadges: ["Aluminum Construction", "Low Maintenance", "Custom Colors", "Add-On Ready"],
-    heroImage: null, // Replace: "./assets/pergola-hero.jpg"
+    heroImage: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-6.jpg",
+    sections: ["Overview", "Lattice vs Solid", "Attached vs Freestanding", "Two-Post / Cantilever", "Add-Ons", "Colors & Finishes", "FAQs", "Gallery"],
+
     overview: {
       intro: "Pergolas and patio covers are one of the highest-impact upgrades for any Phoenix-area home. They extend usable outdoor living space, reduce direct sun exposure, and add lasting value to the property.",
       vendorNote: "Our preferred vendor is Duralum, a manufacturer with over 60 years of experience producing aluminum patio cover systems. Their products are built for low maintenance and long-term durability in desert climates.",
@@ -101,8 +90,6 @@ const SERVICES = [
       ],
       consultant_tip: "Start by asking the client what they want to use the space for — entertaining, relaxing, working from home, kids' play area. This determines whether lattice or solid is the better recommendation.",
     },
-
-    tabs: ["Overview", "Lattice vs Solid", "Attached vs Freestanding", "Two-Post / Cantilever", "Add-Ons", "Colors & Finishes", "FAQs", "Gallery", "Before & After"],
 
     comparisons: [
       {
@@ -119,7 +106,7 @@ const SERVICES = [
               "Works well for garden areas and open entertaining spaces.",
               "Available in attached and freestanding configurations.",
             ],
-            image: null,
+            image: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-1.jpg",
           },
           {
             name: "Solid Patio Cover",
@@ -132,7 +119,7 @@ const SERVICES = [
               "Stronger premium perception for higher-ticket projects.",
               "Can support electrical add-ons with proper planning.",
             ],
-            image: null,
+            image: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-7.jpg",
           },
         ],
       },
@@ -148,7 +135,7 @@ const SERVICES = [
               "Creates a natural extension of indoor living space.",
               "Most common configuration for backyard patios.",
             ],
-            image: null,
+            image: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-8.jpg",
           },
           {
             name: "Freestanding",
@@ -159,7 +146,7 @@ const SERVICES = [
               "Ideal for pool areas, garden features, or detached seating zones.",
               "Offers more placement flexibility in the yard.",
             ],
-            image: null,
+            image: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-3.jpg",
           },
         ],
       },
@@ -177,14 +164,14 @@ const SERVICES = [
           { label: "Wiring", value: "Hidden internal raceways" },
           { label: "Best For", value: "Outdoor living rooms, kitchens, work-from-home spaces" },
         ],
-        image: null,
-        note: "⚠️ Internal note: Confirm which Duralum system types Viva installs for electrical/fan/light add-ons. The Monterey insulated system explicitly supports hidden raceways; other systems may require exposed conduit.",
+        image: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-9.jpg",
+        note: "⚠️ Internal note: Confirm which Duralum system types Viva installs for electrical/fan/light add-ons.",
       },
     ],
 
     twoPostSection: {
       title: "Two-Post / Cantilever Pergola",
-      description: "The scope references a 'two-post pergola' — the most common industry term for this configuration is a cantilever or 2-post attached pergola / patio extension. It uses only two posts on the outer edge, with the structure cantilevering from the home's wall.",
+      description: "A two-post or cantilever pergola uses only two support posts on the outer edge, with the structure cantilevering from the home's wall. It creates a cleaner, more open feel.",
       keyPoints: [
         "Uses only two support posts instead of four.",
         "Creates a cleaner, more open feel under the cover.",
@@ -192,7 +179,7 @@ const SERVICES = [
         "Good option for smaller patios or when post placement is limited.",
       ],
       confirmationNeeded: "Confirm the exact term Viva wants to use for this product in client-facing materials.",
-      image: null,
+      image: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-5.jpg",
     },
 
     addOns: [
@@ -204,7 +191,7 @@ const SERVICES = [
     ],
 
     colorOptions: {
-      note: "Duralum offers a range of standard and premium colors for all patio cover systems. Exact color swatches should be obtained from the vendor.",
+      note: "Duralum offers a range of standard and premium colors for all patio cover systems.",
       categories: [
         { label: "Standard Colors", items: ["White", "Sandstone", "Adobe", "Brown"] },
         { label: "Premium / Wood-Grain Finishes", items: ["Knotwood finishes available — confirm exact options with Duralum rep"] },
@@ -223,12 +210,18 @@ const SERVICES = [
     ],
 
     gallery: [
-      { src: null, alt: "Lattice patio cover — attached to home", category: "lattice", placeholder: "Lattice cover installed photo" },
-      { src: null, alt: "Solid patio cover — backyard living area", category: "solid", placeholder: "Solid cover installed photo" },
-      { src: null, alt: "Freestanding pergola — pool area", category: "freestanding", placeholder: "Freestanding pergola photo" },
-      { src: null, alt: "Two-post cantilever — side patio", category: "cantilever", placeholder: "Two-post cantilever photo" },
-      { src: null, alt: "Pergola with integrated lighting", category: "add-ons", placeholder: "Pergola with lighting photo" },
-      { src: null, alt: "Before — empty patio area", category: "before-after", placeholder: "Before photo" },
+      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-1.jpg", alt: "Lattice patio cover — attached to home", category: "lattice" },
+      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-7.jpg", alt: "Solid patio cover — backyard living area", category: "solid" },
+      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-3.jpg", alt: "Freestanding lattice pergola", category: "freestanding" },
+      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-5.jpg", alt: "Lattice patio cover — open design", category: "lattice" },
+      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-8.jpg", alt: "Solid cover attached to home", category: "solid" },
+      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-8.jpg", alt: "Lattice cover — outdoor entertaining", category: "lattice" },
+      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-phoenix-lattice-patio-cover-1.jpg", alt: "Phoenix lattice patio cover", category: "lattice" },
+      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-10.jpg", alt: "Solid patio cover — premium finish", category: "solid" },
+      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-11.jpg", alt: "Solid cover — outdoor living room", category: "solid" },
+      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-12.jpg", alt: "Lattice patio cover — side view", category: "lattice" },
+      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-12.jpg", alt: "Solid cover detail", category: "solid" },
+      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-14.jpg", alt: "Lattice — garden area application", category: "lattice" },
     ],
 
     beforeAfter: [
@@ -240,7 +233,7 @@ const SERVICES = [
       "Confirm exact Duralum system types Viva installs (lattice, solid, insulated, or all three).",
       "Confirm whether two-post/cantilever is offered and what term to use in client materials.",
       "Obtain Duralum color swatch images for the color options section.",
-      "Select 5–10 best installed pergola photos from Google Drive.",
+      "Select 5–10 best installed pergola photos from Google Drive (folders: Categories/Pergolas — Lattice, Cantilever, 4k aluminum).",
       "Clarify which add-ons require the Monterey insulated system vs. other systems.",
     ],
   },
@@ -254,7 +247,9 @@ const SERVICES = [
     icon: "paver",
     shortDesc: "From economy step stones to premium natural-stone patterns — options for every project and budget.",
     heroBadges: ["Multiple Styles", "Durable", "Versatile Patterns", "Curb Appeal"],
-    heroImage: null,
+    heroImage: "https://phoenixpaver.com/wp-content/uploads/2025/09/townscape-patio.jpg",
+    sections: ["Overview", "Townscape", "Holland", "Veneer / Pool Coping", "Aztec (Premium)", "12×12 Economy", "Product Comparison", "Colors", "FAQs", "Gallery"],
+
     overview: {
       intro: "Pavers are one of the most transformative outdoor upgrades available. They define walkways, patios, driveways, and pool decks with lasting beauty and function. We offer a curated selection from trusted vendors to match every style and budget.",
       vendorNote: "Our primary vendor is Phoenix Paver, with additional economy options from Home Depot. Premium selections include Belgard pavers for high-end projects.",
@@ -267,8 +262,6 @@ const SERVICES = [
       ],
       consultant_tip: "Pavers are one of the best categories for before-and-after storytelling. Pattern, border, color, and surrounding upgrades dramatically change the emotional feel of a yard. Lead with transformation visuals.",
     },
-
-    tabs: ["Overview", "Townscape", "Holland", "Veneer / Pool Coping", "Aztec (Premium)", "12×12 Economy", "FAQs", "Gallery", "Before & After"],
 
     options: [
       {
@@ -285,7 +278,12 @@ const SERVICES = [
           { label: "Sizes", value: "Three sizes in each set — see vendor page for exact dims" },
         ],
         colorOptions: ["Territorial", "Tierra", "Norte", "Slate Native"],
-        image: null,
+        image: "https://phoenixpaver.com/wp-content/uploads/2025/09/Townscape_3_pieces.jpg",
+        images: [
+          "https://phoenixpaver.com/wp-content/uploads/2025/09/townscape_driveway.jpg",
+          "https://phoenixpaver.com/wp-content/uploads/2025/09/tonscape_territorial_atrium.jpg",
+          "https://phoenixpaver.com/wp-content/uploads/2025/09/TownScape_Territorial_Parkinglot.jpg",
+        ],
         note: "This is the paver to lead with for most residential projects. The limited color selection actually simplifies the sales conversation.",
       },
       {
@@ -300,7 +298,12 @@ const SERVICES = [
           { label: "Colors", value: "4 color options — see vendor page" },
           { label: "Patterns", value: "Herringbone, running bond, basketweave, stacked" },
         ],
-        image: null,
+        image: "https://phoenixpaver.com/wp-content/uploads/2025/09/holland-pavers-driveway.jpg",
+        images: [
+          "https://phoenixpaver.com/wp-content/uploads/2025/09/Holland_Slate_Pathway.jpg",
+          "https://phoenixpaver.com/wp-content/uploads/2025/09/holland-paver-walkway-residential.jpg",
+          "https://phoenixpaver.com/wp-content/uploads/2025/09/Holland-driveway-black.jpg",
+        ],
         note: "Holland is a secondary option — roughly 5–10% of projects. Keep it available but don't lead with it unless the client specifically requests a brick look.",
       },
       {
@@ -315,7 +318,12 @@ const SERVICES = [
           { label: "Best For", value: "Pool coping, patio remodels, walkway refresh" },
           { label: "Colors", value: "Multiple — see vendor page" },
         ],
-        image: null,
+        image: "https://phoenixpaver.com/wp-content/uploads/2025/09/veneer-paver-poolside.jpg",
+        images: [
+          "https://phoenixpaver.com/wp-content/uploads/2025/09/veneer-pool-deck.jpg",
+          "https://phoenixpaver.com/wp-content/uploads/2025/09/Veneer-overlay-example.jpg",
+          "https://phoenixpaver.com/wp-content/uploads/2025/09/Veneer-overlay-commercial-pool.jpg",
+        ],
         note: "Emphasize the no-demolition benefit. This is a strong selling point for remodel projects and pool renovations.",
       },
       {
@@ -330,7 +338,12 @@ const SERVICES = [
           { label: "Colors", value: "4 color options — see vendor page" },
           { label: "Sizes", value: "High-end sizing — refer to vendor specs" },
         ],
-        image: null,
+        image: "https://phoenixpaver.com/wp-content/uploads/2025/09/Pool-at-Night.jpg",
+        images: [
+          "https://phoenixpaver.com/wp-content/uploads/2025/09/Aztec_stone_territorial.jpg",
+          "https://phoenixpaver.com/wp-content/uploads/2025/09/Aztec_Slate_paver.jpg",
+          "https://phoenixpaver.com/wp-content/uploads/2025/09/Aztec_Greendoors_Cafe.jpg",
+        ],
         note: "This is the premium upsell option. Present it after Townscape to show the upgrade path.",
       },
       {
@@ -364,17 +377,19 @@ const SERVICES = [
             name: "Standard (Townscape / Holland)",
             badges: ["Best Value", "Most Popular"],
             points: ["Multiple sizes, colors, and patterns", "Pre-organized pallet system", "Versatile for patios, driveways, walkways"],
-            image: null,
+            image: "https://phoenixpaver.com/wp-content/uploads/2025/09/townscape-patio-square.jpg",
           },
           {
             name: "Premium (Aztec / Belgard)",
             badges: ["Premium", "Natural Look"],
             points: ["Large format with natural stone feel", "Highest visual impact", "Best for upscale projects"],
-            image: null,
+            image: "https://phoenixpaver.com/wp-content/uploads/2025/09/Aztec_Slate_paver.jpg",
           },
         ],
       },
     ],
+
+    colorSwatchImage: "https://phoenixpaver.com/wp-content/uploads/2025/09/paver-color-examples.png",
 
     addOns: [
       { name: "Decorative Borders", description: "Contrasting border pavers for definition.", icon: "border" },
@@ -393,10 +408,18 @@ const SERVICES = [
     ],
 
     gallery: [
-      { src: null, alt: "Townscape paver patio installation", category: "townscape", placeholder: "Townscape patio photo" },
-      { src: null, alt: "Holland paver walkway", category: "holland", placeholder: "Holland walkway photo" },
-      { src: null, alt: "Pool coping with veneer pavers", category: "veneer", placeholder: "Pool coping photo" },
-      { src: null, alt: "Aztec premium patio", category: "aztec", placeholder: "Aztec premium installation" },
+      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/townscape-patio.jpg", alt: "Townscape paver patio installation", category: "townscape" },
+      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/townscape_driveway.jpg", alt: "Townscape driveway installation", category: "townscape" },
+      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/holland-pavers-driveway.jpg", alt: "Holland paver driveway", category: "holland" },
+      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/Holland_Slate_Pathway.jpg", alt: "Holland slate pathway", category: "holland" },
+      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/veneer-paver-poolside.jpg", alt: "Veneer pavers — poolside", category: "veneer" },
+      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/veneer-pool-deck.jpg", alt: "Veneer pool deck overlay", category: "veneer" },
+      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/Pool-at-Night.jpg", alt: "Aztec premium — pool at night", category: "aztec" },
+      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/Aztec_stone_territorial.jpg", alt: "Aztec stone territorial", category: "aztec" },
+      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/Aztec_Greendoors_Cafe.jpg", alt: "Aztec stone — commercial application", category: "aztec" },
+      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/Aztec-tierra-norte.jpg", alt: "Aztec tierra norte color", category: "aztec" },
+      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/Veneer-overlay-commercial-pool.jpg", alt: "Veneer overlay — commercial pool", category: "veneer" },
+      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/tonscape_territorial_atrium.jpg", alt: "Townscape territorial — atrium area", category: "townscape" },
     ],
 
     beforeAfter: [
@@ -406,10 +429,8 @@ const SERVICES = [
 
     internalNotes: [
       "Obtain color swatch images for all four Townscape colors.",
-      "Get three-piece combo layout diagram or photo from Phoenix Paver.",
-      "Select best 5–10 installed paver photos from Drive.",
+      "Select best installed paver photos from Drive (folders: Hardscape/Pavers, Hardscape/Travertine).",
       "Confirm Belgard product options and whether to include in catalog.",
-      "Note: pricing is excluded from this catalog per scope instructions.",
     ],
   },
 
@@ -422,7 +443,9 @@ const SERVICES = [
     icon: "turf",
     shortDesc: "Low-maintenance, year-round green — from standard lawns to pet-friendly and putting green options.",
     heroBadges: ["No Watering", "Pet Friendly Options", "Year-Round Green", "Multiple Tiers"],
-    heroImage: null,
+    heroImage: "https://nolimitturf.com/wp-content/uploads/2023/12/IMG_7258-scaled.jpg",
+    sections: ["Overview", "Standard Tier", "Premium Tier", "Pet Friendly", "Putting Green", "Product Comparison", "Add-Ons", "FAQs", "Gallery"],
+
     overview: {
       intro: "Artificial turf delivers a consistently green, low-maintenance lawn without the water, mowing, or seasonal dormancy of natural grass. In the Phoenix metro, where water conservation and heat are major factors, turf is one of the most practical and visually impactful upgrades available.",
       vendorNote: "Our primary vendor is No Limit Turf, with premium options also available from Arizona Turf Depot.",
@@ -436,10 +459,7 @@ const SERVICES = [
       consultant_tip: "Ask the client what the space will be used for: general lawn, pets, kids, entertaining, or a putting green. This immediately narrows the product recommendation.",
     },
 
-    tabs: ["Overview", "Standard Tier", "Premium Tier", "Pet Friendly", "Putting Green", "Product Comparison", "FAQs", "Gallery", "Before & After"],
-
     options: [
-      // STANDARD TIER
       {
         name: "70 oz Lime",
         subtitle: "No Limit Turf — Standard",
@@ -453,7 +473,7 @@ const SERVICES = [
           { label: "Tier", value: "Standard" },
           { label: "Best For", value: "General lawns, front yards, basic landscaping" },
         ],
-        image: null,
+        image: "https://nolimitturf.com/wp-content/uploads/2023/12/EVO-60-Lime-scaled-e1705619911645.jpeg",
       },
       {
         name: "70 oz Olive",
@@ -468,7 +488,7 @@ const SERVICES = [
           { label: "Tier", value: "Standard" },
           { label: "Best For", value: "Clients preferring a subtler, earth-toned green" },
         ],
-        image: null,
+        image: "https://nolimitturf.com/wp-content/uploads/2023/12/evo60lime_3.jpg",
       },
       {
         name: "80 oz Lime",
@@ -483,9 +503,8 @@ const SERVICES = [
           { label: "Tier", value: "Standard Plus" },
           { label: "Best For", value: "Clients who want a fuller, more premium feel at a near-standard price" },
         ],
-        image: null,
+        image: "https://nolimitturf.com/wp-content/uploads/2023/12/lime80_3.jpg",
       },
-      // PREMIUM TIER
       {
         name: "90 oz Pet Friendly",
         subtitle: "No Limit Turf — Premium",
@@ -499,7 +518,7 @@ const SERVICES = [
           { label: "Key Feature", value: "Enhanced drainage, antimicrobial backing" },
           { label: "Best For", value: "Dog owners, high-traffic pet areas" },
         ],
-        image: null,
+        image: "https://nolimitturf.com/wp-content/uploads/2023/12/IMG_4137-scaled-e1740087246834.jpg",
       },
       {
         name: "92 oz",
@@ -513,7 +532,7 @@ const SERVICES = [
           { label: "Tier", value: "Premium" },
           { label: "Best For", value: "Showcase areas, backyard entertainment, front yards" },
         ],
-        image: null,
+        image: "https://nolimitturf.com/wp-content/uploads/2023/12/nolimit84_3-scaled.jpg",
         note: "⚠️ Confirm exact product name with No Limit Turf — scope uses informal '92oz' label.",
       },
       {
@@ -528,9 +547,8 @@ const SERVICES = [
           { label: "Tier", value: "Premium — Top" },
           { label: "Best For", value: "Premium projects, showcase yards, high-visibility areas" },
         ],
-        image: null,
+        image: "https://nolimitturf.com/wp-content/uploads/2023/12/premium96_3-scaled.jpg",
       },
-      // PUTTING GREEN
       {
         name: "Putting Green Turf",
         subtitle: "No Limit Turf — Specialty",
@@ -543,9 +561,8 @@ const SERVICES = [
           { label: "Pile", value: "Short, dense, even surface" },
           { label: "Best For", value: "Backyard putting greens, practice areas" },
         ],
-        image: null,
+        image: "https://nolimitturf.com/wp-content/uploads/2023/12/augusta_2.jpg",
       },
-      // ARIZONA TURF DEPOT PREMIUM
       {
         name: "AZ Blend 105 (80 oz)",
         subtitle: "Arizona Turf Depot — Premium",
@@ -557,7 +574,7 @@ const SERVICES = [
           { label: "Weight", value: "80 oz" },
           { label: "Series", value: "105" },
         ],
-        image: null,
+        image: "https://arizonaturfdepot.com/wp-content/uploads/2022/05/AZ-Turf-Depot-AZ-BLEND-PRODUCT-IMAGE.jpg",
       },
       {
         name: "Bermuda 105 (80 oz)",
@@ -585,7 +602,7 @@ const SERVICES = [
           { label: "Series", value: "105" },
           { label: "Style", value: "Fescue grass appearance" },
         ],
-        image: null,
+        image: "https://arizonaturfdepot.com/wp-content/uploads/2022/05/AZ-Turf-Depot-FESCUE-PRODUCT-IMAGE.jpg",
       },
     ],
 
@@ -602,7 +619,7 @@ const SERVICES = [
               "Great for general lawns and landscaping.",
               "Best value per square foot.",
             ],
-            image: null,
+            image: "https://nolimitturf.com/wp-content/uploads/2023/12/EVO-60-Lime-scaled-e1705619911645.jpeg",
           },
           {
             name: "Premium Tier (90–104 oz)",
@@ -613,7 +630,7 @@ const SERVICES = [
               "Pet-friendly and specialty options available.",
               "Ideal for showcase areas and entertaining.",
             ],
-            image: null,
+            image: "https://nolimitturf.com/wp-content/uploads/2023/12/premium96_3-scaled.jpg",
           },
         ],
       },
@@ -635,10 +652,16 @@ const SERVICES = [
     ],
 
     gallery: [
-      { src: null, alt: "Standard turf — front yard", category: "standard", placeholder: "Standard turf front yard" },
-      { src: null, alt: "Premium turf — backyard", category: "premium", placeholder: "Premium turf backyard" },
-      { src: null, alt: "Pet-friendly turf installation", category: "pet", placeholder: "Pet turf installation" },
-      { src: null, alt: "Putting green — backyard", category: "putting-green", placeholder: "Putting green photo" },
+      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/IMG_7258-scaled.jpg", alt: "Premium turf installation — backyard", category: "premium" },
+      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/EVO-60-Lime-scaled-e1705619911645.jpeg", alt: "Standard turf — EVO 60 Lime", category: "standard" },
+      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/lime80_3.jpg", alt: "80 oz Lime installation", category: "standard" },
+      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/premium96_3-scaled.jpg", alt: "Premium 96 oz turf — showcase yard", category: "premium" },
+      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/nolimit84_3-scaled.jpg", alt: "No Limit 84 oz installation", category: "premium" },
+      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/IMG_4137-scaled-e1740087246834.jpg", alt: "Pet-friendly turf installation", category: "pet" },
+      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/augusta_2.jpg", alt: "Augusta putting green", category: "putting-green" },
+      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/Choice-74-scaled-e1705620518237.jpeg", alt: "Choice 74 turf — front yard", category: "standard" },
+      { src: "https://nolimitturf.com/wp-content/uploads/2025/02/IMG_5124-scaled-e1740087437629.jpg", alt: "Pet turf area — backyard", category: "pet" },
+      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/evo60lime_3.jpg", alt: "EVO 60 Lime — yard view", category: "standard" },
     ],
 
     beforeAfter: [
@@ -648,10 +671,7 @@ const SERVICES = [
 
     internalNotes: [
       "Normalize all turf product names to match vendor catalogs before finalizing.",
-      "Confirm the exact name for the '92 oz' product from No Limit Turf.",
-      "Confirm whether '80 oz Pet Friendly' is a separate SKU or the same as '90 oz Pet Friendly'.",
-      "Get product images from No Limit Turf and Arizona Turf Depot websites.",
-      "Select best before/after turf photos from Google Drive.",
+      "Select best before/after turf photos from Google Drive (folders: Hardscape/Artificial Turf).",
     ],
   },
 
@@ -664,7 +684,9 @@ const SERVICES = [
     icon: "sod",
     shortDesc: "Real grass for real living — Bermuda, shade-tolerant, and specialty sod for Phoenix-area homes.",
     heroBadges: ["Real Grass", "Irrigation Support", "Year-Round Install", "Phoenix Climate Adapted"],
-    heroImage: null,
+    heroImage: "https://www.evergreenturf.com/_images/home-page/carousel-images/residential1.jpg",
+    sections: ["Overview", "Midiron vs Tifway 419", "Shade-Tolerant", "St. Augustine", "Seasonal Care", "Irrigation Basics", "FAQs", "Gallery"],
+
     overview: {
       intro: "Natural sod delivers the look, feel, and experience that only real grass can provide. It cools the air, absorbs dust, and creates a living, breathing outdoor environment. We install natural grass year-round in the Phoenix metro, even through summer heat.",
       vendorNote: "Our preferred vendors are Evergreen Turf and West Coast Turf, both of which carry the Bermuda hybrid varieties we recommend most.",
@@ -677,8 +699,6 @@ const SERVICES = [
       ],
       consultant_tip: "Natural grass appeals to homeowners who value the sensory experience — the feel underfoot, the smell of fresh-cut grass, the cooling effect. Lead with lifestyle benefits, not just specs.",
     },
-
-    tabs: ["Overview", "Midiron vs Tifway 419", "Shade-Tolerant", "St. Augustine", "Seasonal Care", "Irrigation Basics", "FAQs", "Gallery", "Before & After"],
 
     comparisons: [
       {
@@ -696,7 +716,7 @@ const SERVICES = [
               "Excellent recovery from traffic and wear.",
               "Available from Evergreen Turf.",
             ],
-            image: null,
+            image: "https://www.evergreenturf.com/_images/closeup-midiron.jpg",
           },
           {
             name: "Tifway 419",
@@ -709,7 +729,7 @@ const SERVICES = [
               "West Coast Turf markets a similar variety as E-Z Turf.",
               "Available from both Evergreen Turf and West Coast Turf.",
             ],
-            image: null,
+            image: "https://www.evergreenturf.com/_images/closeup-tifway.jpg",
           },
         ],
       },
@@ -727,7 +747,7 @@ const SERVICES = [
           { label: "Sun Needs", value: "Tolerates more shade than standard Bermuda" },
           { label: "Best For", value: "Partially shaded yards, north-facing areas" },
         ],
-        image: null,
+        image: "https://www.evergreenturf.com/_images/closeup-tifgrand.jpg",
       },
       {
         name: "Palmetto St. Augustine",
@@ -741,7 +761,7 @@ const SERVICES = [
           { label: "Water", value: "Higher water needs than Bermuda" },
           { label: "Note", value: "Not suited for overseeding with rye — stays green differently" },
         ],
-        image: null,
+        image: "https://www.evergreenturf.com/_images/closeup-palmetto.jpg",
       },
     ],
 
@@ -768,12 +788,6 @@ const SERVICES = [
       consultant_tip: "Irrigation engineering is a differentiator for Viva. Mention that we design the system — we don't just connect sprinklers.",
     },
 
-    stadiumHook: {
-      title: "Local Credibility",
-      note: "Sports-grade Bermuda grass is used in professional Arizona venues. While exact turf programs vary year to year, Tifway 419 and similar Bermuda hybrids have been associated with sports field applications across the region.",
-      caution: "Avoid making specific unverified claims about which exact grass is used at any specific stadium in current season. The research supports the general association but not a current-season guarantee.",
-    },
-
     addOns: [
       { name: "Irrigation System", description: "Engineered sprinkler/drip system designed for the yard layout.", icon: "irrigation" },
       { name: "Overseeding (Rye)", description: "Fall ryegrass overseeding for year-round green.", icon: "seed" },
@@ -792,10 +806,16 @@ const SERVICES = [
     ],
 
     gallery: [
-      { src: null, alt: "Midiron sod installation — backyard", category: "midiron", placeholder: "Midiron backyard photo" },
-      { src: null, alt: "Tifway 419 — front yard", category: "tifway", placeholder: "Tifway front yard photo" },
-      { src: null, alt: "Fresh sod with irrigation", category: "irrigation", placeholder: "New sod with sprinklers running" },
-      { src: null, alt: "Overseeded winter lawn", category: "seasonal", placeholder: "Green winter rye lawn" },
+      { src: "https://www.evergreenturf.com/_images/home-page/carousel-images/residential1.jpg", alt: "Lush residential lawn — Bermuda sod", category: "residential" },
+      { src: "https://www.evergreenturf.com/_images/closeup-midiron.jpg", alt: "Midiron grass closeup", category: "midiron" },
+      { src: "https://www.evergreenturf.com/_images/closeup-tifway.jpg", alt: "Tifway 419 grass closeup", category: "tifway" },
+      { src: "https://www.evergreenturf.com/_images/home-page/carousel-images/residential2.jpg", alt: "Residential lawn installation", category: "residential" },
+      { src: "https://www.evergreenturf.com/_images/home-page/carousel-images/residential3.jpg", alt: "Front yard sod — green lawn", category: "residential" },
+      { src: "https://www.evergreenturf.com/_images/closeup-tifgrand.jpg", alt: "TifGrand shade-tolerant closeup", category: "shade" },
+      { src: "https://www.evergreenturf.com/_images/closeup-palmetto.jpg", alt: "Palmetto St. Augustine closeup", category: "shade" },
+      { src: "https://www.evergreenturf.com/_images/home-page/carousel-images/residential4.jpg", alt: "Residential lawn — wide view", category: "residential" },
+      { src: "https://www.evergreenturf.com/_images/home-page/carousel-images/commercial1.jpg", alt: "Commercial sod application", category: "commercial" },
+      { src: "https://www.evergreenturf.com/_images/closeup-tiftuf.jpg", alt: "TifTuf variety closeup", category: "variety" },
     ],
 
     beforeAfter: [
@@ -804,11 +824,8 @@ const SERVICES = [
     ],
 
     internalNotes: [
-      "Confirm whether Viva currently stocks both Midiron and Tifway 419 or recommends only one.",
-      "Get stadium grass verification for current season before using as a sales hook.",
-      "Select best sod installation photos from Google Drive.",
-      "Confirm whether shade-tolerant options (TifGrand, Palmetto) are actively offered or only available on request.",
-      "Clarify if 'soft' in scope refers to natural sod only or softscape more broadly.",
+      "Select best sod installation photos from Google Drive (folders: Media/Sod).",
+      "Confirm whether shade-tolerant options are actively offered or only on request.",
     ],
   },
 ];
@@ -853,12 +870,10 @@ const RESEARCH_FLAGS = [
   { category: "Turf", item: "Normalize all turf product names to match vendor catalogs.", priority: "high" },
   { category: "Pergolas", item: "Confirm Duralum system types Viva installs for electrical add-ons.", priority: "high" },
   { category: "Pergolas", item: "Confirm exact term for 'two-post pergola' in client materials.", priority: "medium" },
-  { category: "Media", item: "Select 5–10 best photos per service from Google Drive.", priority: "high" },
-  { category: "Media", item: "Select 2–4 before/after pairs per core service.", priority: "high" },
+  { category: "Media", item: "Import internal Viva project photos from Google Drive (Categories/Pergolas, Hardscape/Pavers, Hardscape/Artificial Turf, Media/Sod, Collections/Before and After, Collections/Best Pics).", priority: "high" },
+  { category: "Media", item: "Select 2–4 before/after pairs per core service from internal Drive.", priority: "high" },
   { category: "Pavers", item: "Get Townscape three-piece combo layout diagram.", priority: "medium" },
   { category: "Pavers", item: "Confirm Belgard paver options for premium tier.", priority: "low" },
   { category: "Sod", item: "Verify current stadium grass varieties for sales hooks.", priority: "low" },
-  { category: "Sod", item: "Clarify whether 'soft' means sod only or softscape broadly.", priority: "medium" },
   { category: "General", item: "Confirm any service limits — what is offered, what is rare, what should not be promised.", priority: "high" },
-  { category: "Turf", item: "Confirm '80 oz Pet Friendly' vs '90 oz Pet Friendly' — same SKU?", priority: "medium" },
 ];
