@@ -1,15 +1,12 @@
 /**
  * ═══════════════════════════════════════════════════════════════
  * VIVA LANDSCAPE & DESIGN — INTERNAL SALES CATALOG
- * Application Logic (app.js) — v2.0 (Scrollable Pages + Anchor Nav)
- * ═══════════════════════════════════════════════════════════════
- *
- * KEY CHANGE: Service pages are now single vertically-scrollable
- * pages with sticky anchor navigation instead of tabbed sub-views.
- *
- * All content comes from content.js — this file only renders.
+ * Application Logic (app.js) — v3.0 (Collections + Tri-Shield + GSAP)
  * ═══════════════════════════════════════════════════════════════
  */
+
+// ── GSAP SETUP ──────────────────────────────────────────────
+gsap.registerPlugin(ScrollTrigger);
 
 // ── STATE ────────────────────────────────────────────────────
 let currentPage = "home";
@@ -67,6 +64,9 @@ function navItem(id, label, icon) {
 
 // ── NAVIGATION ───────────────────────────────────────────────
 function navigateTo(page) {
+  // Kill all ScrollTriggers from previous page
+  ScrollTrigger.getAll().forEach(st => st.kill());
+
   currentPage = page;
   document.querySelectorAll(".nav-item[data-page]").forEach(btn => {
     btn.classList.toggle("active", btn.dataset.page === page);
@@ -87,14 +87,140 @@ function navigateTo(page) {
       setupStickyNav(service);
     }
   }
+  // Add footer to all pages
+  content.innerHTML += renderFooter();
+
   document.querySelector(".main-content").scrollTo(0, 0);
   setupAccordions();
   setupGalleryClicks();
+
+  // Initialize GSAP animations after render
+  requestAnimationFrame(() => initPageAnimations(page));
+}
+
+// ── GSAP ANIMATIONS ──────────────────────────────────────────
+function initPageAnimations(page) {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const mainContent = document.querySelector(".main-content");
+
+  // Common: catalog sections fade in
+  gsap.utils.toArray(".catalog-section").forEach(section => {
+    gsap.from(section, {
+      y: 30,
+      autoAlpha: 0,
+      duration: 0.5,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 85%",
+        scroller: mainContent,
+      }
+    });
+  });
+
+  // Home: service cards stagger
+  gsap.utils.toArray(".home-service-card").forEach((card, i) => {
+    gsap.from(card, {
+      y: 40,
+      autoAlpha: 0,
+      duration: 0.5,
+      delay: i * 0.08,
+      ease: "power2.out",
+    });
+  });
+
+  // Product cards stagger
+  gsap.utils.toArray(".product-card").forEach((card, i) => {
+    gsap.from(card, {
+      y: 40,
+      autoAlpha: 0,
+      duration: 0.6,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: card,
+        start: "top 88%",
+        scroller: mainContent,
+      }
+    });
+  });
+
+  // Hero badges scale-in
+  gsap.utils.toArray(".hero-badges .badge").forEach((badge, i) => {
+    gsap.from(badge, {
+      scale: 0.7,
+      autoAlpha: 0,
+      duration: 0.4,
+      delay: 0.3 + i * 0.08,
+      ease: "back.out(1.7)",
+    });
+  });
+
+  // Tri-Shield layers build up
+  gsap.utils.toArray(".shield-layer").forEach((layer, i) => {
+    gsap.from(layer, {
+      y: 30,
+      autoAlpha: 0,
+      duration: 0.6,
+      delay: i * 0.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: layer,
+        start: "top 88%",
+        scroller: mainContent,
+      }
+    });
+  });
+
+  // Comparison cards enter from sides
+  gsap.utils.toArray(".comparison-grid .comparison-card").forEach((card, i) => {
+    gsap.from(card, {
+      x: i % 2 === 0 ? -30 : 30,
+      autoAlpha: 0,
+      duration: 0.5,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: card,
+        start: "top 85%",
+        scroller: mainContent,
+      }
+    });
+  });
+
+  // Collection sections
+  gsap.utils.toArray(".collection-section").forEach(section => {
+    gsap.from(section, {
+      y: 40,
+      autoAlpha: 0,
+      duration: 0.6,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 85%",
+        scroller: mainContent,
+      }
+    });
+  });
+
+  // Badges in product cards
+  gsap.utils.toArray(".product-card-badges .badge").forEach((badge, i) => {
+    gsap.from(badge, {
+      scale: 0.6,
+      autoAlpha: 0,
+      duration: 0.35,
+      ease: "back.out(1.7)",
+      scrollTrigger: {
+        trigger: badge,
+        start: "top 90%",
+        scroller: mainContent,
+      }
+    });
+  });
 }
 
 // ── HOME PAGE ────────────────────────────────────────────────
 function renderHomePage() {
-  let html = `
+  return `
     <div class="home-hero">
       <div class="home-brand-name">${BRAND.name}</div>
       <h2>${HOME.heroTitle}</h2>
@@ -110,7 +236,7 @@ function renderHomePage() {
       `).join("")}
     </div>
     <div class="how-to-use">
-      <h3>📖 How to Use This During a Presentation</h3>
+      <h3>How to Use This During a Presentation</h3>
       <div class="how-to-grid">
         ${HOME.howToUse.map((item, i) => `
           <div class="how-to-item">
@@ -122,13 +248,13 @@ function renderHomePage() {
       </div>
     </div>
     <div class="how-to-use">
-      <h3>🎯 Recommended Presentation Flow</h3>
+      <h3>Recommended Presentation Flow</h3>
       <ol style="padding-left:20px; margin-top:16px;">
         ${HOME.recommendedFlow.map(step => `<li style="padding:6px 0; font-size:14px; color:var(--text-secondary);">${step}</li>`).join("")}
       </ol>
     </div>
     <div class="updates-section" style="margin-top: var(--space-xl);">
-      <h3>📊 Content Status</h3>
+      <h3>Content Status</h3>
       ${HOME.recentUpdates.map(u => `
         <div class="update-row">
           <span class="update-label">${u.label}</span>
@@ -138,7 +264,6 @@ function renderHomePage() {
       `).join("")}
     </div>
   `;
-  return html;
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -179,6 +304,14 @@ function renderServicePage(service) {
 
     if (name === "overview") {
       html += renderOverview(service);
+    } else if (name.includes("tri-shield") || name.includes("tri\u2011shield")) {
+      html += renderTriShield(service);
+    } else if (name === "standard collection") {
+      html += renderTurfCollection(service, "standard");
+    } else if (name === "premium collection") {
+      html += renderTurfCollection(service, "premium");
+    } else if (name === "full comparison") {
+      html += renderFullComparisonTable(service);
     } else if (name.includes("vs") || name.includes("attached")) {
       html += renderComparisons(service, sectionName);
     } else if (name.includes("faq")) {
@@ -207,9 +340,9 @@ function renderServicePage(service) {
       html += renderTierOptions(service, "premium-pet", "Pet-Friendly Options");
     } else if (name.includes("putting")) {
       html += renderTierOptions(service, "specialty", "Putting Green");
-    } else if (name.includes("standard")) {
+    } else if (name.includes("standard") && !name.includes("collection")) {
       html += renderTierOptions(service, "standard", "Standard Tier");
-    } else if (name.includes("premium") && !name.includes("pet")) {
+    } else if (name.includes("premium") && !name.includes("pet") && !name.includes("collection")) {
       html += renderTierOptions(service, "premium", "Premium Tier");
     } else if (name === "townscape") {
       html += renderSpecificOption(service, "Townscape Paver Sets");
@@ -239,7 +372,6 @@ function setupStickyNav(service) {
   const anchorNav = document.getElementById("anchor-nav");
   if (!anchorNav || !mainContent) return;
 
-  // Click handler for anchor links
   anchorNav.querySelectorAll(".anchor-link").forEach(link => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
@@ -255,7 +387,6 @@ function setupStickyNav(service) {
     });
   });
 
-  // Scroll spy
   let ticking = false;
   mainContent.addEventListener("scroll", () => {
     if (!ticking) {
@@ -311,12 +442,215 @@ function renderOverview(service) {
   if (o.consultant_tip) {
     html += `
       <div class="consultant-tip">
-        <div class="consultant-tip-label">💡 Consultant Tip</div>
+        <div class="consultant-tip-label">Consultant Tip</div>
         <p>${o.consultant_tip}</p>
       </div>
     `;
   }
   html += `</div>`;
+  return html;
+}
+
+// ══════════════════════════════════════════════════════════════
+// TRI-SHIELD™ SECTION
+// ══════════════════════════════════════════════════════════════
+function renderTriShield(service) {
+  const ts = service.triShield;
+  if (!ts) return `<p style="color:var(--text-muted)">Tri-Shield\u2122 content is being prepared.</p>`;
+
+  let html = `
+    <div class="tri-shield-section">
+      <div class="tri-shield-header">
+        <h3>Tri-Shield\u2122 Outdoor System</h3>
+        <p>Every structural project includes all three shields \u2014 it\u2019s what separates Viva from the competition.</p>
+      </div>
+      <div class="tri-shield-layers">
+  `;
+
+  ts.layers.forEach(layer => {
+    html += `
+      <div class="shield-layer ${layer.color}">
+        <div class="shield-layer-icon">${layer.icon}</div>
+        <div class="shield-layer-content">
+          <div class="shield-layer-name">${layer.name}</div>
+          <div class="shield-layer-desc">${layer.description}</div>
+          <div class="shield-layer-prevents">${layer.prevents}</div>
+        </div>
+      </div>
+    `;
+  });
+
+  html += `
+      </div>
+      <div class="tri-shield-tagline">${ts.tagline}</div>
+    </div>
+  `;
+  return html;
+}
+
+// ══════════════════════════════════════════════════════════════
+// TURF COLLECTION SECTIONS (Standard / Premium)
+// ══════════════════════════════════════════════════════════════
+function renderTurfCollection(service, tier) {
+  const collection = tier === "standard" ? service.standardCollection : service.premiumCollection;
+  if (!collection) return `<p style="color:var(--text-muted)">Collection data is being prepared.</p>`;
+
+  const tierClass = tier;
+  let html = `
+    <div class="collection-section ${tierClass}">
+      <div class="collection-header">
+        <span class="collection-tier-badge ${tierClass}">${tier === "standard" ? "Standard Tier" : "Premium Tier"}</span>
+        <h3>${collection.title}</h3>
+        <p>${collection.subtitle}</p>
+      </div>
+      <div class="collection-grid ${collection.products.length <= 3 ? 'collection-grid-3' : 'collection-grid-6'}">
+  `;
+
+  collection.products.forEach(product => {
+    html += renderProductCard(product);
+  });
+
+  html += `</div>`;
+
+  // Face weight tip for premium collection
+  if (tier === "premium" && service.faceWeightTip) {
+    html += `
+      <div class="consultant-tip-prominent" style="margin-top:var(--space-lg);">
+        <div class="consultant-tip-label">Important: Face Weight vs Total Weight</div>
+        <p>${service.faceWeightTip}</p>
+      </div>
+    `;
+  }
+
+  // What's included footer
+  if (collection.included) {
+    html += `
+      <div class="collection-footer">
+        <h4>What\u2019s Included with Every ${tier === "standard" ? "Standard" : "Premium"} Install</h4>
+        <div class="included-items">
+          ${collection.included.map((item, i) => `
+            <div class="included-item ${tier === "premium" && i === 0 ? 'plus' : ''}">${item}</div>
+          `).join("")}
+        </div>
+      </div>
+    `;
+  }
+
+  html += `</div>`;
+  return html;
+}
+
+// ── PRODUCT CARD (for collections) ───────────────────────────
+function renderProductCard(product) {
+  const badgeHtml = product.badges.map(b => {
+    if (b === "most-popular") return `<span class="badge badge-most-popular">Most Popular</span>`;
+    if (b === "pet-optimized") return `<span class="badge badge-pet-optimized">Pet Optimized</span>`;
+    if (b === "flagship") return `<span class="badge badge-flagship">Flagship Luxury</span>`;
+    return `<span class="badge badge-default">${b}</span>`;
+  }).join("");
+
+  const drainageClass = product.drainageHighlight ? ' highlight' : '';
+
+  let html = `
+    <div class="product-card">
+      <div class="product-card-image">
+        ${product.image
+          ? `<img src="${product.image}" alt="${product.name}" loading="lazy">`
+          : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);font-size:13px;">Image pending</div>`
+        }
+      </div>
+      <div class="product-card-body">
+        <div class="product-card-name">${product.name}</div>
+        <div class="product-card-badges">${badgeHtml}</div>
+        <div class="specs-grid">
+          <div class="spec-cell">
+            <div class="spec-cell-label">Face Weight</div>
+            <div class="spec-cell-value">${product.faceWeight}</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-cell-label">Total Weight</div>
+            <div class="spec-cell-value">${product.totalWeight}</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-cell-label">Pile Height</div>
+            <div class="spec-cell-value">${product.pileHeight}</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-cell-label">Warranty</div>
+            <div class="spec-cell-value">${product.warranty}</div>
+          </div>
+          <div class="spec-cell${drainageClass}">
+            <div class="spec-cell-label">Drainage</div>
+            <div class="spec-cell-value">${product.drainage}${product.drainageHighlight ? ' (2X!)' : ''}</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-cell-label">Color</div>
+            <div class="spec-cell-value">${product.color}</div>
+          </div>
+        </div>
+        <div class="product-card-bestfor"><strong>Best For:</strong> ${product.bestFor}</div>
+        <div class="product-card-desc">${product.description}</div>
+  `;
+
+  // Spec sheet links
+  if (product.specSheet || product.warrantySheet) {
+    html += `<div class="product-card-links">`;
+    if (product.specSheet) {
+      html += `<a href="${product.specSheet}" target="_blank" rel="noopener" class="spec-sheet-link">📄 Spec Sheet</a>`;
+    }
+    if (product.warrantySheet) {
+      html += `<a href="${product.warrantySheet}" target="_blank" rel="noopener" class="spec-sheet-link">🛡️ Warranty</a>`;
+    }
+    html += `</div>`;
+  }
+
+  html += `</div></div>`;
+  return html;
+}
+
+// ══════════════════════════════════════════════════════════════
+// FULL COMPARISON TABLE (all 9 products)
+// ══════════════════════════════════════════════════════════════
+function renderFullComparisonTable(service) {
+  const std = service.standardCollection ? service.standardCollection.products : [];
+  const prm = service.premiumCollection ? service.premiumCollection.products : [];
+  const allProducts = [...std, ...prm];
+
+  if (allProducts.length === 0) return `<p style="color:var(--text-muted)">Comparison data is being prepared.</p>`;
+
+  let html = `
+    <p style="color:var(--text-secondary);margin-bottom:var(--space-lg);font-size:14px;">All 9 turf products side by side. Scroll horizontally on mobile.</p>
+    <div class="comparison-table-wrapper">
+      <table class="comparison-table-full">
+        <thead>
+          <tr>
+            <th>Spec</th>
+            ${allProducts.map(p => `<th class="tier-${p.tier}">${p.name}</th>`).join("")}
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Face Weight</td>${allProducts.map(p => `<td>${p.faceWeight}</td>`).join("")}</tr>
+          <tr><td>Total Weight</td>${allProducts.map(p => `<td>${p.totalWeight}</td>`).join("")}</tr>
+          <tr><td>Pile Height</td>${allProducts.map(p => `<td>${p.pileHeight}</td>`).join("")}</tr>
+          <tr><td>Warranty</td>${allProducts.map(p => `<td>${p.warranty}</td>`).join("")}</tr>
+          <tr><td>Drainage</td>${allProducts.map(p => `<td${p.drainageHighlight ? ' style="color:#0277BD;font-weight:700;"' : ''}>${p.drainage}</td>`).join("")}</tr>
+          <tr><td>Supplier</td>${allProducts.map(p => `<td>${p.supplier}</td>`).join("")}</tr>
+          <tr><td>Tier</td>${allProducts.map(p => `<td><span class="badge badge-${p.tier === 'standard' ? 'brand' : 'premium'}" style="font-size:10px;">${p.tier}</span></td>`).join("")}</tr>
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  // Face weight tip
+  if (service.faceWeightTip) {
+    html += `
+      <div class="consultant-tip-prominent">
+        <div class="consultant-tip-label">Important: Face Weight vs Total Weight</div>
+        <p>${service.faceWeightTip}</p>
+      </div>
+    `;
+  }
+
   return html;
 }
 
@@ -378,7 +712,6 @@ function renderSpecificOption(service, optionName) {
   const opt = (service.options || []).find(o => o.name === optionName);
   if (!opt) return `<p style="color:var(--text-muted);padding:var(--space-lg);">This product section is being prepared.</p>`;
   let html = renderOptionCard(opt, true);
-  // Show extra images if available
   if (opt.images && opt.images.length > 0) {
     html += `<div class="option-extra-images">`;
     opt.images.forEach(imgUrl => {
@@ -516,7 +849,7 @@ function renderSeasonalCare(service) {
   `;
   if (sc.dormancyNote) {
     html += `<div class="consultant-tip" style="margin-top:var(--space-lg)">
-      <div class="consultant-tip-label">💡 Key Point for Clients</div>
+      <div class="consultant-tip-label">Key Point for Clients</div>
       <p>${sc.dormancyNote}</p>
     </div>`;
   }
@@ -534,7 +867,7 @@ function renderIrrigationBasics(service) {
   `;
   if (ib.consultant_tip) {
     html += `<div class="consultant-tip" style="margin-top:var(--space-lg)">
-      <div class="consultant-tip-label">💡 Consultant Tip</div>
+      <div class="consultant-tip-label">Consultant Tip</div>
       <p>${ib.consultant_tip}</p>
     </div>`;
   }
@@ -676,7 +1009,7 @@ function renderGlobalFAQs() {
 function renderResearchFlags() {
   let html = `
     <div class="service-hero" style="border-left:4px solid var(--warning);">
-      <h2>📋 Internal Notes & Research Flags</h2>
+      <h2>Internal Notes & Research Flags</h2>
       <p class="hero-desc">Items that need internal confirmation, missing assets, and open research questions. This section is for the team only — not for client presentations.</p>
     </div>
     <div class="card" style="margin-bottom:var(--space-xl);overflow-x:auto;">
@@ -709,6 +1042,31 @@ function renderResearchFlags() {
   return html;
 }
 
+// ══════════════════════════════════════════════════════════════
+// FOOTER
+// ══════════════════════════════════════════════════════════════
+function renderFooter() {
+  return `
+    <footer class="app-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <h4>${BRAND.name}</h4>
+          <div class="footer-tagline">${BRAND.tagline}</div>
+          <div class="footer-contact">
+            <a href="tel:${BRAND.phone}">\u260E ${BRAND.phone}</a>
+            <a href="mailto:${BRAND.email}">\u2709 ${BRAND.email}</a>
+            <a href="${BRAND.website}" target="_blank" rel="noopener">\uD83C\uDF10 ${BRAND.website.replace('https://', '')}</a>
+            <span>\uD83D\uDCCD ${BRAND.address || ''}</span>
+          </div>
+        </div>
+        <div class="footer-right">
+          <div class="footer-position">${BRAND.position || ''}</div>
+        </div>
+      </div>
+    </footer>
+  `;
+}
+
 // ── IMAGE HELPER ─────────────────────────────────────────────
 function renderImageOrPlaceholder(src, alt) {
   if (src) {
@@ -724,6 +1082,18 @@ function setupAccordions() {
     if (trigger && !trigger._bound) {
       trigger._bound = true;
       trigger.addEventListener("click", () => {
+        const isOpen = item.classList.contains("open");
+        // Animate with GSAP if available
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          const body = item.querySelector(".accordion-body");
+          if (isOpen) {
+            gsap.to(body, { maxHeight: 0, duration: 0.3, ease: "power2.inOut" });
+          } else {
+            gsap.set(body, { maxHeight: "none" });
+            const h = body.scrollHeight;
+            gsap.fromTo(body, { maxHeight: 0 }, { maxHeight: h, duration: 0.3, ease: "power2.inOut" });
+          }
+        }
         item.classList.toggle("open");
       });
     }
@@ -794,6 +1164,15 @@ function handleSearch(query) {
         results.push({ type: "option", label: opt.name, page: service.id });
       }
     });
+    // Search in collection products too
+    const collections = [service.standardCollection, service.premiumCollection].filter(Boolean);
+    collections.forEach(col => {
+      (col.products || []).forEach(p => {
+        if (p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q) || p.bestFor.toLowerCase().includes(q)) {
+          results.push({ type: "product", label: p.name, page: service.id });
+        }
+      });
+    });
   });
   GLOBAL_FAQS.forEach(faq => {
     if (faq.q.toLowerCase().includes(q) || faq.a.toLowerCase().includes(q)) {
@@ -811,7 +1190,14 @@ function renderSearchResults(results) {
     container.style.display = "block";
     return;
   }
-  container.innerHTML = results.slice(0, 8).map(r => `
+  // Deduplicate by label
+  const seen = new Set();
+  const unique = results.filter(r => {
+    if (seen.has(r.label)) return false;
+    seen.add(r.label);
+    return true;
+  });
+  container.innerHTML = unique.slice(0, 10).map(r => `
     <button class="search-result-item" onclick="navigateTo('${r.page}');document.getElementById('search-results').style.display='none';document.getElementById('search-input').value='';">
       <span class="search-result-type">${r.type}</span>
       <span>${r.label}</span>
