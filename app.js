@@ -47,7 +47,7 @@ function renderSidebar() {
   html += `<div class="future-services-group">`;
   html += `<div class="sidebar-section-label">Coming Soon</div>`;
   FUTURE_SERVICES.forEach(s => {
-    html += `<div class="nav-item future"><span class="nav-icon">${ICONS[s.icon] || "📄"}</span>${s.title}</div>`;
+    html += `<div class="nav-item future" data-tooltip="${s.title}"><span class="nav-icon">${ICONS[s.icon] || "📄"}</span><span class="nav-label">${s.title}</span></div>`;
   });
   html += `</div>`;
   nav.innerHTML = html;
@@ -60,7 +60,7 @@ function renderSidebar() {
 }
 
 function navItem(id, label, icon) {
-  return `<button class="nav-item" data-page="${id}"><span class="nav-icon">${icon}</span>${label}</button>`;
+  return `<button class="nav-item" data-page="${id}" data-tooltip="${label}"><span class="nav-icon">${icon}</span><span class="nav-label">${label}</span></button>`;
 }
 
 // ── NAVIGATION ───────────────────────────────────────────────
@@ -318,6 +318,7 @@ function renderHomePage() {
     <div class="home-hero">
       <div class="home-brand-name">${BRAND.name}</div>
       <h2>${HOME.heroTitle}</h2>
+      <p class="home-hero-subtitle">${HOME.heroSubtitle}</p>
       <p>${HOME.toolDescription}</p>
     </div>
     <div class="home-services-grid">
@@ -1164,7 +1165,7 @@ function renderFooter() {
 // ── IMAGE HELPER ─────────────────────────────────────────────
 function renderImageOrPlaceholder(src, alt) {
   if (src) {
-    return `<div class="gallery-image-wrap" style="margin-bottom:var(--space-md);border-radius:var(--radius-md);overflow:hidden;max-height:220px;"><img src="${src}" alt="${alt}" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>`;
+    return `<div class="gallery-image-wrap" style="margin-bottom:var(--space-sm);border-radius:var(--radius-md);overflow:hidden;max-height:180px;"><img src="${src}" alt="${alt}" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>`;
   }
   return "";
 }
