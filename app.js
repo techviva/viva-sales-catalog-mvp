@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderSidebar();
   navigateTo("home");
   setupMobileToggle();
+  setupSidebarCollapse();
 });
 
 // ── SIDEBAR ──────────────────────────────────────────────────
@@ -102,118 +103,211 @@ function navigateTo(page) {
 function initPageAnimations(page) {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  const mainContent = document.querySelector(".main-content");
+  const mc = document.querySelector(".main-content");
+  const stDefaults = { scroller: mc };
 
-  // Common: catalog sections fade in
-  gsap.utils.toArray(".catalog-section").forEach(section => {
-    gsap.from(section, {
-      y: 30,
-      autoAlpha: 0,
-      duration: 0.5,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: section,
-        start: "top 85%",
-        scroller: mainContent,
-      }
+  // ── Hero entrance ──
+  const hero = document.querySelector(".service-hero, .home-hero");
+  if (hero) {
+    gsap.from(hero, { y: 20, autoAlpha: 0, duration: 0.6, ease: "power3.out" });
+    // Hero title
+    const heroTitle = hero.querySelector("h2");
+    if (heroTitle) gsap.from(heroTitle, { y: 15, autoAlpha: 0, duration: 0.5, delay: 0.15, ease: "power2.out" });
+    // Hero desc
+    const heroDesc = hero.querySelector(".hero-desc, p");
+    if (heroDesc) gsap.from(heroDesc, { y: 10, autoAlpha: 0, duration: 0.5, delay: 0.25, ease: "power2.out" });
+  }
+
+  // ── Hero badges scale-in with stagger ──
+  const heroBadges = gsap.utils.toArray(".hero-badges .badge");
+  if (heroBadges.length) {
+    gsap.from(heroBadges, {
+      scale: 0.5, autoAlpha: 0, duration: 0.4,
+      delay: 0.35, stagger: 0.06, ease: "back.out(2)",
+    });
+  }
+
+  // ── Anchor nav slide-in ──
+  const anchorNav = document.querySelector(".anchor-nav");
+  if (anchorNav) {
+    gsap.from(anchorNav, { y: -15, autoAlpha: 0, duration: 0.4, delay: 0.3, ease: "power2.out" });
+  }
+
+  // ── Home service cards stagger ──
+  const homeCards = gsap.utils.toArray(".home-service-card");
+  if (homeCards.length) {
+    gsap.from(homeCards, {
+      y: 50, autoAlpha: 0, duration: 0.6,
+      stagger: 0.08, ease: "power3.out", delay: 0.2,
+    });
+  }
+
+  // ── Section dividers ──
+  gsap.utils.toArray(".section-divider").forEach(div => {
+    gsap.from(div, {
+      x: -20, autoAlpha: 0, duration: 0.5, ease: "power2.out",
+      scrollTrigger: { trigger: div, start: "top 88%", ...stDefaults },
     });
   });
 
-  // Home: service cards stagger
-  gsap.utils.toArray(".home-service-card").forEach((card, i) => {
+  // ── Cards in grids (comparison, option cards) ──
+  gsap.utils.toArray(".card-grid .card, .comparison-grid .card").forEach((card, i) => {
     gsap.from(card, {
-      y: 40,
-      autoAlpha: 0,
-      duration: 0.5,
-      delay: i * 0.08,
-      ease: "power2.out",
+      y: 40, autoAlpha: 0, duration: 0.5, ease: "power2.out",
+      scrollTrigger: { trigger: card, start: "top 90%", ...stDefaults },
     });
   });
 
-  // Product cards stagger
-  gsap.utils.toArray(".product-card").forEach((card, i) => {
-    gsap.from(card, {
-      y: 40,
-      autoAlpha: 0,
-      duration: 0.6,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: card,
-        start: "top 88%",
-        scroller: mainContent,
-      }
-    });
-  });
-
-  // Hero badges scale-in
-  gsap.utils.toArray(".hero-badges .badge").forEach((badge, i) => {
-    gsap.from(badge, {
-      scale: 0.7,
-      autoAlpha: 0,
-      duration: 0.4,
-      delay: 0.3 + i * 0.08,
-      ease: "back.out(1.7)",
-    });
-  });
-
-  // Tri-Shield layers build up
-  gsap.utils.toArray(".shield-layer").forEach((layer, i) => {
-    gsap.from(layer, {
-      y: 30,
-      autoAlpha: 0,
-      duration: 0.6,
-      delay: i * 0.2,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: layer,
-        start: "top 88%",
-        scroller: mainContent,
-      }
-    });
-  });
-
-  // Comparison cards enter from sides
-  gsap.utils.toArray(".comparison-grid .comparison-card").forEach((card, i) => {
-    gsap.from(card, {
-      x: i % 2 === 0 ? -30 : 30,
-      autoAlpha: 0,
-      duration: 0.5,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: card,
-        start: "top 85%",
-        scroller: mainContent,
-      }
-    });
-  });
-
-  // Collection sections
+  // ── Collection sections ──
   gsap.utils.toArray(".collection-section").forEach(section => {
     gsap.from(section, {
-      y: 40,
-      autoAlpha: 0,
-      duration: 0.6,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: section,
-        start: "top 85%",
-        scroller: mainContent,
-      }
+      y: 50, autoAlpha: 0, duration: 0.7, ease: "power3.out",
+      scrollTrigger: { trigger: section, start: "top 85%", ...stDefaults },
     });
   });
 
-  // Badges in product cards
-  gsap.utils.toArray(".product-card-badges .badge").forEach((badge, i) => {
-    gsap.from(badge, {
-      scale: 0.6,
-      autoAlpha: 0,
-      duration: 0.35,
-      ease: "back.out(1.7)",
-      scrollTrigger: {
-        trigger: badge,
-        start: "top 90%",
-        scroller: mainContent,
-      }
+  // ── Product cards with stagger per collection ──
+  document.querySelectorAll(".collection-grid").forEach(grid => {
+    const cards = gsap.utils.toArray(grid.querySelectorAll(".product-card"));
+    if (cards.length) {
+      gsap.from(cards, {
+        y: 60, autoAlpha: 0, scale: 0.95,
+        duration: 0.6, stagger: 0.1, ease: "power3.out",
+        scrollTrigger: { trigger: grid, start: "top 85%", ...stDefaults },
+      });
+    }
+  });
+
+  // ── Specs grids inside product cards ──
+  gsap.utils.toArray(".specs-grid").forEach(grid => {
+    gsap.from(grid, {
+      autoAlpha: 0, y: 10, duration: 0.4, ease: "power2.out",
+      scrollTrigger: { trigger: grid, start: "top 92%", ...stDefaults },
+    });
+  });
+
+  // ── Tri-Shield layers build from bottom ──
+  const shieldLayers = gsap.utils.toArray(".shield-layer");
+  if (shieldLayers.length) {
+    gsap.from(shieldLayers, {
+      y: 40, autoAlpha: 0, duration: 0.6,
+      stagger: 0.15, ease: "power2.out",
+      scrollTrigger: { trigger: shieldLayers[0], start: "top 85%", ...stDefaults },
+    });
+  }
+
+  // ── Tri-Shield tagline ──
+  const tagline = document.querySelector(".tri-shield-tagline");
+  if (tagline) {
+    gsap.from(tagline, {
+      autoAlpha: 0, y: 15, duration: 0.5, delay: 0.6, ease: "power2.out",
+      scrollTrigger: { trigger: tagline, start: "top 92%", ...stDefaults },
+    });
+  }
+
+  // ── Comparison table slide-in ──
+  const compTable = document.querySelector(".comparison-table-wrapper");
+  if (compTable) {
+    gsap.from(compTable, {
+      autoAlpha: 0, y: 30, duration: 0.6, ease: "power2.out",
+      scrollTrigger: { trigger: compTable, start: "top 85%", ...stDefaults },
+    });
+  }
+
+  // ── Consultant tips ──
+  gsap.utils.toArray(".consultant-tip, .consultant-tip-prominent").forEach(tip => {
+    gsap.from(tip, {
+      x: -20, autoAlpha: 0, duration: 0.5, ease: "power2.out",
+      scrollTrigger: { trigger: tip, start: "top 90%", ...stDefaults },
+    });
+  });
+
+  // ── FAQ items stagger ──
+  gsap.utils.toArray(".accordion-item").forEach((item, i) => {
+    gsap.from(item, {
+      y: 15, autoAlpha: 0, duration: 0.35,
+      ease: "power2.out",
+      scrollTrigger: { trigger: item, start: "top 92%", ...stDefaults },
+    });
+  });
+
+  // ── Gallery items ──
+  document.querySelectorAll(".gallery-grid").forEach(grid => {
+    const items = gsap.utils.toArray(grid.querySelectorAll(".gallery-item"));
+    if (items.length) {
+      gsap.from(items, {
+        scale: 0.9, autoAlpha: 0, duration: 0.5,
+        stagger: 0.05, ease: "power2.out",
+        scrollTrigger: { trigger: grid, start: "top 85%", ...stDefaults },
+      });
+    }
+  });
+
+  // ── Add-on cards ──
+  document.querySelectorAll(".addons-grid").forEach(grid => {
+    const items = gsap.utils.toArray(grid.querySelectorAll(".addon-card"));
+    if (items.length) {
+      gsap.from(items, {
+        y: 30, autoAlpha: 0, duration: 0.4,
+        stagger: 0.06, ease: "back.out(1.4)",
+        scrollTrigger: { trigger: grid, start: "top 88%", ...stDefaults },
+      });
+    }
+  });
+
+  // ── Included items ──
+  gsap.utils.toArray(".included-items").forEach(container => {
+    const items = gsap.utils.toArray(container.querySelectorAll(".included-item"));
+    if (items.length) {
+      gsap.from(items, {
+        x: -15, autoAlpha: 0, duration: 0.3,
+        stagger: 0.04, ease: "power2.out",
+        scrollTrigger: { trigger: container, start: "top 90%", ...stDefaults },
+      });
+    }
+  });
+
+  // ── Overview key points ──
+  gsap.utils.toArray(".overview-key-points li").forEach((li, i) => {
+    gsap.from(li, {
+      x: -10, autoAlpha: 0, duration: 0.3,
+      ease: "power2.out",
+      scrollTrigger: { trigger: li, start: "top 93%", ...stDefaults },
+    });
+  });
+
+  // ── Footer ──
+  const footer = document.querySelector(".app-footer");
+  if (footer) {
+    gsap.from(footer, {
+      autoAlpha: 0, y: 20, duration: 0.5, ease: "power2.out",
+      scrollTrigger: { trigger: footer, start: "top 95%", ...stDefaults },
+    });
+  }
+
+  // ── How-to items on home ──
+  gsap.utils.toArray(".how-to-item").forEach((item, i) => {
+    gsap.from(item, {
+      y: 30, autoAlpha: 0, duration: 0.4,
+      delay: i * 0.06, ease: "power2.out",
+      scrollTrigger: { trigger: item, start: "top 90%", ...stDefaults },
+    });
+  });
+
+  // ── Before/After cards ──
+  gsap.utils.toArray(".before-after-card").forEach(card => {
+    gsap.from(card, {
+      y: 30, autoAlpha: 0, duration: 0.5, ease: "power2.out",
+      scrollTrigger: { trigger: card, start: "top 88%", ...stDefaults },
+    });
+  });
+
+  // ── Season cards ──
+  gsap.utils.toArray(".season-card").forEach((card, i) => {
+    gsap.from(card, {
+      y: 20, autoAlpha: 0, duration: 0.4,
+      ease: "power2.out",
+      scrollTrigger: { trigger: card, start: "top 90%", ...stDefaults },
     });
   });
 }
@@ -731,7 +825,7 @@ function renderProductComparison(service) {
       <div style="margin-top:var(--space-xl);">
         <div class="section-header"><h3>Color Options</h3><p>Available colors across paver product lines</p></div>
         <div class="card" style="text-align:center;padding:var(--space-lg);">
-          <img src="${service.colorSwatchImage}" alt="Paver color options" style="max-width:100%;border-radius:var(--radius-md);" loading="lazy">
+          <img src="${service.colorSwatchImage}" alt="Paver color options" style="max-width:600px;width:100%;border-radius:var(--radius-md);margin:0 auto;" loading="lazy">
         </div>
       </div>
     `;
@@ -1070,7 +1164,7 @@ function renderFooter() {
 // ── IMAGE HELPER ─────────────────────────────────────────────
 function renderImageOrPlaceholder(src, alt) {
   if (src) {
-    return `<div class="gallery-image-wrap" style="margin-bottom:var(--space-md);border-radius:var(--radius-md);overflow:hidden;"><img src="${src}" alt="${alt}" loading="lazy"></div>`;
+    return `<div class="gallery-image-wrap" style="margin-bottom:var(--space-md);border-radius:var(--radius-md);overflow:hidden;max-height:220px;"><img src="${src}" alt="${alt}" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>`;
   }
   return "";
 }
@@ -1143,6 +1237,28 @@ function setupMobileToggle() {
 function closeMobileSidebar() {
   document.getElementById("sidebar").classList.remove("open");
   document.getElementById("sidebar-overlay").classList.remove("visible");
+}
+
+// ── SIDEBAR COLLAPSE ─────────────────────────────────────────
+function setupSidebarCollapse() {
+  const btn = document.getElementById("sidebar-collapse");
+  const sidebar = document.getElementById("sidebar");
+  if (!btn || !sidebar) return;
+
+  // Restore state from localStorage
+  if (localStorage.getItem("sidebar-collapsed") === "true") {
+    sidebar.classList.add("collapsed");
+    document.body.classList.add("sidebar-collapsed");
+  }
+
+  btn.addEventListener("click", () => {
+    const isCollapsed = sidebar.classList.toggle("collapsed");
+    document.body.classList.toggle("sidebar-collapsed", isCollapsed);
+    localStorage.setItem("sidebar-collapsed", isCollapsed);
+
+    // Refresh ScrollTrigger after sidebar transition
+    setTimeout(() => ScrollTrigger.refresh(), 450);
+  });
 }
 
 // ── SEARCH ───────────────────────────────────────────────────
