@@ -3,53 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Viva Landscape & Design — Internal Sales Catalog</title>
+  <title>Viva Landscape & Design — Sales Catalog</title>
+  <meta name="theme-color" content="#0B0F0D">
   <link rel="stylesheet" href="styles.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-  <!--
-  ═══════════════════════════════════════════════════════════════
-  VIVA LANDSCAPE & DESIGN — INTERNAL SALES CATALOG (MVP)
-  ═══════════════════════════════════════════════════════════════
-
-  HOW TO RUN:
-  1. Open this file (index.html) directly in a browser.
-     No server or build step required.
-
-  HOW TO EDIT CONTENT:
-  1. Open content.js
-  2. Find the service/section you want to update
-  3. Edit text, add options, update images, add FAQs
-  4. Refresh the browser
-
-  FILE STRUCTURE:
-  ├── index.html      ← You are here (layout shell)
-  ├── styles.css      ← All visual styling (CSS variables for branding)
-  ├── content.js      ← ALL content data (services, FAQs, gallery, etc.)
-  ├── app.js          ← Rendering logic and interactions
-  └── assets/         ← Place images here
-      ├── viva-logo.png
-      ├── pergola-hero.jpg
-      └── ... (add project photos)
-
-  HOW TO REPLACE BRAND COLORS:
-  1. Open styles.css
-  2. Find the :root section at the top
-  3. Replace the --brand-* variables with Viva's exact hex codes
-
-  HOW TO ADD A NEW SERVICE:
-  1. Open content.js
-  2. Copy an existing service object in the SERVICES array
-  3. Update the id, title, content, options, FAQs, etc.
-  4. The sidebar and routing will pick it up automatically
-
-  HOW TO ADD IMAGES:
-  1. Place images in the /assets/ folder
-  2. In content.js, replace null image values with paths
-     Example: image: "./assets/my-photo.jpg"
-  ═══════════════════════════════════════════════════════════════
-  -->
 </head>
 <body>
 
@@ -59,48 +17,36 @@
 
   <div class="app-layout">
 
-    <!-- ── SIDEBAR ──────────────────────────────────────────── -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-brand">
-        <!-- Replace with: <img src="./assets/viva-logo.png" alt="Viva Logo" style="height:40px;margin-bottom:8px;"> -->
         <div class="sidebar-brand-logo">V</div>
         <h1>Viva Landscape<br>& Design</h1>
         <p>Sales Catalog</p>
       </div>
-      <nav class="sidebar-nav" id="sidebar-nav">
-        <!-- Rendered by app.js -->
-      </nav>
+      <nav class="sidebar-nav" id="sidebar-nav"></nav>
     </aside>
 
-    <!-- ── MAIN CONTENT ─────────────────────────────────────── -->
     <main class="main-content">
-
-      <!-- Search bar -->
-      <div style="max-width:1200px;margin:0 auto;padding:24px 32px 0;">
+      <div style="max-width:1200px;margin:0 auto;padding:20px 32px 0;">
         <div class="search-bar">
           <span class="search-icon">🔍</span>
           <input
             type="text"
             class="search-input"
             id="search-input"
-            placeholder="Search services, products, FAQs..."
+            placeholder="Search products, services, FAQs..."
             oninput="handleSearch(this.value)"
             onfocus="if(this.value.length>=2)document.getElementById('search-results').style.display='block'"
             onblur="setTimeout(()=>document.getElementById('search-results').style.display='none',200)"
           >
-          <div id="search-results" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:1px solid var(--border-soft);border-radius:0 0 var(--radius-lg) var(--radius-lg);box-shadow:var(--shadow-lg);z-index:50;max-height:320px;overflow-y:auto;"></div>
+          <div id="search-results" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg-raised);border:1px solid var(--border-soft);border-radius:0 0 var(--radius-lg) var(--radius-lg);box-shadow:var(--shadow-lg);z-index:50;max-height:360px;overflow-y:auto;"></div>
         </div>
       </div>
-
-      <!-- Dynamic content area -->
-      <div class="content-area" id="content-area">
-        <!-- Rendered by app.js -->
-      </div>
+      <div class="content-area" id="content-area"></div>
     </main>
 
   </div>
 
-  <!-- ── LIGHTBOX ───────────────────────────────────────────── -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox()">
     <button class="lightbox-close" onclick="closeLightbox()">✕</button>
     <div class="lightbox-content" onclick="event.stopPropagation()">
@@ -109,40 +55,6 @@
     </div>
   </div>
 
-  <!-- Search result item styles (inline for simplicity) -->
-  <style>
-    .search-result-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      padding: 10px 16px;
-      border: none;
-      background: none;
-      text-align: left;
-      font-size: 14px;
-      color: var(--text-primary);
-      cursor: pointer;
-      transition: background 0.15s;
-      font-family: var(--font-primary);
-    }
-    .search-result-item:hover {
-      background: var(--surface-alt);
-    }
-    .search-result-type {
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      padding: 2px 8px;
-      border-radius: 100px;
-      background: var(--surface-sunken);
-      color: var(--text-muted);
-      flex-shrink: 0;
-    }
-  </style>
-
-  <!-- Load content first, then app logic -->
   <script src="content.js"></script>
   <script src="app.js"></script>
 
