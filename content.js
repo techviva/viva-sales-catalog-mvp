@@ -310,7 +310,37 @@ const SERVICES = [
     shortDesc: "Townscape paver sets from Phoenix Paver — our flagship 3-piece system. Specialty and premium options available on request.",
     heroBadges: ["Best Seller: Townscape", "3-Piece Combo", "Patio · Walkway · Driveway", "Pool Deck Ready"],
     heroImage: "https://lh3.googleusercontent.com/d/1kbOoQN1vfDQcDoA6KrD5T4_SYsgfpY5F",
-    sections: ["Overview", "Standard Options", "Colors", "Add-Ons", "FAQs", "Gallery"],
+    sections: ["Overview", "Tri-Shield™", "Standard Options", "Colors", "Add-Ons", "FAQs", "Gallery"],
+
+    triShield: {
+      layers: [
+        {
+          id: "foundation",
+          name: "Foundation Shield",
+          icon: "🛡️",
+          color: "foundation",
+          description: "Engineered base preparation — compacted fill, crushed aggregate base, and a precision sand setting bed. The work that determines whether the patio holds flat for 20+ years or starts shifting in year three.",
+          prevents: "Prevents: Settling, paver shifting, uneven joints",
+        },
+        {
+          id: "water",
+          name: "Water Shield",
+          icon: "💧",
+          color: "water",
+          description: "Drainage planning baked into the layout — slope, edge drainage, and integration with surrounding hardscape so monsoon rain runs off cleanly.",
+          prevents: "Prevents: Pooling, base erosion, frost-heave damage",
+        },
+        {
+          id: "finish",
+          name: "Finish Shield",
+          icon: "✨",
+          color: "finish",
+          description: "Pattern alignment, color border execution, joint sand, and edge containment. The visible craft that separates a Viva install from a budget contractor.",
+          prevents: "Prevents: Loose edges, sand washout, off-pattern installs",
+        },
+      ],
+      tagline: "Every Viva paver project is built under all three shields. That’s why our pavers don’t move.",
+    },
 
     overview: {
       intro: "Pavers are one of the most transformative outdoor upgrades available. They define walkways, patios, driveways, and pool decks with lasting beauty and function. Our flagship system is the Townscape three-piece set from Phoenix Paver — simple to present, versatile in pattern, and the choice for ~90% of our installs.",
@@ -781,7 +811,37 @@ const SERVICES = [
     shortDesc: "Real grass for real living — Bermuda, shade-tolerant, and specialty sod for Phoenix-area homes.",
     heroBadges: ["Real Grass", "Irrigation Support", "Year-Round Install", "Phoenix Climate Adapted"],
     heroImage: "https://lh3.googleusercontent.com/d/1PbWFcXu3Ya7I5tTbm3Fc3BwGsnj5zlMp",
-    sections: ["Overview", "Midiron vs Tifway 419", "Shade-Tolerant", "St. Augustine", "Seasonal Care", "Irrigation Basics", "FAQs", "Gallery"],
+    sections: ["Overview", "Tri-Shield™", "Midiron vs Tifway 419", "Shade-Tolerant", "St. Augustine", "Seasonal Care", "Irrigation Basics", "FAQs", "Gallery"],
+
+    triShield: {
+      layers: [
+        {
+          id: "foundation",
+          name: "Foundation Shield",
+          icon: "🛡️",
+          color: "foundation",
+          description: "Engineered base prep — soil grading, compaction, and amended soil mix tuned for the local climate. The reason our sod takes root the first season instead of patching up two summers later.",
+          prevents: "Prevents: Patchy growth, weak root systems, low germination",
+        },
+        {
+          id: "water",
+          name: "Water Shield",
+          icon: "💧",
+          color: "water",
+          description: "Irrigation engineered for the specific yard layout — sprinkler zones, drip lines for garden beds, and timing that matches Phoenix water restrictions.",
+          prevents: "Prevents: Dry patches, overspray, water-bill surprises",
+        },
+        {
+          id: "finish",
+          name: "Finish Shield",
+          icon: "✨",
+          color: "finish",
+          description: "A defined maintenance plan: mowing schedule, fertilization windows, fall overseeding, and seasonal handoff so the lawn looks the same in year five as in week six.",
+          prevents: "Prevents: Decline after install, owner overwhelm, year-two regret",
+        },
+      ],
+      tagline: "Same Tri-Shield system, adapted for living grass. Foundation, water, and finish — every install.",
+    },
 
     overview: {
       intro: "Natural sod delivers the look, feel, and experience that only real grass can provide. It cools the air, absorbs dust, and creates a living, breathing outdoor environment. We install natural grass year-round in the Phoenix metro, even through summer heat.",
