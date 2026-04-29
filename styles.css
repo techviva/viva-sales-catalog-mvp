@@ -278,7 +278,13 @@ a:hover { color: var(--brand-primary-light); }
   height: 100vh; background: var(--bg-base);
   overflow-y: auto; overflow-x: hidden;
   scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
   transition: margin-left 0.4s var(--ease-out);
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
 }
 .sidebar.collapsed ~ .main-content,
 body.sidebar-collapsed .main-content { margin-left: 60px; }
@@ -593,8 +599,8 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
 .accordion-trigger {
   width: 100%; display: flex; align-items: center;
   justify-content: space-between;
-  padding: 14px var(--space-lg);
-  font-size: 14px; font-weight: 600;
+  padding: 10px var(--space-md);
+  font-size: 13.5px; font-weight: 600;
   color: var(--text-primary); text-align: left;
   transition: background var(--transition-fast);
 }
@@ -610,8 +616,20 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
 .accordion-item.open .accordion-body { max-height: 500px; }
 
 .accordion-body-inner {
-  padding: 0 var(--space-lg) var(--space-lg);
-  font-size: 14px; color: var(--text-secondary); line-height: 1.7;
+  padding: 0 var(--space-md) var(--space-md);
+  font-size: 13px; color: var(--text-secondary); line-height: 1.55;
+}
+
+/* FAQ list: 2-col layout on monitors ≥1280px (used by global FAQs page) */
+.faq-list { display: block; }
+@media (min-width: 1280px) {
+  .faq-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm) var(--space-md);
+    align-items: start;
+  }
+  .faq-list .accordion-item { margin-bottom: 0; }
 }
 
 .faq-tag {
@@ -663,12 +681,17 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
 /* ── BEFORE / AFTER ────────────────────────────────────────── */
 .before-after-grid {
   display: grid; grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-lg);
+  gap: var(--space-md);
 }
 
 @media (max-width: 768px) {
   .before-after-grid {
     grid-template-columns: 1fr;
+  }
+}
+@media (min-width: 1280px) {
+  .before-after-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 .before-after-card {
