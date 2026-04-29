@@ -301,7 +301,90 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
   margin: 0 auto;
   padding: var(--space-md) var(--space-xl) 0;
 }
+.topbar-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+.topbar-row .search-bar { flex: 1; margin-bottom: 0; }
 .search-bar { position: relative; margin-bottom: var(--space-lg); }
+
+/* Presentation mode toggle (in topbar) */
+.presentation-toggle {
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 14px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  background: var(--bg-raised);
+  font-family: inherit;
+  font-size: 12.5px; font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+.presentation-toggle:hover {
+  border-color: var(--brand-primary);
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+.presentation-toggle-icon {
+  font-size: 9px;
+  color: var(--brand-primary);
+  transition: transform var(--transition-fast);
+}
+.presentation-toggle[aria-pressed="true"] {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--text-on-brand);
+}
+.presentation-toggle[aria-pressed="true"] .presentation-toggle-icon {
+  color: var(--text-on-brand);
+  transform: rotate(90deg);
+}
+
+/* Presentation mode behavior — applied to body
+   When ON: every .catalog-section starts collapsed. The section
+   divider becomes the click target. .is-open reveals the content. */
+body.presentation-mode .catalog-section > *:not(.section-divider) {
+  display: none;
+}
+body.presentation-mode .catalog-section.is-open > *:not(.section-divider) {
+  display: block;
+}
+body.presentation-mode .catalog-section .section-divider {
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-sm);
+  background: var(--bg-raised);
+}
+body.presentation-mode .catalog-section .section-divider:hover {
+  border-color: var(--brand-primary);
+  background: var(--bg-hover);
+}
+body.presentation-mode .catalog-section .section-divider::before {
+  content: "▶";
+  font-size: 10px;
+  color: var(--brand-primary);
+  margin-right: var(--space-sm);
+  transition: transform var(--transition-fast);
+  display: inline-block;
+}
+body.presentation-mode .catalog-section.is-open .section-divider::before {
+  transform: rotate(90deg);
+}
+body.presentation-mode .catalog-section .section-divider h3 {
+  display: inline;
+}
+/* When in presentation mode, give a subtle hint on each section that it's clickable */
+body.presentation-mode .catalog-section:not(.is-open) {
+  margin-bottom: var(--space-sm);
+}
 
 .search-input {
   width: 100%; padding: 14px var(--space-lg) 14px 44px;
