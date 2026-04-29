@@ -328,9 +328,14 @@ function renderHomePage() {
       <div class="home-services-grid">
         ${SERVICES.map(s => `
           <div class="home-service-card" onclick="navigateTo('${s.id}')">
-            <div class="home-service-icon">${ICONS[s.icon] || "📄"}</div>
-            <h3>${s.title}</h3>
-            <p>${s.shortDesc}</p>
+            ${s.heroImage
+              ? `<div class="home-service-card-image" style="background-image:url('${s.heroImage}')"><span class="home-service-card-icon">${ICONS[s.icon] || "📄"}</span></div>`
+              : `<div class="home-service-card-image home-service-card-image--placeholder"><span class="home-service-card-icon">${ICONS[s.icon] || "📄"}</span></div>`
+            }
+            <div class="home-service-card-body">
+              <h3>${s.title}</h3>
+              <p>${s.shortDesc}</p>
+            </div>
           </div>
         `).join("")}
       </div>
