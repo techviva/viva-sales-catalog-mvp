@@ -248,22 +248,21 @@ const SERVICES = [
     id: "pavers",
     title: "Pavers",
     icon: "paver",
-    shortDesc: "From economy step stones to premium natural-stone patterns — options for every project and budget.",
-    heroBadges: ["Multiple Styles", "Durable", "Versatile Patterns", "Curb Appeal"],
+    shortDesc: "Townscape paver sets from Phoenix Paver — our flagship 3-piece system. Specialty and premium options available on request.",
+    heroBadges: ["Best Seller: Townscape", "3-Piece Combo", "Patio · Walkway · Driveway", "Pool Deck Ready"],
     heroImage: "https://lh3.googleusercontent.com/d/1kbOoQN1vfDQcDoA6KrD5T4_SYsgfpY5F",
-    sections: ["Overview", "Standard Options", "Premium & Specialty", "Product Comparison", "Colors", "Add-Ons", "FAQs", "Gallery"],
+    sections: ["Overview", "Standard Options", "Colors", "Add-Ons", "FAQs", "Gallery"],
 
     overview: {
-      intro: "Pavers are one of the most transformative outdoor upgrades available. They define walkways, patios, driveways, and pool decks with lasting beauty and function. We offer a curated selection from trusted vendors to match every style and budget.",
-      vendorNote: "Our primary vendor is Phoenix Paver, with additional economy options from Home Depot. Premium selections include Belgard pavers for high-end projects.",
+      intro: "Pavers are one of the most transformative outdoor upgrades available. They define walkways, patios, driveways, and pool decks with lasting beauty and function. Our flagship system is the Townscape three-piece set from Phoenix Paver — simple to present, versatile in pattern, and the choice for ~90% of our installs.",
+      vendorNote: "Our primary vendor is Phoenix Paver. Townscape sets are the lead product. Additional specialty options (Veneer overlay, Aztec premium, 12×12 step stones) stay available for clients who request them — they live behind the 'Specialty options' toggle on this page.",
       keyPoints: [
         "Townscape is our flagship paver — simple, versatile, and easy to present.",
-        "Available in multiple color blends, sizes, and pattern configurations.",
-        "Three-piece combos come pre-organized on full 100 sq ft pallets.",
-        "Veneer pavers allow overlay on existing concrete without demolition.",
-        "Economy 12×12 step stones provide a budget-friendly entry point.",
+        "Available in 4 color blends and patterns optimized for our local installs.",
+        "Three-piece combos come pre-organized on full pallets, easy to sell, easy to install.",
+        "Color borders (a contrasting accent on the edges) noticeably elevate any patio.",
       ],
-      consultant_tip: "Pavers are one of the best categories for before-and-after storytelling. Pattern, border, color, and surrounding upgrades dramatically change the emotional feel of a yard. Lead with transformation visuals.",
+      consultant_tip: "Pavers are one of the best categories for before-and-after storytelling. Pattern, color borders, and surrounding upgrades dramatically change the emotional feel of a yard. Lead with the Townscape Slate transformation visuals — that single product covers most consultations.",
     },
 
     options: [
@@ -272,13 +271,13 @@ const SERVICES = [
         subtitle: "Phoenix Paver — Flagship Product",
         tier: "standard",
         badges: ["Best Seller", "3-Piece Combo", "4 Color Options"],
-        description: "The Townscape is our most-used paver. It comes in a three-piece set that covers 100 sq ft per pallet, pre-organized for easy installation. Simple to sell, simple to install.",
+        description: "The Townscape is our most-used paver — about 90% of our installs are this exact product. It comes in a three-piece set, pre-organized for easy installation. Simple to sell, simple to install.",
         specs: [
           { label: "Vendor", value: "Phoenix Paver" },
-          { label: "Set Type", value: "Three-piece combo" },
-          { label: "Coverage", value: "~100 sq ft per pallet" },
+          { label: "Set Type", value: "Three-piece random pattern combo" },
           { label: "Colors", value: "Territorial, Tierra, Norte, Slate Native (4 options)" },
-          { label: "Sizes", value: "Three sizes in each set — see vendor page for exact dims" },
+          { label: "Most Popular", value: "Townscape Slate" },
+          { label: "Layouts", value: "Random pattern (default), running bond, custom" },
         ],
         colorOptions: ["Territorial", "Tierra", "Norte", "Slate Native"],
         image: "https://phoenixpaver.com/wp-content/uploads/2025/09/Townscape_3_pieces.jpg",
@@ -311,8 +310,9 @@ const SERVICES = [
       },
       {
         name: "Veneer Pavers / Pool Coping",
-        subtitle: "Phoenix Paver — Overlay Solution",
+        subtitle: "Phoenix Paver — Overlay Solution (Specialty)",
         tier: "standard",
+        hidden: true,
         badges: ["No Demolition", "Pool & Patio Refresh"],
         description: "Veneer pavers are designed to be installed directly over existing concrete surfaces. This makes them ideal for pool deck upgrades, patio refreshes, and remodels where full demolition isn't practical or desired.",
         specs: [
@@ -331,8 +331,9 @@ const SERVICES = [
       },
       {
         name: "Aztec Stone Sets",
-        subtitle: "Phoenix Paver — Premium Tier",
+        subtitle: "Phoenix Paver — Premium Specialty",
         tier: "premium",
+        hidden: true,
         badges: ["Large Format", "Natural Stone Feel", "Premium"],
         description: "The Aztec stone set is a larger-format paver with a more textured, natural-stone appearance. It is positioned as a premier option for clients who want a higher-end aesthetic.",
         specs: [
@@ -347,14 +348,15 @@ const SERVICES = [
           "https://phoenixpaver.com/wp-content/uploads/2025/09/Aztec_Slate_paver.jpg",
           "https://phoenixpaver.com/wp-content/uploads/2025/09/Aztec_Greendoors_Cafe.jpg",
         ],
-        note: "This is the premium upsell option. Present it after Townscape to show the upgrade path.",
+        note: "Premium upsell. Reveal only when the client signals interest in upgrading the visual or asks about higher-end finishes.",
       },
       {
         name: "12×12 Square Step Stone",
-        subtitle: "Home Depot — Economy Tier",
-        tier: "economy",
-        badges: ["Budget Friendly", "Simple"],
-        description: "A basic 12 in. × 12 in. × 1.5 in. pewter square concrete step stone. This is our economy-tier option for projects with tighter budgets or simpler scope.",
+        subtitle: "Home Depot — Standard Step Stone",
+        tier: "standard",
+        hidden: true,
+        badges: ["Simple", "Stepping Paths"],
+        description: "A basic 12 in. × 12 in. × 1.5 in. pewter square concrete step stone. Useful for stepping paths and simple-scope walkways where full paver installation isn't needed.",
         specs: [
           { label: "Vendor", value: "Home Depot (Pavestone)" },
           { label: "Size", value: '12" × 12" × 1.5"' },
@@ -362,41 +364,14 @@ const SERVICES = [
           { label: "Use Case", value: "Walkways, simple patios, stepping paths" },
         ],
         image: null,
-        note: "Economy option. Good for adding stepping paths or simple patio areas where full paver installation isn't needed.",
-      },
-    ],
-
-    comparisons: [
-      {
-        title: "Paver Tier Comparison",
-        items: [
-          {
-            name: "Economy (12×12)",
-            badges: ["Budget", "Simple"],
-            points: ["Single size and color", "Basic concrete step stone", "Best for walkways and stepping paths"],
-            image: null,
-          },
-          {
-            name: "Standard (Townscape / Holland)",
-            badges: ["Best Value", "Most Popular"],
-            points: ["Multiple sizes, colors, and patterns", "Pre-organized pallet system", "Versatile for patios, driveways, walkways"],
-            image: "https://phoenixpaver.com/wp-content/uploads/2025/09/townscape-patio-square.jpg",
-          },
-          {
-            name: "Premium (Aztec / Belgard)",
-            badges: ["Premium", "Natural Look"],
-            points: ["Large format with natural stone feel", "Highest visual impact", "Best for upscale projects"],
-            image: "https://phoenixpaver.com/wp-content/uploads/2025/09/Aztec_Slate_paver.jpg",
-          },
-        ],
+        note: "Specialty option for narrow scopes. Reveal only if the client specifically asks about step stones or simple walkway-only work.",
       },
     ],
 
     colorSwatchImage: "https://phoenixpaver.com/wp-content/uploads/2025/09/paver-color-examples.png",
 
     addOns: [
-      { name: "Decorative Borders", description: "Contrasting border pavers for definition.", icon: "border" },
-      { name: "Sealing", description: "Protective sealant for enhanced color and longevity.", icon: "seal" },
+      { name: "Color Borders", description: "Contrasting border pavers in a secondary color — a small touch that makes the patio stand out.", icon: "border" },
       { name: "Lighting", description: "In-ground or path lighting for walkways and patios.", icon: "light" },
       { name: "Drainage", description: "Proper drainage planning for paver surfaces.", icon: "gutter" },
     ],
