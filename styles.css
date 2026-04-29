@@ -9,62 +9,64 @@
 
 /* ── CSS VARIABLES ──────────────────────────────────────────── */
 /* Aligned to Viva Brand Guidelines · Edition 01 · 2026
-   Olive #2D3824 · Lime #83C036 · Earth #794C20 · Cream #F5F5EF */
+   Olive #2D3824 · Lime #83C036 · Earth #794C20 · Cream #F5F5EF
+   Light identity per brandbook dominance bar: Olive 50% · Cream 30% · Lime 12% · Earth 8% */
 :root {
-  /* Brand Colors — Lime is the action accent in the dark UI */
-  --brand-primary: #83C036;            /* Viva Lime */
+  /* Brand Colors */
+  --brand-primary: #83C036;            /* Viva Lime — action accent */
   --brand-primary-light: #9BD142;
   --brand-primary-dark: #6FAD26;       /* Viva Lime Dim */
-  --brand-primary-glow: rgba(131, 192, 54, 0.18);
-  --brand-accent: #A37A52;             /* Viva Earth Soft (legible on dark) */
-  --brand-accent-light: #C0986B;
-  --brand-accent-glow: rgba(163, 122, 82, 0.18);
+  --brand-primary-glow: rgba(131, 192, 54, 0.22);
+  --brand-accent: #794C20;             /* Viva Earth — full strength on cream */
+  --brand-accent-light: #A37A52;
+  --brand-accent-glow: rgba(121, 76, 32, 0.18);
 
-  /* Dark Surfaces — anchored in deep olive instead of neutral black */
-  --bg-base: #0A0E08;
-  --bg-surface: #131811;
-  --bg-raised: #1A2117;
-  --bg-elevated: #23301A;              /* Viva Olive Dim */
-  --bg-hover: #2D3824;                 /* Viva Olive */
-  --bg-sidebar: #080C07;
-  --bg-sidebar-hover: rgba(131, 192, 54, 0.08);
-  --bg-sidebar-active: rgba(131, 192, 54, 0.15);
+  /* Surfaces — cream-based, brandbook prescribed */
+  --bg-base: #F5F5EF;                  /* Viva Cream — main page surface */
+  --bg-surface: #ECEBE0;               /* Linen — alternate section */
+  --bg-raised: #FFFFFF;                /* Card / raised elements */
+  --bg-elevated: #FFFFFF;              /* Emphasized card */
+  --bg-hover: #E8E8D8;                 /* Cream Warm */
+  --bg-sidebar: #2D3824;               /* Viva Olive — anchors dominance */
+  --bg-sidebar-hover: rgba(245, 245, 239, 0.06);
+  --bg-sidebar-active: rgba(131, 192, 54, 0.20);
 
-  /* Text — cream-based to match brandbook */
-  --text-primary: #F5F5EF;             /* Viva Cream */
-  --text-secondary: #C4C8B8;
+  /* Text — olive on cream, sidebar uses cream on olive */
+  --text-primary: #23301A;             /* Olive Dim */
+  --text-secondary: #3C4A30;           /* Olive Soft */
   --text-muted: #808E99;               /* Viva Slate */
-  --text-on-brand: #23301A;            /* Olive Dim — high contrast on lime */
-  --text-sidebar: #8A9482;
+  --text-on-brand: #23301A;            /* On lime: olive-dim for legibility */
+  --text-on-dark: #F5F5EF;             /* On olive: cream */
+  --text-sidebar: rgba(245, 245, 239, 0.65);
   --text-sidebar-active: #F5F5EF;
 
-  /* Borders */
-  --border-subtle: rgba(245, 245, 239, 0.06);
-  --border-soft: rgba(245, 245, 239, 0.10);
-  --border-medium: rgba(245, 245, 239, 0.15);
-  --border-accent: rgba(131, 192, 54, 0.30);
+  /* Borders — Line / Line Soft from brandbook */
+  --border-subtle: #E0DDD2;            /* Line Soft */
+  --border-soft: #CDCCC1;              /* Line */
+  --border-medium: rgba(45, 56, 36, 0.20);
+  --border-accent: rgba(131, 192, 54, 0.40);
 
-  /* Status — harmonized to brand */
-  --success: #83C036;
-  --success-bg: rgba(131, 192, 54, 0.12);
-  --warning: #C0986B;
-  --warning-bg: rgba(192, 152, 107, 0.14);
+  /* Status — readable on cream */
+  --success: #6FAD26;                  /* Lime Dim for AA contrast on cream */
+  --success-bg: rgba(131, 192, 54, 0.14);
+  --warning: #A37A52;
+  --warning-bg: rgba(163, 122, 82, 0.14);
   --danger: #C83A3A;                   /* Brandbook misuse red */
-  --danger-bg: rgba(200, 58, 58, 0.12);
-  --info: #808E99;                     /* Viva Slate */
-  --info-bg: rgba(128, 142, 153, 0.14);
+  --danger-bg: rgba(200, 58, 58, 0.10);
+  --info: #5C6770;                     /* Slate Dim for cream contrast */
+  --info-bg: rgba(128, 142, 153, 0.12);
 
-  /* Tier colors — primary tiers map to brand, specialty/pet stay distinct */
-  --tier-standard: #83C036;            /* Lime */
-  --tier-standard-bg: rgba(131, 192, 54, 0.12);
-  --tier-premium: #A37A52;             /* Earth Soft */
-  --tier-premium-bg: rgba(163, 122, 82, 0.14);
-  --tier-economy: #808E99;             /* Slate */
+  /* Tier colors — darker variants for cream readability */
+  --tier-standard: #6FAD26;            /* Lime Dim */
+  --tier-standard-bg: rgba(131, 192, 54, 0.14);
+  --tier-premium: #794C20;             /* Earth full */
+  --tier-premium-bg: rgba(121, 76, 32, 0.10);
+  --tier-economy: #5C6770;             /* Slate Dim */
   --tier-economy-bg: rgba(128, 142, 153, 0.14);
-  --tier-specialty: #AB47BC;
-  --tier-specialty-bg: rgba(171, 71, 188, 0.12);
-  --tier-pet: #00ACC1;
-  --tier-pet-bg: rgba(0, 172, 193, 0.12);
+  --tier-specialty: #8E2EAB;
+  --tier-specialty-bg: rgba(142, 46, 171, 0.10);
+  --tier-pet: #00838F;
+  --tier-pet-bg: rgba(0, 131, 143, 0.10);
 
   /* Typography */
   --font-primary: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -87,12 +89,12 @@
   --radius-lg: 16px;
   --radius-xl: 24px;
 
-  /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
-  --shadow-glow-green: 0 0 20px rgba(131, 192, 54, 0.18);
-  --shadow-glow-gold: 0 0 20px rgba(163, 122, 82, 0.20);
+  /* Shadows — olive-tinted, subtle on cream */
+  --shadow-sm: 0 1px 3px rgba(35, 48, 26, 0.06), 0 1px 2px rgba(35, 48, 26, 0.04);
+  --shadow-md: 0 4px 14px rgba(35, 48, 26, 0.08), 0 2px 4px rgba(35, 48, 26, 0.04);
+  --shadow-lg: 0 12px 32px rgba(35, 48, 26, 0.12), 0 4px 8px rgba(35, 48, 26, 0.06);
+  --shadow-glow-green: 0 0 20px rgba(131, 192, 54, 0.30);
+  --shadow-glow-gold: 0 0 20px rgba(121, 76, 32, 0.20);
 
   /* Transitions */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -119,8 +121,8 @@ a:hover { color: var(--brand-primary-light); }
 /* ── SCROLLBAR ─────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+::-webkit-scrollbar-thumb { background: rgba(45, 56, 36, 0.18); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(45, 56, 36, 0.32); }
 
 /* ── LAYOUT ────────────────────────────────────────────────── */
 .app-layout { display: flex; height: 100vh; overflow: hidden; }
@@ -158,13 +160,13 @@ a:hover { color: var(--brand-primary-light); }
   border-radius: var(--radius-sm);
   background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-dark));
   display: flex; align-items: center; justify-content: center;
-  font-size: 15px; font-weight: 800; color: #fff;
+  font-size: 15px; font-weight: 800; color: var(--text-on-brand);
   box-shadow: var(--shadow-glow-green);
   flex-shrink: 0;
 }
 
 .sidebar-brand-text h1 {
-  font-size: 13px; font-weight: 700; color: var(--text-primary);
+  font-size: 13px; font-weight: 700; color: var(--text-sidebar-active);
   letter-spacing: -0.2px; line-height: 1.3; white-space: nowrap;
 }
 
@@ -181,7 +183,7 @@ a:hover { color: var(--brand-primary-light); }
   color: var(--text-muted);
   transition: all var(--transition-fast);
 }
-.sidebar-collapse-btn:hover { color: var(--text-primary); background: var(--bg-sidebar-hover); }
+.sidebar-collapse-btn:hover { color: var(--text-sidebar-active); background: var(--bg-sidebar-hover); }
 .sidebar-collapse-btn svg { transition: transform 0.3s var(--ease-out); }
 
 /* ── Collapsed sidebar ─── */
@@ -224,7 +226,7 @@ a:hover { color: var(--brand-primary-light); }
   margin-bottom: 2px; position: relative; width: 100%; text-align: left;
 }
 
-.nav-item:hover { background: var(--bg-sidebar-hover); color: var(--text-primary); }
+.nav-item:hover { background: var(--bg-sidebar-hover); color: var(--text-sidebar-active); }
 
 .nav-item.active {
   background: var(--bg-sidebar-active);
@@ -356,7 +358,7 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
 .badge-economy { background: var(--tier-economy-bg); color: var(--tier-economy); }
 .badge-specialty { background: var(--tier-specialty-bg); color: var(--tier-specialty); }
 .badge-pet { background: var(--tier-pet-bg); color: var(--tier-pet); }
-.badge-default { background: rgba(255,255,255,0.06); color: var(--text-secondary); border: 1px solid var(--border-subtle); }
+.badge-default { background: rgba(45, 56, 36, 0.06); color: var(--text-secondary); border: 1px solid var(--border-subtle); }
 
 .badge-most-popular {
   background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-dark));
@@ -365,11 +367,11 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
 }
 .badge-pet-optimized {
   background: linear-gradient(135deg, #00ACC1, #00838F);
-  color: #fff; font-weight: 700;
+  color: var(--text-on-dark); font-weight: 700;
 }
 .badge-flagship {
-  background: linear-gradient(135deg, var(--brand-accent), #794C20);
-  color: var(--text-primary); font-weight: 700;
+  background: linear-gradient(135deg, var(--brand-accent-light), var(--brand-accent));
+  color: var(--text-on-dark); font-weight: 700;
   box-shadow: var(--shadow-glow-gold);
 }
 .badge-drainage-highlight {
@@ -793,7 +795,7 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
 .how-to-item { text-align: center; padding: var(--space-md); }
 .how-to-num {
   width: 32px; height: 32px; border-radius: 50%;
-  background: var(--brand-primary); color: #fff;
+  background: var(--brand-primary); color: var(--text-on-brand);
   display: flex; align-items: center; justify-content: center;
   margin: 0 auto var(--space-sm); font-size: 14px; font-weight: 700;
 }
@@ -943,13 +945,13 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
   scrollbar-width: none;
   -ms-overflow-style: none;
 
-  /* Glass — mismo shape que antes + efecto vidrio Apple */
-  background: rgba(20, 26, 22, 0.78);
+  /* Glass — cream-tinted, brandbook-aligned */
+  background: rgba(245, 245, 239, 0.78);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255,255,255,0.05);
+  border: 1px solid rgba(45, 56, 36, 0.08);
+  box-shadow: 0 2px 16px rgba(35, 48, 26, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
   will-change: background, box-shadow, border-color;
 }
 .anchor-nav::-webkit-scrollbar { display: none; }
@@ -994,7 +996,7 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
   background: transparent;
 }
 .anchor-link:hover { color: var(--text-primary); }
-.anchor-link.active { color: #fff; font-weight: 600; }
+.anchor-link.active { color: var(--text-on-brand); font-weight: 600; }
 
 /* ── SECTION DIVIDERS ──────────────────────────────────────── */
 .catalog-section {
