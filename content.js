@@ -512,6 +512,7 @@ const SERVICES = [
     heroBadges: ["No Watering", "Pet Friendly Options", "Year-Round Green", "Tri-Shield\u2122 Included"],
     heroImage: "https://lh3.googleusercontent.com/d/1DfoCQaFcoc4a4o0_zKf7bPb-jEyxJ7dy",
     sections: ["Overview", "Tri-Shield\u2122", "Standard Collection", "Premium Collection", "Putting Green", "Full Comparison", "Add-Ons", "FAQs", "Gallery"],
+    collapsibleSections: ["Premium Collection", "Putting Green", "Full Comparison"],
 
     overview: {
       intro: "Artificial turf delivers a consistently green, low-maintenance lawn without the water, mowing, or seasonal dormancy of natural grass. In the Phoenix metro, where water conservation and heat are major factors, turf is one of the most practical and visually impactful property improvements available.",
@@ -760,9 +761,37 @@ const SERVICES = [
     comparisons: [],
 
     addOns: [
-      { name: "Infill Material", description: "Antimicrobial infill for pet areas and odor control.", icon: "infill" },
-      { name: "Border Edging", description: "Clean edges with bender board or concrete borders.", icon: "border" },
-      { name: "Drainage System", description: "Enhanced drainage for pet areas or slopes.", icon: "gutter" },
+      {
+        name: "Camo Infill (Pet & Family Upgrade)",
+        description: "Antimicrobial sand infill that controls odors and bacteria — recommended for households with pets or kids.",
+        icon: "infill",
+        details: [
+          "Standard installs include regular silica sand infill — included at no charge.",
+          "Camo Infill is a paid upgrade: antimicrobial coating that neutralizes odors at the surface.",
+          "Recommended specifically for pet owners, families with young kids, or play areas.",
+          "Vendor: VV Turf / camofill.net (https://camofill.net) — odor-control and antimicrobial properties.",
+        ],
+      },
+      {
+        name: "Border Edging",
+        description: "Clean edges with bender board or concrete borders.",
+        icon: "border",
+        details: [
+          "Bender board: flexible plastic edging, blends with the lawn line.",
+          "Concrete: poured curb, more permanent and visually defined.",
+          "Choice depends on layout, budget, and existing hardscape.",
+        ],
+      },
+      {
+        name: "Drainage System",
+        description: "Enhanced drainage for pet areas, slopes, or low-lying installs.",
+        icon: "gutter",
+        details: [
+          "Sub-base drainage layer for pet areas (helps the surface stay clean and odor-free).",
+          "French drains or surface drains for sloped lots.",
+          "Engineered as part of the Tri-Shield Water Shield layer.",
+        ],
+      },
     ],
 
     faqs: [
@@ -798,6 +827,8 @@ const SERVICES = [
       "All turf product names now match verified vendor data (David handoff 2026-04).",
       "Select best before/after turf photos from Google Drive (folders: Hardscape/Artificial Turf).",
       "Bermuda 105 image pending \u2014 check arizonaturfdepot.com/product/bermuda-105/.",
+      "Gallery review: David flagged that one of the gallery images is natural grass, not artificial turf. Identify and remove the natural-grass image so the gallery only shows real turf installs.",
+      "Camo Infill upsell positioning: standard installs include regular silica sand at no charge \u2014 Camo is a paid premium add-on, not a substitute for the included infill.",
     ],
   },
 
@@ -808,10 +839,11 @@ const SERVICES = [
     id: "sod",
     title: "Sod / Natural Grass",
     icon: "sod",
-    shortDesc: "Real grass for real living — Bermuda, shade-tolerant, and specialty sod for Phoenix-area homes.",
-    heroBadges: ["Real Grass", "Irrigation Support", "Year-Round Install", "Phoenix Climate Adapted"],
+    shortDesc: "Bermuda hybrids — Midiron is the choice for ~80% of our installs. Specialty shade-tolerant options available on request.",
+    heroBadges: ["Real Grass", "Bermuda · Midiron Primary", "Irrigation Support", "Phoenix Climate Adapted"],
     heroImage: "https://lh3.googleusercontent.com/d/1PbWFcXu3Ya7I5tTbm3Fc3BwGsnj5zlMp",
-    sections: ["Overview", "Tri-Shield™", "Midiron vs Tifway 419", "Shade-Tolerant", "St. Augustine", "Seasonal Care", "Irrigation Basics", "FAQs", "Gallery"],
+    sections: ["Overview", "Tri-Shield™", "Midiron vs Tifway 419", "Specialty Grasses", "Seasonal Care", "Irrigation Basics", "FAQs", "Gallery"],
+    collapsibleSections: ["Specialty Grasses"],
 
     triShield: {
       layers: [
@@ -930,6 +962,10 @@ const SERVICES = [
         { season: "Winter (Dec–Feb)", note: "Bermuda goes dormant and turns brown. Overseeded rye stays green through winter." },
       ],
       dormancyNote: "Bermuda grass dormancy is completely normal in Arizona winters. It is not dead — it will green up again in spring. Overseeding with ryegrass is the most common way to maintain a green lawn year-round.",
+      externalResources: [
+        { label: "West Coast Turf — Sod Watering Guidelines", url: "https://www.westcoastturf.com/sod-Watering-Guidelines" },
+        { label: "Evergreen Turf — Lawn Care Resources", url: "https://www.evergreenturf.com/lawn-care/" },
+      ],
     },
 
     irrigationBasics: {
@@ -945,10 +981,49 @@ const SERVICES = [
     },
 
     addOns: [
-      { name: "Irrigation System", description: "Engineered sprinkler/drip system designed for the yard layout.", icon: "irrigation" },
-      { name: "Overseeding (Rye)", description: "Fall ryegrass overseeding for year-round green.", icon: "seed" },
-      { name: "Fertilizer Program", description: "Seasonal fertilization plan for optimal health.", icon: "fertilizer" },
-      { name: "Sod Edging", description: "Clean edge definition between sod and hardscape.", icon: "border" },
+      {
+        name: "Irrigation System",
+        description: "Engineered sprinkler/drip system designed for the yard layout.",
+        icon: "irrigation",
+        details: [
+          "Custom-zoned sprinkler design tuned to your specific yard.",
+          "Drip lines for garden beds and low-flow plantings.",
+          "Smart timer integration available.",
+          "Phoenix water-restriction compliant scheduling.",
+        ],
+      },
+      {
+        name: "Overseeding (Rye)",
+        description: "Fall ryegrass overseeding for year-round green.",
+        icon: "seed",
+        details: [
+          "Done annually in October when daytime temps fall to 80–85°F.",
+          "Keeps the lawn green through Phoenix winters when Bermuda goes dormant.",
+          "Watering and mowing change during transition — Viva walks you through.",
+          "Per U of Arizona extension recommendations.",
+        ],
+      },
+      {
+        name: "Fertilizer Program",
+        description: "Seasonal fertilization plan for optimal health.",
+        icon: "fertilizer",
+        details: [
+          "Spring green-up fertilizer when Bermuda emerges from dormancy.",
+          "Summer maintenance feed during peak growth season.",
+          "Fall pre-overseed prep + winter care plan.",
+          "Custom NPK ratios based on soil test if needed.",
+        ],
+      },
+      {
+        name: "Sod Edging",
+        description: "Clean edge definition between sod and hardscape.",
+        icon: "border",
+        details: [
+          "Bender board: low-profile flexible edging.",
+          "Concrete: poured curb that defines the lawn line permanently.",
+          "Steel edging: high-end clean look that holds shape.",
+        ],
+      },
     ],
 
     faqs: [
