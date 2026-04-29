@@ -404,66 +404,77 @@ function renderServicePage(service) {
   html += `</nav>`;
 
   // Render all sections vertically
+  const collapsibleSet = new Set((service.collapsibleSections || []).map(s => s.toLowerCase()));
   sections.forEach(sectionName => {
     const slug = slugify(sectionName);
     const name = sectionName.toLowerCase();
-    html += `<section class="catalog-section" id="section-${slug}">`;
+    const isCollapsible = collapsibleSet.has(name);
+    html += `<section class="catalog-section${isCollapsible ? ' is-collapsible' : ''}" id="section-${slug}">`;
     html += `<div class="section-divider"><h3>${sectionName}</h3></div>`;
 
+    let inner = "";
     if (name === "overview") {
-      html += renderOverview(service);
+      inner = renderOverview(service);
     } else if (name.includes("tri-shield") || name.includes("tri\u2011shield")) {
-      html += renderTriShield(service);
+      inner = renderTriShield(service);
     } else if (name === "standard collection") {
-      html += renderTurfCollection(service, "standard");
+      inner = renderTurfCollection(service, "standard");
     } else if (name === "premium collection") {
-      html += renderTurfCollection(service, "premium");
+      inner = renderTurfCollection(service, "premium");
     } else if (name === "full comparison") {
-      html += renderFullComparisonTable(service);
+      inner = renderFullComparisonTable(service);
     } else if (name === "pergola types") {
-      html += renderOptionGroup(service, ["standard", "premium"]);
+      inner = renderOptionGroup(service, ["standard", "premium"]);
     } else if (name === "configurations") {
-      html += renderConfigurations(service);
+      inner = renderConfigurations(service);
+    } else if (name === "specialty grasses") {
+      inner = renderTierOptions(service, "specialty", "Specialty Grasses");
     } else if (name.includes("vs") || name.includes("attached")) {
-      html += renderComparisons(service, sectionName);
+      inner = renderComparisons(service, sectionName);
     } else if (name.includes("faq")) {
-      html += renderFAQs(service.faqs, service.title);
+      inner = renderFAQs(service.faqs, service.title);
     } else if (name === "gallery") {
-      html += renderGallery(service.gallery);
+      inner = renderGallery(service.gallery);
     } else if (name.includes("before") && name.includes("after")) {
-      html += renderBeforeAfter(service.beforeAfter);
+      inner = renderBeforeAfter(service.beforeAfter);
     } else if (name.includes("add-on") || name === "add-ons") {
-      html += renderAddOns(service);
+      inner = renderAddOns(service);
     } else if (name.includes("color") || name.includes("finish")) {
-      html += renderColorOptions(service);
+      inner = renderColorOptions(service);
     } else if (name.includes("two-post") || name.includes("cantilever")) {
-      html += renderTwoPost(service);
+      inner = renderTwoPost(service);
     } else if (name.includes("seasonal") || name.includes("care")) {
-      html += renderSeasonalCare(service);
+      inner = renderSeasonalCare(service);
     } else if (name.includes("irrigation")) {
-      html += renderIrrigationBasics(service);
+      inner = renderIrrigationBasics(service);
     } else if (name.includes("shade")) {
-      html += renderShadeOptions(service);
+      inner = renderShadeOptions(service);
     } else if (name.includes("st. augustine") || name.includes("augustine")) {
-      html += renderStAugustine(service);
+      inner = renderStAugustine(service);
     } else if (name.includes("product comparison")) {
-      html += renderProductComparison(service);
+      inner = renderProductComparison(service);
     } else if (name.includes("pet")) {
-      html += renderTierOptions(service, "premium-pet", "Pet-Friendly Options");
+      inner = renderTierOptions(service, "premium-pet", "Pet-Friendly Options");
     } else if (name.includes("putting")) {
-      html += renderTierOptions(service, "specialty", "Putting Green");
+      inner = renderTierOptions(service, "specialty", "Putting Green");
     } else if (name.includes("standard") && !name.includes("collection")) {
-      html += renderTierOptions(service, "standard", "Standard Tier");
+      inner = renderTierOptions(service, "standard", "Standard Tier");
     } else if (name.includes("premium") && !name.includes("pet") && !name.includes("collection")) {
-      html += renderTierOptions(service, "premium", "Premium Tier");
+      inner = renderTierOptions(service, "premium", "Premium Tier");
     } else if (name === "standard options") {
-      html += renderOptionGroup(service, ["standard"]);
+      inner = renderOptionGroup(service, ["standard"]);
     } else if (name.includes("premium & specialty") || name.includes("premium & special")) {
-      html += renderOptionGroup(service, ["premium", "economy"]);
+      inner = renderOptionGroup(service, ["premium", "economy"]);
     } else if (name.includes("midiron")) {
-      html += renderComparisons(service, sectionName);
+      inner = renderComparisons(service, sectionName);
     } else {
-      html += `<p style="color:var(--text-muted);">Content for this section is being prepared.</p>`;
+      inner = `<p style="color:var(--text-muted);">Content for this section is being prepared.</p>`;
+    }
+
+    if (isCollapsible) {
+      html += `<details class="section-collapsible"><summary>Click to view ${sectionName}</summary><div class="section-collapsible-body">${inner}</div></details>`;
+    } else {
+      html += inner;
     }
 
     html += `</section>`;
@@ -1127,9 +1138,18 @@ function renderSeasonalCare(service) {
     </div>
   `;
   if (sc.dormancyNote) {
-    html += `<div class="consultant-tip" style="margin-top:var(--space-lg)">
+    html += `<div class="consultant-tip" style="margin-top:var(--space-md)">
       <div class="consultant-tip-label">Key Point for Clients</div>
       <p>${sc.dormancyNote}</p>
+    </div>`;
+  }
+  if (sc.externalResources && sc.externalResources.length) {
+    html += `<div class="consultant-tip" style="margin-top:var(--space-md)">
+      <div class="consultant-tip-label">Vendor Watering &amp; Care Guides</div>
+      <p>If a client wants the technical watering schedule, walk them through these:</p>
+      <ul style="padding-left:18px;margin-top:6px;">
+        ${sc.externalResources.map(r => `<li style="padding:2px 0;font-size:13px;"><a href="${r.url}" target="_blank" rel="noopener" style="color:var(--brand-primary-dark);text-decoration:underline;">${r.label}</a></li>`).join("")}
+      </ul>
     </div>`;
   }
   return html;

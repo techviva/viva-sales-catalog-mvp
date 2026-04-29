@@ -1098,6 +1098,37 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
 
 .card-expanded { max-width: 700px; }
 
+/* Section-level collapsible (for service.collapsibleSections — Premium Collection, Putting Green, Specialty Grasses, etc.) */
+.section-collapsible {
+  margin-top: var(--space-sm);
+}
+.section-collapsible summary {
+  display: inline-flex; align-items: center; gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px dashed var(--border-soft);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  font-size: 13px; font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: all var(--transition-fast);
+}
+.section-collapsible summary::-webkit-details-marker { display: none; }
+.section-collapsible summary::before {
+  content: "▶"; font-size: 10px;
+  color: var(--brand-primary); width: 12px; text-align: center;
+  transition: transform var(--transition-fast);
+}
+.section-collapsible[open] summary::before { transform: rotate(90deg); }
+.section-collapsible summary:hover {
+  border-color: var(--brand-primary);
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+.section-collapsible-body { margin-top: var(--space-md); }
+
 /* Click-to-expand toggle for specialty/premium options that the consultant only reveals on demand */
 .hidden-options-toggle {
   margin-top: var(--space-md);
