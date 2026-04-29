@@ -538,14 +538,14 @@ function setupStickyNav(service) {
         if (scrollTop > GLASS_THRESHOLD && !isGlass) {
           isGlass = true;
           gsap.to(anchorNav, {
-            backgroundColor: "rgba(10,14,8,0.82)",
-            boxShadow: "0 1px 0 rgba(255,255,255,0.05), 0 8px 32px rgba(0,0,0,0.4)",
+            backgroundColor: "rgba(245,245,239,0.86)",
+            boxShadow: "inset 0 1px 0 rgba(255,255,255,0.6), 0 8px 32px rgba(35,48,26,0.12)",
             duration: 0.4, ease: "power2.out",
           });
         } else if (scrollTop <= GLASS_THRESHOLD && isGlass) {
           isGlass = false;
           gsap.to(anchorNav, {
-            backgroundColor: "rgba(26,33,23,0.55)",
+            backgroundColor: "rgba(232,232,216,0.6)",
             boxShadow: "none",
             duration: 0.4, ease: "power2.out",
           });
