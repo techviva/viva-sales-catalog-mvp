@@ -830,7 +830,7 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
 }
 @media (min-width: 1180px) {
   .how-to-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 .how-to-item { text-align: center; padding: var(--space-sm); }
