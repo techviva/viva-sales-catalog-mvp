@@ -1061,6 +1061,36 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
 
 .card-expanded { max-width: 700px; }
 
+/* Click-to-expand toggle for specialty/premium options that the consultant only reveals on demand */
+.hidden-options-toggle {
+  margin-top: var(--space-md);
+}
+.hidden-options-toggle summary {
+  display: inline-flex; align-items: center; gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px dashed var(--border-soft);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  font-size: 13px; font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: all var(--transition-fast);
+}
+.hidden-options-toggle summary::-webkit-details-marker { display: none; }
+.hidden-options-toggle summary::before {
+  content: "+"; font-size: 16px; font-weight: 700;
+  color: var(--brand-primary); width: 16px; text-align: center;
+  transition: transform var(--transition-fast);
+}
+.hidden-options-toggle[open] summary::before { content: "−"; }
+.hidden-options-toggle summary:hover {
+  border-color: var(--brand-primary);
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
 .option-extra-images {
   display: grid; grid-template-columns: repeat(2, 1fr);
   gap: var(--space-md); margin-top: var(--space-lg);

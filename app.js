@@ -874,19 +874,36 @@ function renderComparisons(service, sectionName) {
 function renderTierOptions(service, tier, title) {
   const opts = (service.options || []).filter(o => o.tier === tier || o.tier?.includes(tier));
   if (opts.length === 0) return `<p style="color:var(--text-muted)">Options for this tier are being prepared.</p>`;
-  let html = `<div class="option-group-grid">`;
-  opts.forEach(opt => { html += renderOptionCard(opt); });
-  html += `</div>`;
-  return html;
+  return renderOptionListWithHidden(opts);
 }
 
 // ── OPTION GROUP (pairs of 2 — the primary layout for service options) ──────
 function renderOptionGroup(service, tiers) {
   const opts = (service.options || []).filter(o => tiers.includes(o.tier));
   if (opts.length === 0) return `<p style="color:var(--text-muted);padding:var(--space-lg);">Options for this section are being prepared.</p>`;
-  let html = `<div class="option-group-grid">`;
-  opts.forEach(opt => { html += renderOptionCard(opt); });
-  html += `</div>`;
+  return renderOptionListWithHidden(opts);
+}
+
+// Render a list of option cards, hiding those flagged `hidden: true` behind
+// a click-to-expand <details> so the consultant only reveals them on demand.
+function renderOptionListWithHidden(opts, hiddenLabel) {
+  const visible = opts.filter(o => !o.hidden);
+  const hidden = opts.filter(o => o.hidden);
+  let html = "";
+  if (visible.length > 0) {
+    html += `<div class="option-group-grid">`;
+    visible.forEach(opt => { html += renderOptionCard(opt); });
+    html += `</div>`;
+  }
+  if (hidden.length > 0) {
+    const label = hiddenLabel || `Show specialty options (${hidden.length})`;
+    html += `<details class="hidden-options-toggle">`;
+    html += `<summary>${label}</summary>`;
+    html += `<div class="option-group-grid" style="margin-top:var(--space-md);">`;
+    hidden.forEach(opt => { html += renderOptionCard(opt); });
+    html += `</div>`;
+    html += `</details>`;
+  }
   return html;
 }
 
