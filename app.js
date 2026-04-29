@@ -318,48 +318,54 @@ function initPageAnimations(page) {
 // ── HOME PAGE ────────────────────────────────────────────────
 function renderHomePage() {
   return `
-    <div class="home-hero">
-      <div class="home-brand-name">${BRAND.name}</div>
-      <h2>${HOME.heroTitle}</h2>
-      <p class="home-hero-subtitle">${HOME.heroSubtitle}</p>
-      <p>${HOME.toolDescription}</p>
-    </div>
-    <div class="home-services-grid">
-      ${SERVICES.map(s => `
-        <div class="home-service-card" onclick="navigateTo('${s.id}')">
-          <div class="home-service-icon">${ICONS[s.icon] || "📄"}</div>
-          <h3>${s.title}</h3>
-          <p>${s.shortDesc}</p>
-        </div>
-      `).join("")}
-    </div>
-    <div class="how-to-use">
-      <h3>How to Use This During a Presentation</h3>
-      <div class="how-to-grid">
-        ${HOME.howToUse.map((item, i) => `
-          <div class="how-to-item">
-            <div class="how-to-num">${i + 1}</div>
-            <div class="how-to-label">${item.label}</div>
-            <div class="how-to-text">${item.text}</div>
+    <div class="snap-section">
+      <div class="home-hero">
+        <div class="home-brand-name">${BRAND.name}</div>
+        <h2>${HOME.heroTitle}</h2>
+        <p class="home-hero-subtitle">${HOME.heroSubtitle}</p>
+        <p>${HOME.toolDescription}</p>
+      </div>
+      <div class="home-services-grid">
+        ${SERVICES.map(s => `
+          <div class="home-service-card" onclick="navigateTo('${s.id}')">
+            <div class="home-service-icon">${ICONS[s.icon] || "📄"}</div>
+            <h3>${s.title}</h3>
+            <p>${s.shortDesc}</p>
           </div>
         `).join("")}
       </div>
     </div>
-    <div class="how-to-use">
-      <h3>Recommended Presentation Flow</h3>
-      <ol style="padding-left:20px; margin-top:16px;">
-        ${HOME.recommendedFlow.map(step => `<li style="padding:6px 0; font-size:14px; color:var(--text-secondary);">${step}</li>`).join("")}
-      </ol>
-    </div>
-    <div class="updates-section" style="margin-top: var(--space-xl);">
-      <h3>Content Status</h3>
-      ${HOME.recentUpdates.map(u => `
-        <div class="update-row">
-          <span class="update-label">${u.label}</span>
-          <span class="update-note">${u.note}</span>
-          <span class="status-dot ${u.status}"></span>
+    <div class="snap-section">
+      <div class="how-to-use">
+        <h3>How to Use This During a Presentation</h3>
+        <div class="how-to-grid">
+          ${HOME.howToUse.map((item, i) => `
+            <div class="how-to-item">
+              <div class="how-to-num">${i + 1}</div>
+              <div class="how-to-label">${item.label}</div>
+              <div class="how-to-text">${item.text}</div>
+            </div>
+          `).join("")}
         </div>
-      `).join("")}
+      </div>
+      <div class="how-to-use">
+        <h3>Recommended Presentation Flow</h3>
+        <ol style="padding-left:20px; margin-top:12px;">
+          ${HOME.recommendedFlow.map(step => `<li style="padding:5px 0; font-size:13px; color:var(--text-secondary);">${step}</li>`).join("")}
+        </ol>
+      </div>
+    </div>
+    <div class="snap-section">
+      <div class="updates-section" style="margin-top: var(--space-md);">
+        <h3>Content Status</h3>
+        ${HOME.recentUpdates.map(u => `
+          <div class="update-row">
+            <span class="update-label">${u.label}</span>
+            <span class="update-note">${u.note}</span>
+            <span class="status-dot ${u.status}"></span>
+          </div>
+        `).join("")}
+      </div>
     </div>
   `;
 }
@@ -370,15 +376,17 @@ function renderHomePage() {
 function renderServicePage(service) {
   let html = "";
 
-  // Hero with image
+  // Hero with image — first slide-section of the service
   html += `
-    <div class="service-hero ${service.heroImage ? 'has-hero-image' : ''}">
-      ${service.heroImage ? `<div class="hero-image-bg" style="background-image:url('${service.heroImage}')"></div>` : ''}
-      <div class="hero-content-overlay">
-        <h2>${service.title}</h2>
-        <p class="hero-desc">${service.shortDesc}</p>
-        <div class="hero-badges">
-          ${service.heroBadges.map(b => `<span class="badge badge-brand">${b}</span>`).join("")}
+    <div class="snap-section">
+      <div class="service-hero ${service.heroImage ? 'has-hero-image' : ''}">
+        ${service.heroImage ? `<div class="hero-image-bg" style="background-image:url('${service.heroImage}')"></div>` : ''}
+        <div class="hero-content-overlay">
+          <h2>${service.title}</h2>
+          <p class="hero-desc">${service.shortDesc}</p>
+          <div class="hero-badges">
+            ${service.heroBadges.map(b => `<span class="badge badge-brand">${b}</span>`).join("")}
+          </div>
         </div>
       </div>
     </div>
@@ -1229,11 +1237,11 @@ function renderGlobalFAQs() {
     </div>
   `;
   html += `<div class="section-header"><h3>General Questions</h3></div>`;
-  html += renderFAQs(GLOBAL_FAQS, "General");
+  html += `<div class="faq-list">${renderFAQs(GLOBAL_FAQS, "General")}</div>`;
   SERVICES.forEach(service => {
     if (service.faqs && service.faqs.length > 0) {
-      html += `<div class="section-header" style="margin-top:var(--space-xl)"><h3>${service.title}</h3></div>`;
-      html += renderFAQs(service.faqs, service.title);
+      html += `<div class="section-header" style="margin-top:var(--space-md)"><h3>${service.title}</h3></div>`;
+      html += `<div class="faq-list">${renderFAQs(service.faqs, service.title)}</div>`;
     }
   });
   return html;
