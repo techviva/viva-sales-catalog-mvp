@@ -127,20 +127,18 @@ function initPageAnimations(page) {
     });
   }
 
-  // ── Anchor nav slide-in ──
-  const anchorNav = document.querySelector(".anchor-nav");
-  if (anchorNav) {
-    gsap.from(anchorNav, { y: -15, autoAlpha: 0, duration: 0.4, delay: 0.3, ease: "power2.out" });
-  }
+  // ── Anchor nav — handled in setupStickyNav with GSAP ──
+  // (skipped here to avoid double animation)
 
-  // ── Home service cards stagger ──
+  // ── Home service cards — ScrollTrigger per card (prevents invisible cards below fold) ──
   const homeCards = gsap.utils.toArray(".home-service-card");
-  if (homeCards.length) {
-    gsap.from(homeCards, {
+  homeCards.forEach((card, i) => {
+    gsap.from(card, {
       y: 50, autoAlpha: 0, duration: 0.6,
-      stagger: 0.08, ease: "power3.out", delay: 0.2,
+      delay: i * 0.05, ease: "power3.out",
+      scrollTrigger: { trigger: card, start: "top 92%", ...stDefaults },
     });
-  }
+  });
 
   // ── Section dividers ──
   gsap.utils.toArray(".section-divider").forEach(div => {
@@ -158,43 +156,39 @@ function initPageAnimations(page) {
     });
   });
 
-  // ── Collection sections ──
+  // ── Collection sections — solo y, sin autoAlpha para no ocultar hijos ──
   gsap.utils.toArray(".collection-section").forEach(section => {
     gsap.from(section, {
-      y: 50, autoAlpha: 0, duration: 0.7, ease: "power3.out",
-      scrollTrigger: { trigger: section, start: "top 85%", ...stDefaults },
+      y: 40, opacity: 0, duration: 0.6, ease: "power3.out",
+      scrollTrigger: { trigger: section, start: "top 88%", ...stDefaults },
     });
   });
 
-  // ── Product cards with stagger per collection ──
-  document.querySelectorAll(".collection-grid").forEach(grid => {
-    const cards = gsap.utils.toArray(grid.querySelectorAll(".product-card"));
-    if (cards.length) {
-      gsap.from(cards, {
-        y: 60, autoAlpha: 0, scale: 0.95,
-        duration: 0.6, stagger: 0.1, ease: "power3.out",
-        scrollTrigger: { trigger: grid, start: "top 85%", ...stDefaults },
-      });
-    }
+  // ── Product cards — ScrollTrigger individual por card (evita stagger batch frágil) ──
+  gsap.utils.toArray(".product-card").forEach((card, i) => {
+    gsap.from(card, {
+      y: 40, autoAlpha: 0, scale: 0.97,
+      duration: 0.55, ease: "power3.out",
+      scrollTrigger: { trigger: card, start: "top 92%", ...stDefaults },
+    });
   });
 
-  // ── Specs grids inside product cards ──
+  // ── Specs grids — sin autoAlpha (heredan visibilidad del producto padre) ──
   gsap.utils.toArray(".specs-grid").forEach(grid => {
     gsap.from(grid, {
-      autoAlpha: 0, y: 10, duration: 0.4, ease: "power2.out",
-      scrollTrigger: { trigger: grid, start: "top 92%", ...stDefaults },
+      opacity: 0, y: 8, duration: 0.35, ease: "power2.out",
+      scrollTrigger: { trigger: grid, start: "top 94%", ...stDefaults },
     });
   });
 
-  // ── Tri-Shield layers build from bottom ──
-  const shieldLayers = gsap.utils.toArray(".shield-layer");
-  if (shieldLayers.length) {
-    gsap.from(shieldLayers, {
-      y: 40, autoAlpha: 0, duration: 0.6,
-      stagger: 0.15, ease: "power2.out",
-      scrollTrigger: { trigger: shieldLayers[0], start: "top 85%", ...stDefaults },
+  // ── Tri-Shield layers — ScrollTrigger individual para evitar batch frágil ──
+  gsap.utils.toArray(".shield-layer").forEach((layer, i) => {
+    gsap.from(layer, {
+      y: 30, autoAlpha: 0, duration: 0.5,
+      delay: i * 0.12, ease: "power2.out",
+      scrollTrigger: { trigger: layer, start: "top 90%", ...stDefaults },
     });
-  }
+  });
 
   // ── Tri-Shield tagline ──
   const tagline = document.querySelector(".tri-shield-tagline");
@@ -232,27 +226,36 @@ function initPageAnimations(page) {
   });
 
   // ── Gallery items ──
-  document.querySelectorAll(".gallery-grid").forEach(grid => {
-    const items = gsap.utils.toArray(grid.querySelectorAll(".gallery-item"));
+  document.querySelectorAll(".gallery-grid, .gallery-grid-main").forEach(grid => {
+    const items = gsap.utils.toArray(grid.querySelectorAll(".gallery-item, .gallery-item-main"));
     if (items.length) {
       gsap.from(items, {
-        scale: 0.9, autoAlpha: 0, duration: 0.5,
+        scale: 0.92, autoAlpha: 0, duration: 0.5,
         stagger: 0.05, ease: "power2.out",
         scrollTrigger: { trigger: grid, start: "top 85%", ...stDefaults },
       });
     }
   });
 
-  // ── Add-on cards ──
-  document.querySelectorAll(".addons-grid").forEach(grid => {
-    const items = gsap.utils.toArray(grid.querySelectorAll(".addon-card"));
-    if (items.length) {
-      gsap.from(items, {
-        y: 30, autoAlpha: 0, duration: 0.4,
-        stagger: 0.06, ease: "back.out(1.4)",
-        scrollTrigger: { trigger: grid, start: "top 88%", ...stDefaults },
+  // ── Option group cards ──
+  document.querySelectorAll(".option-group-grid").forEach(grid => {
+    const cards = gsap.utils.toArray(grid.querySelectorAll(".option-card"));
+    if (cards.length) {
+      gsap.from(cards, {
+        y: 40, autoAlpha: 0, duration: 0.55,
+        stagger: 0.1, ease: "power3.out",
+        scrollTrigger: { trigger: grid, start: "top 85%", ...stDefaults },
       });
     }
+  });
+
+  // ── Add-on cards — ScrollTrigger individual por card ──
+  gsap.utils.toArray(".addon-card").forEach((card, i) => {
+    gsap.from(card, {
+      y: 20, autoAlpha: 0, duration: 0.4,
+      delay: i * 0.05, ease: "power2.out",
+      scrollTrigger: { trigger: card, start: "top 93%", ...stDefaults },
+    });
   });
 
   // ── Included items ──
@@ -384,10 +387,12 @@ function renderServicePage(service) {
   // Sticky anchor nav
   const sections = service.sections || [];
   html += `<nav class="anchor-nav" id="anchor-nav">`;
+  html += `<div class="anchor-nav-pill" id="anchor-nav-pill"></div>`;
   sections.forEach((s, i) => {
     const slug = slugify(s);
     html += `<a href="#section-${slug}" class="anchor-link ${i === 0 ? 'active' : ''}" data-anchor="${slug}">${s}</a>`;
   });
+  html += `<div class="anchor-nav-progress" id="anchor-nav-progress"></div>`;
   html += `</nav>`;
 
   // Render all sections vertically
@@ -439,16 +444,10 @@ function renderServicePage(service) {
       html += renderTierOptions(service, "standard", "Standard Tier");
     } else if (name.includes("premium") && !name.includes("pet") && !name.includes("collection")) {
       html += renderTierOptions(service, "premium", "Premium Tier");
-    } else if (name === "townscape") {
-      html += renderSpecificOption(service, "Townscape Paver Sets");
-    } else if (name === "holland") {
-      html += renderSpecificOption(service, "Holland Pavers");
-    } else if (name.includes("veneer")) {
-      html += renderSpecificOption(service, "Veneer Pavers / Pool Coping");
-    } else if (name.includes("aztec")) {
-      html += renderSpecificOption(service, "Aztec Stone Sets");
-    } else if (name.includes("12×12") || name.includes("12x12") || name.includes("economy")) {
-      html += renderSpecificOption(service, "12×12 Square Step Stone");
+    } else if (name === "standard options") {
+      html += renderOptionGroup(service, ["standard"]);
+    } else if (name.includes("premium & specialty") || name.includes("premium & special")) {
+      html += renderOptionGroup(service, ["premium", "economy"]);
     } else if (name.includes("midiron")) {
       html += renderComparisons(service, sectionName);
     } else {
@@ -465,33 +464,106 @@ function renderServicePage(service) {
 function setupStickyNav(service) {
   const mainContent = document.querySelector(".main-content");
   const anchorNav = document.getElementById("anchor-nav");
+  const pill = document.getElementById("anchor-nav-pill");
+  const progressBar = document.getElementById("anchor-nav-progress");
   if (!anchorNav || !mainContent) return;
 
+  // ── Initial entrance: nav fades in from below via CSS opacity ──
+  // No fromTo aquí — el nav empieza visible y GSAP solo hace el slide
+  gsap.from(anchorNav, { y: -6, duration: 0.45, ease: "power2.out", delay: 0.3 });
+
+  // ── Pill indicator: position under active link ───────────────
+  function movePill(activeLink, animate = true) {
+    if (!pill || !activeLink) return;
+    const navRect = anchorNav.getBoundingClientRect();
+    const linkRect = activeLink.getBoundingClientRect();
+    const leftOffset = linkRect.left - navRect.left + anchorNav.scrollLeft;
+    const topOffset = linkRect.top - navRect.top;
+    if (animate) {
+      gsap.to(pill, {
+        x: leftOffset, y: topOffset,
+        width: linkRect.width, height: linkRect.height,
+        opacity: 1, duration: 0.35, ease: "power3.out",
+      });
+    } else {
+      gsap.set(pill, {
+        x: leftOffset, y: topOffset,
+        width: linkRect.width, height: linkRect.height,
+        opacity: 1,
+      });
+    }
+  }
+
+  // Init pill on first active link
+  requestAnimationFrame(() => {
+    const firstActive = anchorNav.querySelector(".anchor-link.active");
+    if (firstActive) movePill(firstActive, false);
+  });
+
+  // ── Click handlers ───────────────────────────────────────────
   anchorNav.querySelectorAll(".anchor-link").forEach(link => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
       const targetId = link.getAttribute("href").slice(1);
       const target = document.getElementById(targetId);
       if (target) {
-        const offset = anchorNav.offsetHeight + 20;
+        const offset = anchorNav.offsetHeight + 16;
         const top = target.offsetTop - offset;
         mainContent.scrollTo({ top, behavior: "smooth" });
       }
       anchorNav.querySelectorAll(".anchor-link").forEach(l => l.classList.remove("active"));
       link.classList.add("active");
+      movePill(link);
     });
   });
 
+  // ── Scroll: glass intensity + progress + active anchor ───────
+  let isGlass = false;
   let ticking = false;
+  const GLASS_THRESHOLD = 40;
+
   mainContent.addEventListener("scroll", () => {
     if (!ticking) {
       requestAnimationFrame(() => {
+        const scrollTop = mainContent.scrollTop;
+        const scrollMax = mainContent.scrollHeight - mainContent.clientHeight;
+        const progress = scrollMax > 0 ? (scrollTop / scrollMax) * 100 : 0;
+
+        // Progress bar
+        if (progressBar) {
+          gsap.to(progressBar, { width: progress + "%", duration: 0.1, ease: "none", overwrite: true });
+        }
+
+        // Glass state transition
+        if (scrollTop > GLASS_THRESHOLD && !isGlass) {
+          isGlass = true;
+          gsap.to(anchorNav, {
+            backgroundColor: "rgba(10,14,8,0.82)",
+            boxShadow: "0 1px 0 rgba(255,255,255,0.05), 0 8px 32px rgba(0,0,0,0.4)",
+            duration: 0.4, ease: "power2.out",
+          });
+        } else if (scrollTop <= GLASS_THRESHOLD && isGlass) {
+          isGlass = false;
+          gsap.to(anchorNav, {
+            backgroundColor: "rgba(26,33,23,0.55)",
+            boxShadow: "none",
+            duration: 0.4, ease: "power2.out",
+          });
+        }
+
         updateActiveAnchor();
         ticking = false;
       });
       ticking = true;
     }
   });
+
+  // ── Re-position pill when active changes ─────────────────────
+  const pillObserver = new MutationObserver(() => {
+    const active = anchorNav.querySelector(".anchor-link.active");
+    if (active) movePill(active);
+  });
+  pillObserver.observe(anchorNav, { attributes: true, subtree: true, attributeFilter: ["class"] });
 }
 
 function updateActiveAnchor() {
@@ -500,7 +572,8 @@ function updateActiveAnchor() {
   if (!anchorNav) return;
   const mainContent = document.querySelector(".main-content");
   const scrollTop = mainContent.scrollTop;
-  const offset = 200;
+  const anchorNavEl = document.querySelector(".anchor-nav");
+  const offset = (anchorNavEl ? anchorNavEl.offsetHeight : 60) + 40;
 
   let activeId = null;
   sections.forEach(section => {
@@ -792,12 +865,18 @@ function renderComparisons(service, sectionName) {
 // ── OPTIONS RENDERERS ────────────────────────────────────────
 function renderTierOptions(service, tier, title) {
   const opts = (service.options || []).filter(o => o.tier === tier || o.tier?.includes(tier));
-  let html = "";
-  if (opts.length === 0) {
-    html += `<p style="color:var(--text-muted)">Options for this tier are being prepared.</p>`;
-    return html;
-  }
-  html += `<div class="card-grid card-grid-2">`;
+  if (opts.length === 0) return `<p style="color:var(--text-muted)">Options for this tier are being prepared.</p>`;
+  let html = `<div class="option-group-grid">`;
+  opts.forEach(opt => { html += renderOptionCard(opt); });
+  html += `</div>`;
+  return html;
+}
+
+// ── OPTION GROUP (pairs of 2 — the primary layout for service options) ──────
+function renderOptionGroup(service, tiers) {
+  const opts = (service.options || []).filter(o => tiers.includes(o.tier));
+  if (opts.length === 0) return `<p style="color:var(--text-muted);padding:var(--space-lg);">Options for this section are being prepared.</p>`;
+  let html = `<div class="option-group-grid">`;
   opts.forEach(opt => { html += renderOptionCard(opt); });
   html += `</div>`;
   return html;
@@ -836,37 +915,63 @@ function renderProductComparison(service) {
 
 function renderOptionCard(opt, expanded = false) {
   const tierClass = opt.tier?.includes("premium") ? "premium" : opt.tier === "economy" ? "economy" : opt.tier === "specialty" ? "specialty" : opt.tier?.includes("pet") ? "pet" : "brand";
-  let html = `
-    <div class="card ${expanded ? 'card-expanded' : ''}">
-      ${renderImageOrPlaceholder(opt.image, opt.name)}
-      <div class="card-title">${opt.name}</div>
-      <div class="card-subtitle">${opt.subtitle || ""}</div>
-      <div class="card-badges">
-        ${(opt.badges || []).map(b => `<span class="badge badge-${tierClass}">${b}</span>`).join("")}
-      </div>
-      <div class="card-desc">${opt.description}</div>
-  `;
-  if (opt.specs) {
-    html += `<table class="specs-table">`;
+  const tierLabel = opt.tier?.includes("premium") ? "Premium" : opt.tier === "economy" ? "Economy" : opt.tier === "specialty" ? "Specialty" : opt.tier?.includes("pet") ? "Pet" : "Standard";
+
+  let html = `<div class="option-card">`;
+
+  // Image
+  if (opt.image) {
+    html += `<div class="option-card-image"><img src="${opt.image}" alt="${opt.name}" loading="lazy"></div>`;
+  } else {
+    html += `<div class="option-card-image option-card-image--empty"><span>Image pending</span></div>`;
+  }
+
+  html += `<div class="option-card-body">`;
+
+  // Tier badge + title
+  html += `<div class="option-card-header">`;
+  html += `<span class="option-tier-badge badge-${tierClass}">${tierLabel}</span>`;
+  html += `</div>`;
+  html += `<div class="option-card-title">${opt.name}</div>`;
+  if (opt.subtitle) html += `<div class="option-card-subtitle">${opt.subtitle}</div>`;
+
+  // Badges
+  if (opt.badges && opt.badges.length) {
+    html += `<div class="option-card-badges">${opt.badges.map(b => `<span class="badge badge-${tierClass}">${b}</span>`).join("")}</div>`;
+  }
+
+  // Description
+  html += `<p class="option-card-desc">${opt.description}</p>`;
+
+  // Specs
+  if (opt.specs && opt.specs.length) {
+    html += `<div class="option-specs-grid">`;
     opt.specs.forEach(s => {
-      html += `<tr><td>${s.label}</td><td>${s.value}</td></tr>`;
+      html += `<div class="option-spec-row"><span class="option-spec-label">${s.label}</span><span class="option-spec-value">${s.value}</span></div>`;
     });
-    html += `</table>`;
+    html += `</div>`;
   }
-  if (opt.colorOptions) {
-    html += `
-      <div style="margin-top:var(--space-md)">
-        <div style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Available Colors</div>
-        <div class="color-chips">
-          ${opt.colorOptions.map(c => `<span class="color-chip">${c}</span>`).join("")}
-        </div>
-      </div>
-    `;
+
+  // Color options
+  if (opt.colorOptions && opt.colorOptions.length) {
+    html += `<div class="option-colors"><div class="option-colors-label">Available Colors</div><div class="color-chips">${opt.colorOptions.map(c => `<span class="color-chip">${c}</span>`).join("")}</div></div>`;
   }
+
+  // Extra images (gallery strip)
+  if (opt.images && opt.images.length) {
+    html += `<div class="option-image-strip">`;
+    opt.images.forEach(imgUrl => {
+      html += `<div class="option-image-thumb gallery-item" data-lightbox="${opt.name}"><img src="${imgUrl}" alt="${opt.name}" loading="lazy"></div>`;
+    });
+    html += `</div>`;
+  }
+
+  // Internal note
   if (opt.note) {
     html += `<div class="internal-note">${opt.note.replace("⚠️ ", "")}</div>`;
   }
-  html += `</div>`;
+
+  html += `</div></div>`;
   return html;
 }
 
@@ -881,8 +986,10 @@ function renderAddOns(service) {
     html += `
       <div class="addon-card">
         <div class="addon-icon">${ICONS[a.icon] || "✨"}</div>
-        <div class="addon-name">${a.name}</div>
-        <div class="addon-desc">${a.description}</div>
+        <div class="addon-content">
+          <div class="addon-name">${a.name}</div>
+          <div class="addon-desc">${a.description}</div>
+        </div>
       </div>
     `;
   });
@@ -915,17 +1022,18 @@ function renderColorOptions(service) {
 function renderTwoPost(service) {
   if (!service.twoPostSection) return "";
   const tp = service.twoPostSection;
-  let html = `
-    <div class="card" style="max-width:700px;">
-      ${renderImageOrPlaceholder(tp.image, tp.title)}
-      <p class="card-desc">${tp.description}</p>
-      <ul class="overview-key-points">
-        ${tp.keyPoints.map(p => `<li>${p}</li>`).join("")}
-      </ul>
-      ${tp.confirmationNeeded ? `<div class="internal-note">${tp.confirmationNeeded}</div>` : ""}
-    </div>
-  `;
-  return html;
+  const fakeOpt = {
+    name: tp.title,
+    subtitle: "Pergola Configuration",
+    tier: "standard",
+    badges: [],
+    description: tp.description,
+    image: tp.image || null,
+    images: [],
+    specs: tp.keyPoints.map(p => ({ label: "•", value: p })),
+    note: tp.confirmationNeeded || null,
+  };
+  return `<div class="option-group-grid">${renderOptionCard(fakeOpt)}</div>`;
 }
 
 // ── SEASONAL CARE ────────────────────────────────────────────
@@ -974,7 +1082,7 @@ function renderShadeOptions(service) {
   const opts = (service.options || []).filter(o => o.name.toLowerCase().includes("tifgrand") || o.name.toLowerCase().includes("shade") || o.name.toLowerCase().includes("palmetto"));
   if (opts.length === 0) return `<p style="color:var(--text-muted)">Shade-tolerant options are being documented.</p>`;
   let html = `<p style="color:var(--text-secondary);margin-bottom:var(--space-lg);font-size:14px;">For areas with limited sun exposure from trees, structures, or north-facing orientation.</p>`;
-  html += `<div class="card-grid card-grid-2">`;
+  html += `<div class="option-group-grid">`;
   opts.forEach(opt => { html += renderOptionCard(opt); });
   html += `</div>`;
   return html;
@@ -983,7 +1091,7 @@ function renderShadeOptions(service) {
 function renderStAugustine(service) {
   const opt = (service.options || []).find(o => o.name.toLowerCase().includes("palmetto") || o.name.toLowerCase().includes("augustine"));
   if (!opt) return `<p style="color:var(--text-muted)">St. Augustine content is being prepared.</p>`;
-  return `<div style="max-width:700px;">${renderOptionCard(opt, true)}</div>`;
+  return `<div class="option-group-grid">${renderOptionCard(opt)}</div>`;
 }
 
 // ── FAQ ──────────────────────────────────────────────────────
@@ -1011,23 +1119,53 @@ function renderFAQs(faqs, title) {
 // ── GALLERY ──────────────────────────────────────────────────
 function renderGallery(items) {
   if (!items || items.length === 0) return `<p style="color:var(--text-muted)">Gallery images are being collected.</p>`;
-  let html = `<p style="color:var(--text-muted);margin-bottom:var(--space-lg);font-size:14px;">Click any image to enlarge during a presentation.</p>`;
-  html += `<div class="gallery-grid">`;
-  items.forEach(item => {
-    html += `
-      <div class="gallery-item" data-lightbox="${item.alt}">
-        <div class="gallery-image-wrap">
-          ${item.src
-            ? `<img src="${item.src}" alt="${item.alt}" loading="lazy">`
-            : `<div class="gallery-placeholder"><div class="gallery-placeholder-icon">🖼️</div>${item.placeholder || "Image pending"}</div>`
-          }
-        </div>
-        <div class="gallery-label">${item.alt}</div>
-      </div>
-    `;
-  });
-  html += `</div>`;
+
+  // Group by category if available
+  const categories = [...new Set(items.map(i => i.category).filter(Boolean))];
+  const hasCats = categories.length > 1;
+
+  let html = `<p style="color:var(--text-secondary);margin-bottom:var(--space-lg);font-size:13.5px;">Click any image to enlarge during a screen share or call.</p>`;
+
+  if (hasCats) {
+    categories.forEach(cat => {
+      const catItems = items.filter(i => i.category === cat);
+      html += `<div class="gallery-category">`;
+      html += `<div class="gallery-category-label">${cat.charAt(0).toUpperCase() + cat.slice(1).replace(/-/g, ' ')}</div>`;
+      html += `<div class="gallery-grid-main">`;
+      catItems.forEach(item => {
+        html += renderGalleryItem(item);
+      });
+      html += `</div></div>`;
+    });
+    // Uncategorized
+    const uncatItems = items.filter(i => !i.category);
+    if (uncatItems.length) {
+      html += `<div class="gallery-grid-main">`;
+      uncatItems.forEach(item => { html += renderGalleryItem(item); });
+      html += `</div>`;
+    }
+  } else {
+    html += `<div class="gallery-grid-main">`;
+    items.forEach(item => { html += renderGalleryItem(item); });
+    html += `</div>`;
+  }
+
   return html;
+}
+
+function renderGalleryItem(item) {
+  return `
+    <div class="gallery-item-main" data-lightbox="${item.alt}">
+      <div class="gallery-img-wrap">
+        ${item.src
+          ? `<img src="${item.src}" alt="${item.alt}" loading="lazy">`
+          : `<div class="gallery-placeholder"><span>🖼️</span><small>${item.placeholder || 'Image pending'}</small></div>`
+        }
+        <div class="gallery-item-overlay"><span>🔍 Ampliar</span></div>
+      </div>
+      ${item.alt ? `<div class="gallery-item-label">${item.alt}</div>` : ''}
+    </div>
+  `;
 }
 
 // ── BEFORE / AFTER ───────────────────────────────────────────
@@ -1165,9 +1303,9 @@ function renderFooter() {
 // ── IMAGE HELPER ─────────────────────────────────────────────
 function renderImageOrPlaceholder(src, alt) {
   if (src) {
-    return `<div class="gallery-image-wrap" style="margin-bottom:var(--space-sm);border-radius:var(--radius-md);overflow:hidden;max-height:180px;"><img src="${src}" alt="${alt}" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>`;
+    return `<div class="comp-image-wrap"><img src="${src}" alt="${alt || ''}" loading="lazy"></div>`;
   }
-  return "";
+  return `<div class="comp-image-wrap comp-image-placeholder"><span>🖼️</span><small>Image pending</small></div>`;
 }
 
 // ── ACCORDION SETUP ──────────────────────────────────────────
@@ -1197,7 +1335,7 @@ function setupAccordions() {
 
 // ── GALLERY LIGHTBOX ─────────────────────────────────────────
 function setupGalleryClicks() {
-  document.querySelectorAll(".gallery-item[data-lightbox]").forEach(item => {
+  document.querySelectorAll(".gallery-item[data-lightbox], .gallery-item-main[data-lightbox]").forEach(item => {
     if (!item._bound) {
       item._bound = true;
       item.addEventListener("click", () => {

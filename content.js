@@ -78,7 +78,7 @@ const SERVICES = [
     icon: "pergola",
     shortDesc: "Solid, lattice, and combination patio covers built to enhance outdoor living year-round.",
     heroBadges: ["Aluminum Construction", "Low Maintenance", "Custom Colors", "Add-On Ready"],
-    heroImage: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-6.jpg",
+    heroImage: "https://lh3.googleusercontent.com/d/1XFixujTOltHntNijYPC9yLTRW8fdQjGa",
     sections: ["Overview", "Lattice vs Solid", "Attached vs Freestanding", "Two-Post / Cantilever", "Add-Ons", "Colors & Finishes", "FAQs", "Gallery"],
 
     overview: {
@@ -109,7 +109,7 @@ const SERVICES = [
               "Works well for garden areas and open entertaining spaces.",
               "Available in attached and freestanding configurations.",
             ],
-            image: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-1.jpg",
+            image: "https://lh3.googleusercontent.com/d/1SDo-aFoaBiC5kjGLchyWN_wBPcFIoKhv",
           },
           {
             name: "Solid Patio Cover",
@@ -122,7 +122,7 @@ const SERVICES = [
               "Stronger premium perception for higher-ticket projects.",
               "Can support electrical add-ons with proper planning.",
             ],
-            image: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-7.jpg",
+            image: "https://lh3.googleusercontent.com/d/1r5hl_AV0g_iYrqEpDu2n2fQKydvclrYm",
           },
         ],
       },
@@ -138,7 +138,7 @@ const SERVICES = [
               "Creates a natural extension of indoor living space.",
               "Most common configuration for backyard patios.",
             ],
-            image: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-8.jpg",
+            image: "https://lh3.googleusercontent.com/d/1nv-q_VA_0_a-llCQVnY9rMDeljZjyLDX",
           },
           {
             name: "Freestanding",
@@ -149,7 +149,7 @@ const SERVICES = [
               "Ideal for pool areas, garden features, or detached seating zones.",
               "Offers more placement flexibility in the yard.",
             ],
-            image: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-3.jpg",
+            image: "https://lh3.googleusercontent.com/d/1ItDyaa8CF8LkHc5HnLPsFyUpM2Mz7x7o",
           },
         ],
       },
@@ -167,7 +167,7 @@ const SERVICES = [
           { label: "Wiring", value: "Hidden internal raceways" },
           { label: "Best For", value: "Outdoor living rooms, kitchens, work-from-home spaces" },
         ],
-        image: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-9.jpg",
+        image: "https://lh3.googleusercontent.com/d/1Wm6u-dM7Hcc9AkUeHCA9MJ17TwzTzjlB",
         note: "⚠️ Internal note: Confirm which Duralum system types Viva installs for electrical/fan/light add-ons.",
       },
     ],
@@ -182,7 +182,7 @@ const SERVICES = [
         "Good option for smaller patios or when post placement is limited.",
       ],
       confirmationNeeded: "Confirm the exact term Viva wants to use for this product in client-facing materials.",
-      image: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-5.jpg",
+      image: "https://lh3.googleusercontent.com/d/14gB-ANPUozQkReaLXpCRcWRDecJZ-mmh",
     },
 
     addOns: [
@@ -213,18 +213,18 @@ const SERVICES = [
     ],
 
     gallery: [
-      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-1.jpg", alt: "Lattice patio cover — attached to home", category: "lattice" },
-      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-7.jpg", alt: "Solid patio cover — backyard living area", category: "solid" },
-      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-3.jpg", alt: "Freestanding lattice pergola", category: "freestanding" },
-      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-5.jpg", alt: "Lattice patio cover — open design", category: "lattice" },
-      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-8.jpg", alt: "Solid cover attached to home", category: "solid" },
-      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-8.jpg", alt: "Lattice cover — outdoor entertaining", category: "lattice" },
-      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-phoenix-lattice-patio-cover-1.jpg", alt: "Phoenix lattice patio cover", category: "lattice" },
-      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-10.jpg", alt: "Solid patio cover — premium finish", category: "solid" },
-      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-11.jpg", alt: "Solid cover — outdoor living room", category: "solid" },
-      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-12.jpg", alt: "Lattice patio cover — side view", category: "lattice" },
-      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-solid-patio-cover-12.jpg", alt: "Solid cover detail", category: "solid" },
-      { src: "https://duralum.com/wp-content/uploads/2013/10/duralum-lattice-patio-cover-14.jpg", alt: "Lattice — garden area application", category: "lattice" },
+      { src: "https://lh3.googleusercontent.com/d/1XFixujTOltHntNijYPC9yLTRW8fdQjGa", alt: "Viva — Lattice patio cover installed", category: "lattice" },
+      { src: "https://lh3.googleusercontent.com/d/1SDo-aFoaBiC5kjGLchyWN_wBPcFIoKhv", alt: "Viva — Lattice cover backyard", category: "lattice" },
+      { src: "https://lh3.googleusercontent.com/d/1ItDyaa8CF8LkHc5HnLPsFyUpM2Mz7x7o", alt: "Viva — Lattice pergola outdoor living", category: "lattice" },
+      { src: "https://lh3.googleusercontent.com/d/1bDXyYbnYxxH1ld98tP6Ngg7CaoVrWZl9", alt: "Viva — Lattice cover side view", category: "lattice" },
+      { src: "https://lh3.googleusercontent.com/d/1o6aEFaJR3zYF2NNQCtVobaaAzfLUX__R", alt: "Viva — Lattice patio entertaining area", category: "lattice" },
+      { src: "https://lh3.googleusercontent.com/d/1rrHC8ldl-rmgx_WqfeWMpiad-B9V65u6", alt: "Viva — Lattice cover wide view", category: "lattice" },
+      { src: "https://lh3.googleusercontent.com/d/1r5hl_AV0g_iYrqEpDu2n2fQKydvclrYm", alt: "Viva — Solid patio cover installed", category: "solid" },
+      { src: "https://lh3.googleusercontent.com/d/13Ds8x8qydwJ5cip1yvxWMXD-kZK3AAn0", alt: "Viva — Solid cover backyard project", category: "solid" },
+      { src: "https://lh3.googleusercontent.com/d/16NTqEeHYY9XulWBwkuAPUQ8jY6sh138Q", alt: "Viva — Patio cover full shade", category: "solid" },
+      { src: "https://lh3.googleusercontent.com/d/14gB-ANPUozQkReaLXpCRcWRDecJZ-mmh", alt: "Viva — Cantilever pergola two-post", category: "cantilever" },
+      { src: "https://lh3.googleusercontent.com/d/1Kp5vEPZ232_mEupIYV6WQge1z3QU6qiS", alt: "Viva — Cantilever cover clean look", category: "cantilever" },
+      { src: "https://lh3.googleusercontent.com/d/1nv-q_VA_0_a-llCQVnY9rMDeljZjyLDX", alt: "Viva — Attached pergola project", category: "solid" },
     ],
 
     beforeAfter: [
@@ -250,8 +250,8 @@ const SERVICES = [
     icon: "paver",
     shortDesc: "From economy step stones to premium natural-stone patterns — options for every project and budget.",
     heroBadges: ["Multiple Styles", "Durable", "Versatile Patterns", "Curb Appeal"],
-    heroImage: "https://phoenixpaver.com/wp-content/uploads/2025/09/townscape-patio.jpg",
-    sections: ["Overview", "Townscape", "Holland", "Veneer / Pool Coping", "Aztec (Premium)", "12×12 Economy", "Product Comparison", "Colors", "FAQs", "Gallery"],
+    heroImage: "https://lh3.googleusercontent.com/d/1kbOoQN1vfDQcDoA6KrD5T4_SYsgfpY5F",
+    sections: ["Overview", "Standard Options", "Premium & Specialty", "Product Comparison", "Colors", "Add-Ons", "FAQs", "Gallery"],
 
     overview: {
       intro: "Pavers are one of the most transformative outdoor upgrades available. They define walkways, patios, driveways, and pool decks with lasting beauty and function. We offer a curated selection from trusted vendors to match every style and budget.",
@@ -411,18 +411,18 @@ const SERVICES = [
     ],
 
     gallery: [
-      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/townscape-patio.jpg", alt: "Townscape paver patio installation", category: "townscape" },
-      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/townscape_driveway.jpg", alt: "Townscape driveway installation", category: "townscape" },
-      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/holland-pavers-driveway.jpg", alt: "Holland paver driveway", category: "holland" },
-      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/Holland_Slate_Pathway.jpg", alt: "Holland slate pathway", category: "holland" },
-      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/veneer-paver-poolside.jpg", alt: "Veneer pavers — poolside", category: "veneer" },
-      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/veneer-pool-deck.jpg", alt: "Veneer pool deck overlay", category: "veneer" },
-      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/Pool-at-Night.jpg", alt: "Aztec premium — pool at night", category: "aztec" },
-      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/Aztec_stone_territorial.jpg", alt: "Aztec stone territorial", category: "aztec" },
-      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/Aztec_Greendoors_Cafe.jpg", alt: "Aztec stone — commercial application", category: "aztec" },
-      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/Aztec-tierra-norte.jpg", alt: "Aztec tierra norte color", category: "aztec" },
-      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/Veneer-overlay-commercial-pool.jpg", alt: "Veneer overlay — commercial pool", category: "veneer" },
-      { src: "https://phoenixpaver.com/wp-content/uploads/2025/09/tonscape_territorial_atrium.jpg", alt: "Townscape territorial — atrium area", category: "townscape" },
+      { src: "https://lh3.googleusercontent.com/d/1kbOoQN1vfDQcDoA6KrD5T4_SYsgfpY5F", alt: "Viva — Paver patio installation", category: "pavers" },
+      { src: "https://lh3.googleusercontent.com/d/1IFgICUhiaCMSUsBTcMWpmc9-Q_n6fF8a", alt: "Viva — Paver driveway project", category: "pavers" },
+      { src: "https://lh3.googleusercontent.com/d/17snUQY8qUm_iKvC5ziUKw-esj0YgGKgk", alt: "Viva — Paver backyard transformation", category: "pavers" },
+      { src: "https://lh3.googleusercontent.com/d/1mLB9WbrcanpBu5PetXJ43TaEjS8FNPcO", alt: "Viva — Paver outdoor living area", category: "pavers" },
+      { src: "https://lh3.googleusercontent.com/d/1SuKWJwMIxLFy49a7j6Fo_U8S_2Lp-k9q", alt: "Viva — Paver patio completed", category: "pavers" },
+      { src: "https://lh3.googleusercontent.com/d/1VDQBG7L88yk0nB0lrVhjQ5v4mYEQIFkR", alt: "Viva — Paver walkway and patio", category: "pavers" },
+      { src: "https://lh3.googleusercontent.com/d/1J5GBpLz3ia3iBe-edS2J5yiTc5mzxE7t", alt: "Viva — Paver driveway full view", category: "pavers" },
+      { src: "https://lh3.googleusercontent.com/d/1ucGglT5vlxLaTuqCV8TqmIaJvOUEP_eF", alt: "Viva — Pavers with turf combo", category: "pavers" },
+      { src: "https://lh3.googleusercontent.com/d/1KirwdetmdUItbzZh1ST_A9fffgeRplHU", alt: "Viva — Paver patio side view", category: "pavers" },
+      { src: "https://lh3.googleusercontent.com/d/1Ui2LZ9sejkUqGEJyqGHsSg4ZpNQO1G9u", alt: "Viva — Paver pattern detail", category: "pavers" },
+      { src: "https://lh3.googleusercontent.com/d/1g_5blL4yyF1URVNHlfllSrXXs4PJbhEt", alt: "Viva — Paver driveway project", category: "pavers" },
+      { src: "https://lh3.googleusercontent.com/d/1kP41sK-l5TZJOmvh208FeE2mK4UksytO", alt: "Viva — Paver patio completed project", category: "pavers" },
     ],
 
     beforeAfter: [
@@ -446,7 +446,7 @@ const SERVICES = [
     icon: "turf",
     shortDesc: "Low-maintenance, year-round green — from standard lawns to pet-friendly and putting green options.",
     heroBadges: ["No Watering", "Pet Friendly Options", "Year-Round Green", "Tri-Shield\u2122 Included"],
-    heroImage: "https://nolimitturf.com/wp-content/uploads/2023/12/IMG_7258-scaled.jpg",
+    heroImage: "https://lh3.googleusercontent.com/d/1DfoCQaFcoc4a4o0_zKf7bPb-jEyxJ7dy",
     sections: ["Overview", "Tri-Shield\u2122", "Standard Collection", "Premium Collection", "Putting Green", "Full Comparison", "Add-Ons", "FAQs", "Gallery"],
 
     overview: {
@@ -713,16 +713,16 @@ const SERVICES = [
     ],
 
     gallery: [
-      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/IMG_7258-scaled.jpg", alt: "Premium turf installation \u2014 backyard", category: "premium" },
-      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/EVO-60-Lime-scaled-e1705619911645.jpeg", alt: "EVO 70 Lime \u2014 standard turf", category: "standard" },
-      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/lime80_3.jpg", alt: "Lime 80 installation", category: "standard" },
-      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/premium96_3-scaled.jpg", alt: "Pro 104 \u2014 flagship turf", category: "premium" },
-      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/nolimit84_3-scaled.jpg", alt: "Bermuda 92 installation", category: "premium" },
-      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/IMG_4137-scaled-e1740087246834.jpg", alt: "Pet Play 90 \u2014 pet-friendly turf", category: "pet" },
-      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/augusta_2.jpg", alt: "Augusta putting green", category: "putting-green" },
-      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/Choice-74-scaled-e1705620518237.jpeg", alt: "Front yard turf installation", category: "standard" },
-      { src: "https://nolimitturf.com/wp-content/uploads/2025/02/IMG_5124-scaled-e1740087437629.jpg", alt: "Pet turf area \u2014 backyard", category: "pet" },
-      { src: "https://nolimitturf.com/wp-content/uploads/2023/12/evo60lime_3.jpg", alt: "EVO 70 Olive \u2014 yard view", category: "standard" },
+      { src: "https://lh3.googleusercontent.com/d/1DfoCQaFcoc4a4o0_zKf7bPb-jEyxJ7dy", alt: "Viva — Artificial turf backyard project", category: "installed" },
+      { src: "https://lh3.googleusercontent.com/d/1ooi-qKcvYbMaB5NfhnuAzwHB14C2W8Ag", alt: "Viva — Turf installation completed", category: "installed" },
+      { src: "https://lh3.googleusercontent.com/d/1B-gXdscH05OsX249Q4Qcbxx1Kn3-E_QX", alt: "Viva — Backyard turf full view", category: "installed" },
+      { src: "https://lh3.googleusercontent.com/d/1bGObbXEgBGipLe0j5CtJ1cGJghXpVVOi", alt: "Viva — Turf with pavers combo", category: "installed" },
+      { src: "https://lh3.googleusercontent.com/d/1A-hWL4qMzgyNJqP-DzT2SKQTnNLHLVZd", alt: "Viva — Turf outdoor living area", category: "installed" },
+      { src: "https://lh3.googleusercontent.com/d/1XOgDbSkfcHRrhhlcL73NhxK7CEsT238E", alt: "Viva — Turf install side yard", category: "installed" },
+      { src: "https://lh3.googleusercontent.com/d/1AheaKoRoDFMCBK6M0fnWLAd5aZKuAN8Z", alt: "Viva — Turf large backyard", category: "installed" },
+      { src: "https://lh3.googleusercontent.com/d/1mmzBjhpoijj1234aonPWWcnCznmOEXN8", alt: "Viva — Turf project wide shot", category: "installed" },
+      { src: "https://lh3.googleusercontent.com/d/1s7lle9V835j3-ounl7SrdrUhvKurrlW2", alt: "Viva — Artificial turf finished yard", category: "installed" },
+      { src: "https://lh3.googleusercontent.com/d/1_B-LpTlZlGvhqnyCeWqX0ISn_RhN7AUa", alt: "Viva — Turf installation detail", category: "installed" },
     ],
 
     beforeAfter: [
@@ -746,7 +746,7 @@ const SERVICES = [
     icon: "sod",
     shortDesc: "Real grass for real living — Bermuda, shade-tolerant, and specialty sod for Phoenix-area homes.",
     heroBadges: ["Real Grass", "Irrigation Support", "Year-Round Install", "Phoenix Climate Adapted"],
-    heroImage: "https://www.evergreenturf.com/_images/home-page/carousel-images/residential1.jpg",
+    heroImage: "https://lh3.googleusercontent.com/d/1PbWFcXu3Ya7I5tTbm3Fc3BwGsnj5zlMp",
     sections: ["Overview", "Midiron vs Tifway 419", "Shade-Tolerant", "St. Augustine", "Seasonal Care", "Irrigation Basics", "FAQs", "Gallery"],
 
     overview: {
@@ -868,16 +868,14 @@ const SERVICES = [
     ],
 
     gallery: [
-      { src: "https://www.evergreenturf.com/_images/home-page/carousel-images/residential1.jpg", alt: "Lush residential lawn — Bermuda sod", category: "residential" },
-      { src: "https://www.evergreenturf.com/_images/closeup-midiron.jpg", alt: "Midiron grass closeup", category: "midiron" },
-      { src: "https://www.evergreenturf.com/_images/closeup-tifway.jpg", alt: "Tifway 419 grass closeup", category: "tifway" },
-      { src: "https://www.evergreenturf.com/_images/home-page/carousel-images/residential2.jpg", alt: "Residential lawn installation", category: "residential" },
-      { src: "https://www.evergreenturf.com/_images/home-page/carousel-images/residential3.jpg", alt: "Front yard sod — green lawn", category: "residential" },
-      { src: "https://www.evergreenturf.com/_images/closeup-tifgrand.jpg", alt: "TifGrand shade-tolerant closeup", category: "shade" },
-      { src: "https://www.evergreenturf.com/_images/closeup-palmetto.jpg", alt: "Palmetto St. Augustine closeup", category: "shade" },
-      { src: "https://www.evergreenturf.com/_images/home-page/carousel-images/residential4.jpg", alt: "Residential lawn — wide view", category: "residential" },
-      { src: "https://www.evergreenturf.com/_images/home-page/carousel-images/commercial1.jpg", alt: "Commercial sod application", category: "commercial" },
-      { src: "https://www.evergreenturf.com/_images/closeup-tiftuf.jpg", alt: "TifTuf variety closeup", category: "variety" },
+      { src: "https://lh3.googleusercontent.com/d/1PbWFcXu3Ya7I5tTbm3Fc3BwGsnj5zlMp", alt: "Viva — Sod installation completed", category: "installed" },
+      { src: "https://lh3.googleusercontent.com/d/1ZzAfqzBekd4dKvWPoFAU7sDHjpkbTZ64", alt: "Viva — Green lawn after sod", category: "installed" },
+      { src: "https://lh3.googleusercontent.com/d/1OdFIMN2moyuTRxPwt8oJRud48x4v5_eI", alt: "Viva — Front yard sod project", category: "installed" },
+      { src: "https://lh3.googleusercontent.com/d/1bVkR0TuOPAOv8UqvcFct8soMm-mpIPTa", alt: "Viva — Sod and irrigation install", category: "installed" },
+      { src: "https://lh3.googleusercontent.com/d/1oWHIuIe6OSsQtR_r9p3EdY45E8RGqpP_", alt: "Viva — Lush lawn transformation", category: "installed" },
+      { src: "https://lh3.googleusercontent.com/d/1411CaGqREJa04IVU8oTZruxK4KV39qOj", alt: "Viva — Sod backyard install", category: "installed" },
+      { src: "https://lh3.googleusercontent.com/d/1vsNaD1v1EFxdqrerBWxA4xtkN9Js9u6n", alt: "Viva — Full lawn sod project", category: "installed" },
+      { src: "https://lh3.googleusercontent.com/d/1sMXRsvzwFLB9u1qtuYvxvhpeVnqOliVN", alt: "Viva — Residential sod installation", category: "installed" },
     ],
 
     beforeAfter: [
