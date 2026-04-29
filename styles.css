@@ -71,19 +71,19 @@
   /* Typography */
   --font-primary: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Spacing */
+  /* Spacing — densified for 13" presentation use, atomic xs/sm preserved */
   --space-xs: 4px;
   --space-sm: 8px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-  --space-2xl: 48px;
-  --space-3xl: 64px;
-  --space-4xl: 96px;
+  --space-md: 12px;
+  --space-lg: 18px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+  --space-4xl: 72px;
 
-  /* Layout */
+  /* Layout — fluid max-width: locks at 13" useful viewport, expands to 1480 on big monitors */
   --sidebar-width: 260px;
-  --content-max-width: 1200px;
+  --content-max-width: clamp(1080px, 92vw, 1480px);
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
@@ -290,6 +290,11 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
 }
 
 /* ── SEARCH BAR ────────────────────────────────────────────── */
+.search-bar-wrap {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-xl) 0;
+}
 .search-bar { position: relative; margin-bottom: var(--space-lg); }
 
 .search-input {
