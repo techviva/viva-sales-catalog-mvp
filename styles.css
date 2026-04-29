@@ -561,33 +561,70 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
 .addon-card {
   background: var(--bg-raised);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: var(--space-md);
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  gap: var(--space-sm);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 .addon-card:hover {
   border-color: var(--border-accent);
-  box-shadow: var(--shadow-glow-green);
-  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 .addon-icon {
-  width: 48px; height: 48px; border-radius: var(--radius-md);
+  width: 40px; height: 40px; border-radius: var(--radius-sm);
   background: var(--bg-elevated);
   display: flex; align-items: center; justify-content: center;
-  font-size: 22px; flex-shrink: 0;
+  font-size: 18px; flex-shrink: 0;
   border: 1px solid var(--border-subtle);
 }
 .addon-card:hover .addon-icon {
   background: var(--brand-primary-glow);
   border-color: var(--border-accent);
 }
-.addon-content { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-.addon-name { font-size: 14px; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
-.addon-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+.addon-content { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.addon-name { font-size: 13.5px; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
+.addon-desc { font-size: 12.5px; color: var(--text-secondary); line-height: 1.45; }
+
+/* Expandable add-on card (when add-on has details[]). Native <details> element. */
+.addon-card-expandable {
+  flex-direction: column;
+  cursor: pointer;
+  padding: 0;
+  gap: 0;
+}
+.addon-card-expandable summary {
+  display: flex; flex-direction: row;
+  align-items: center; gap: var(--space-sm);
+  padding: var(--space-md);
+  list-style: none;
+  user-select: none;
+}
+.addon-card-expandable summary::-webkit-details-marker { display: none; }
+.addon-toggle-icon {
+  font-size: 18px; font-weight: 700;
+  color: var(--brand-primary);
+  width: 20px; text-align: center; flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+.addon-card-expandable[open] .addon-toggle-icon { transform: rotate(45deg); }
+.addon-details {
+  list-style: none; padding: 0 var(--space-md) var(--space-md) calc(40px + var(--space-md) + var(--space-sm));
+  margin: 0;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: var(--space-sm);
+}
+.addon-details li {
+  position: relative;
+  padding: 4px 0 4px 14px;
+  font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;
+}
+.addon-details li::before {
+  content: "·"; position: absolute; left: 4px; top: 2px;
+  color: var(--brand-primary); font-weight: 700; font-size: 16px;
+}
 
 /* ── ACCORDION / FAQ ───────────────────────────────────────── */
 .accordion-item {
