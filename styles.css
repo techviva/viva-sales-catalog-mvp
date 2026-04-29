@@ -321,9 +321,9 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
 /* ── SERVICE HERO ──────────────────────────────────────────── */
 .service-hero {
   background: var(--bg-raised);
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl) var(--space-lg);
-  margin-bottom: var(--space-lg);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-md);
   position: relative; overflow: hidden;
   border: 1px solid var(--border-subtle);
 }
@@ -335,19 +335,19 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
 }
 
 .service-hero h2 {
-  font-size: 26px; font-weight: 800;
+  font-size: clamp(20px, 1.2vw + 14px, 26px); font-weight: 800;
   letter-spacing: -0.5px; color: var(--text-primary);
   margin-bottom: var(--space-xs);
 }
 
 .service-hero .hero-desc {
-  font-size: 15px; color: var(--text-secondary);
-  max-width: 700px; line-height: 1.7;
+  font-size: 14px; color: var(--text-secondary);
+  max-width: 720px; line-height: 1.55;
 }
 
 .hero-badges {
   display: flex; flex-wrap: wrap; gap: var(--space-sm);
-  margin-top: var(--space-lg);
+  margin-top: var(--space-sm);
 }
 
 /* ── BADGES ────────────────────────────────────────────────── */
@@ -862,7 +862,7 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
 
 /* ── SECTION HEADERS ───────────────────────────────────────── */
 .section-header { margin-bottom: var(--space-lg); }
-.section-header h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; color: var(--text-primary); margin-bottom: 4px; }
+.section-header h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; color: var(--text-primary); margin-bottom: 4px; }
 .section-header p { font-size: 14px; color: var(--text-muted); }
 
 /* ── COLOR OPTIONS ─────────────────────────────────────────── */
@@ -918,7 +918,7 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
    HERO WITH BACKGROUND IMAGE
    ═══════════════════════════════════════════════════════════════ */
 .service-hero.has-hero-image {
-  min-height: 220px; display: flex;
+  min-height: 170px; display: flex;
   align-items: flex-end; padding: 0;
 }
 .hero-image-bg {
@@ -935,7 +935,7 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
 }
 .hero-content-overlay {
   position: relative; z-index: 1;
-  padding: var(--space-2xl) var(--space-xl); width: 100%;
+  padding: var(--space-lg) var(--space-xl); width: 100%;
 }
 .service-hero.has-hero-image h2 { color: #fff; }
 .service-hero.has-hero-image .hero-desc { color: rgba(255,255,255,0.75); }
@@ -950,14 +950,14 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
 /* ── ANCHOR NAV — Glass sticky bar ────────────────────────── */
 .anchor-nav {
   position: sticky;
-  top: 12px;
+  top: 8px;
   z-index: 50;
   display: flex;
   align-items: center;
   gap: 4px;
   padding: 6px;
   width: fit-content;
-  margin: 0 auto var(--space-xl);
+  margin: 0 auto var(--space-md);
   flex-wrap: nowrap;
   overflow-x: auto;
   scrollbar-width: none;
@@ -1018,18 +1018,18 @@ body.sidebar-collapsed .main-content { margin-left: 60px; }
 
 /* ── SECTION DIVIDERS ──────────────────────────────────────── */
 .catalog-section {
-  margin-bottom: var(--space-2xl);
-  scroll-margin-top: 56px;
+  margin-bottom: var(--space-md);
+  scroll-margin-top: 64px;
 }
 .section-divider {
-  margin-bottom: var(--space-xl);
-  padding-bottom: var(--space-md);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
   border-bottom: 1px solid var(--border-soft);
-  display: flex; align-items: center; gap: var(--space-md);
+  display: flex; align-items: center; gap: var(--space-sm);
 }
 .section-divider h3 {
-  font-size: 20px; font-weight: 700;
-  letter-spacing: -0.4px; color: var(--text-primary);
+  font-size: 17px; font-weight: 700;
+  letter-spacing: -0.3px; color: var(--text-primary);
 }
 
 .card-expanded { max-width: 700px; }
