@@ -25,10 +25,65 @@ const ICONS = {
 // ── INITIALIZATION ───────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   renderSidebar();
+  // Restore presentation-mode preference from previous session
+  if (localStorage.getItem("viva.presentationMode") === "1") {
+    document.body.classList.add("presentation-mode");
+  }
   navigateTo("home");
   setupMobileToggle();
   setupSidebarCollapse();
+  setupPresentationMode();
 });
+
+// ── PRESENTATION MODE ────────────────────────────────────────
+// David's Loom feedback (sod): "Could we organize so when we present
+// by Loom/Zoom we just present what we want — click and section opens,
+// present this first, then maybe finish products."
+//
+// Implementation: a body-level toggle. When ON, every .catalog-section
+// renders collapsed by default. Clicking the section-divider expands
+// just that one. Anchor-nav links also expand the target on navigation.
+function setupPresentationMode() {
+  // Click delegation for section toggles + the toolbar button.
+  document.addEventListener("click", (e) => {
+    const toggle = e.target.closest(".presentation-toggle");
+    if (toggle) {
+      e.preventDefault();
+      const on = !document.body.classList.contains("presentation-mode");
+      document.body.classList.toggle("presentation-mode", on);
+      localStorage.setItem("viva.presentationMode", on ? "1" : "0");
+      // When entering, collapse all; when leaving, open all.
+      document.querySelectorAll(".catalog-section").forEach(s => {
+        s.classList.toggle("is-open", !on);
+      });
+      // Update any toggle buttons in the DOM to reflect new state.
+      document.querySelectorAll(".presentation-toggle").forEach(btn => {
+        btn.setAttribute("aria-pressed", on ? "true" : "false");
+        const lbl = btn.querySelector(".presentation-toggle-label");
+        if (lbl) lbl.textContent = on ? "Presentation Mode: ON" : "Presentation Mode";
+      });
+      return;
+    }
+    // Click on a section-divider in presentation mode toggles that one.
+    const divider = e.target.closest(".section-divider");
+    if (divider && document.body.classList.contains("presentation-mode")) {
+      const section = divider.closest(".catalog-section");
+      if (section) section.classList.toggle("is-open");
+      return;
+    }
+    // Anchor-nav link: in presentation mode, expand the target.
+    const link = e.target.closest("a.anchor-link");
+    if (link && document.body.classList.contains("presentation-mode")) {
+      const id = link.getAttribute("href");
+      if (id && id.startsWith("#")) {
+        const target = document.querySelector(id);
+        if (target && target.classList.contains("catalog-section")) {
+          target.classList.add("is-open");
+        }
+      }
+    }
+  });
+}
 
 // ── SIDEBAR ──────────────────────────────────────────────────
 function renderSidebar() {
