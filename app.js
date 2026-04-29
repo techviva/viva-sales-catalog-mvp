@@ -420,6 +420,10 @@ function renderServicePage(service) {
       html += renderTurfCollection(service, "premium");
     } else if (name === "full comparison") {
       html += renderFullComparisonTable(service);
+    } else if (name === "pergola types") {
+      html += renderOptionGroup(service, ["standard", "premium"]);
+    } else if (name === "configurations") {
+      html += renderConfigurations(service);
     } else if (name.includes("vs") || name.includes("attached")) {
       html += renderComparisons(service, sectionName);
     } else if (name.includes("faq")) {
@@ -1004,19 +1008,66 @@ function renderOptionCard(opt, expanded = false) {
 function renderAddOns(service) {
   if (!service.addOns) return "";
   let html = `
-    <p style="color:var(--text-secondary);margin-bottom:var(--space-lg);font-size:14px;">These options can be included in the project to enhance the installation.</p>
+    <p style="color:var(--text-secondary);margin-bottom:var(--space-md);font-size:13px;">These options can be included in the project to enhance the installation. Click any add-on to read details.</p>
     <div class="addons-grid">
   `;
   service.addOns.forEach(a => {
-    html += `
-      <div class="addon-card">
-        <div class="addon-icon">${ICONS[a.icon] || "✨"}</div>
-        <div class="addon-content">
-          <div class="addon-name">${a.name}</div>
-          <div class="addon-desc">${a.description}</div>
+    const hasDetails = Array.isArray(a.details) && a.details.length > 0;
+    if (hasDetails) {
+      html += `
+        <details class="addon-card addon-card-expandable">
+          <summary>
+            <div class="addon-icon">${ICONS[a.icon] || "✨"}</div>
+            <div class="addon-content">
+              <div class="addon-name">${a.name}</div>
+              <div class="addon-desc">${a.description}</div>
+            </div>
+            <span class="addon-toggle-icon" aria-hidden="true">+</span>
+          </summary>
+          <ul class="addon-details">
+            ${a.details.map(d => `<li>${d}</li>`).join("")}
+          </ul>
+        </details>
+      `;
+    } else {
+      html += `
+        <div class="addon-card">
+          <div class="addon-icon">${ICONS[a.icon] || "✨"}</div>
+          <div class="addon-content">
+            <div class="addon-name">${a.name}</div>
+            <div class="addon-desc">${a.description}</div>
+          </div>
         </div>
-      </div>
-    `;
+      `;
+    }
+  });
+  html += `</div>`;
+  return html;
+}
+
+// ── CONFIGURATIONS ───────────────────────────────────────────
+// Used for pergolas: Attached vs Freestanding (a layout decision,
+// independent of the type — Lattice/Solid/Cantilever).
+function renderConfigurations(service) {
+  const cfg = service.configurations;
+  if (!cfg) return `<p style="color:var(--text-muted)">Configurations content is being prepared.</p>`;
+  let html = "";
+  if (cfg.description) {
+    html += `<p style="color:var(--text-secondary);margin-bottom:var(--space-md);font-size:13px;">${cfg.description}</p>`;
+  }
+  html += `<div class="comparison-grid">`;
+  cfg.items.forEach(it => {
+    html += `<div class="card comparison-card">`;
+    html += renderImageOrPlaceholder(it.image, it.name);
+    html += `<div class="card-title">${it.name}</div>`;
+    if (it.subtitle) html += `<div class="card-subtitle">${it.subtitle}</div>`;
+    if (it.badges) {
+      html += `<div class="card-badges">${it.badges.map(b => `<span class="badge badge-default">${b}</span>`).join("")}</div>`;
+    }
+    if (it.points) {
+      html += `<ul class="card-points">${it.points.map(p => `<li>${p}</li>`).join("")}</ul>`;
+    }
+    html += `</div>`;
   });
   html += `</div>`;
   return html;

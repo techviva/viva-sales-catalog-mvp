@@ -76,131 +76,188 @@ const SERVICES = [
     id: "pergolas",
     title: "Pergolas & Patio Covers",
     icon: "pergola",
-    shortDesc: "Solid, lattice, and combination patio covers built to enhance outdoor living year-round.",
-    heroBadges: ["Aluminum Construction", "Low Maintenance", "Custom Colors", "Add-On Ready"],
+    shortDesc: "Three pergola types we install: Lattice, Solid, and Cantilever (two-post). All from Duralum aluminum systems.",
+    heroBadges: ["Lattice · Solid · Cantilever", "Duralum Aluminum", "Custom Colors & Finishes", "Add-On Ready"],
     heroImage: "https://lh3.googleusercontent.com/d/1XFixujTOltHntNijYPC9yLTRW8fdQjGa",
-    sections: ["Overview", "Lattice vs Solid", "Attached vs Freestanding", "Two-Post / Cantilever", "Add-Ons", "Colors & Finishes", "FAQs", "Gallery"],
+    sections: ["Overview", "Pergola Types", "Configurations", "Colors & Finishes", "Add-Ons", "FAQs", "Gallery"],
 
     overview: {
-      intro: "Pergolas and patio covers are one of the highest-impact upgrades for any Phoenix-area home. They extend usable outdoor living space, reduce direct sun exposure, and add lasting value to the property.",
-      vendorNote: "Our preferred vendor is Duralum, a manufacturer with over 60 years of experience producing aluminum patio cover systems. Their products are built for low maintenance and long-term durability in desert climates.",
+      intro: "Pergolas and patio covers are one of the highest-impact upgrades for any Phoenix-area home — they extend usable outdoor living space, reduce direct sun exposure, and lift the property's value. We install three Duralum pergola types: Lattice, Solid, and Cantilever (two-post).",
+      vendorNote: "Our preferred vendor is Duralum — over 60 years of aluminum patio cover manufacturing. For complex projects we partner locally with AZ Sun Covers. AlumaWood Patio is a useful research reference for the team.",
       keyPoints: [
-        "Solid covers provide full shade and weather protection.",
-        "Lattice covers allow airflow and filtered sunlight.",
-        "Insulated options offer enhanced heat control and hidden wiring channels.",
-        "Available as attached (to the home) or freestanding structures.",
-        "Add-ons include lighting, ceiling fans, and electrical access.",
+        "Lattice covers allow airflow and filtered sunlight — open feel.",
+        "Solid covers provide full shade and weather protection — premium feel.",
+        "Cantilever (two-post) pergolas are a clean, modern footprint with two posts and a wall-mounted side.",
+        "Each type can be installed in Attached or Freestanding configuration.",
+        "Color and rafter-tail cut selections are part of the close — clients love seeing the options.",
       ],
-      consultant_tip: "Start by asking the client what they want to use the space for — entertaining, relaxing, working from home, kids' play area. This determines whether lattice or solid is the better recommendation.",
+      consultant_tip: "Start by asking the client what they want to use the space for — entertaining, relaxing, working from home, kids' play area. That answer drives the lattice-vs-solid recommendation faster than spec talk.",
     },
-
-    comparisons: [
-      {
-        title: "Lattice vs Solid Patio Covers",
-        items: [
-          {
-            name: "Lattice Patio Cover",
-            subtitle: "Duralum Phoenix Lattice",
-            badges: ["Airflow", "Filtered Light", "Classic Look"],
-            points: [
-              "Wood-look aluminum with low maintenance.",
-              "Allows airflow and filtered sunlight through.",
-              "Ideal for areas where full shade is not required.",
-              "Works well for garden areas and open entertaining spaces.",
-              "Available in attached and freestanding configurations.",
-            ],
-            image: "https://lh3.googleusercontent.com/d/1SDo-aFoaBiC5kjGLchyWN_wBPcFIoKhv",
-          },
-          {
-            name: "Solid Patio Cover",
-            subtitle: "Duralum Californian Solid",
-            badges: ["Full Shade", "Weather Protection", "Premium Feel"],
-            points: [
-              "High-grade aluminum with multiple rafter-tail finish options.",
-              "Provides complete shade and protection from rain.",
-              "Better for outdoor kitchens, seating areas, and living rooms.",
-              "Stronger premium perception for higher-ticket projects.",
-              "Can support electrical add-ons with proper planning.",
-            ],
-            image: "https://lh3.googleusercontent.com/d/1r5hl_AV0g_iYrqEpDu2n2fQKydvclrYm",
-          },
-        ],
-      },
-      {
-        title: "Attached vs Freestanding",
-        items: [
-          {
-            name: "Attached",
-            subtitle: "Connected to the home structure",
-            badges: ["Seamless Look", "Most Common"],
-            points: [
-              "Mounts directly to the fascia or wall of the home.",
-              "Creates a natural extension of indoor living space.",
-              "Most common configuration for backyard patios.",
-            ],
-            image: "https://lh3.googleusercontent.com/d/1nv-q_VA_0_a-llCQVnY9rMDeljZjyLDX",
-          },
-          {
-            name: "Freestanding",
-            subtitle: "Independent structure",
-            badges: ["Flexible Placement", "Pool Areas"],
-            points: [
-              "Stands independently with its own post system.",
-              "Ideal for pool areas, garden features, or detached seating zones.",
-              "Offers more placement flexibility in the yard.",
-            ],
-            image: "https://lh3.googleusercontent.com/d/1ItDyaa8CF8LkHc5HnLPsFyUpM2Mz7x7o",
-          },
-        ],
-      },
-    ],
 
     options: [
       {
+        name: "Lattice Pergola",
+        subtitle: "Duralum Phoenix Lattice — open, filtered light",
+        tier: "standard",
+        badges: ["Airflow", "Filtered Light", "Most Versatile"],
+        description: "Wood-look aluminum lattice cover. Slatted top allows airflow and filtered sunlight — ideal for garden areas, open entertaining, or anywhere full shade isn't required. Installs attached to the home or freestanding.",
+        specs: [
+          { label: "Vendor", value: "Duralum" },
+          { label: "Material", value: "Wood-look aluminum" },
+          { label: "Maintenance", value: "Low — no rot, no warp, no repaint" },
+          { label: "Configurations", value: "Attached or Freestanding" },
+          { label: "Best For", value: "Gardens, open entertaining, partial shade" },
+        ],
+        image: "https://lh3.googleusercontent.com/d/1SDo-aFoaBiC5kjGLchyWN_wBPcFIoKhv",
+        images: [
+          "https://lh3.googleusercontent.com/d/1ItDyaa8CF8LkHc5HnLPsFyUpM2Mz7x7o",
+          "https://lh3.googleusercontent.com/d/1bDXyYbnYxxH1ld98tP6Ngg7CaoVrWZl9",
+          "https://lh3.googleusercontent.com/d/1o6aEFaJR3zYF2NNQCtVobaaAzfLUX__R",
+        ],
+      },
+      {
+        name: "Solid Pergola",
+        subtitle: "Duralum Californian Solid — full shade, weather protection",
+        tier: "standard",
+        badges: ["Full Shade", "Weather Protection", "Premium Feel"],
+        description: "Solid aluminum cover providing complete shade and protection from rain. Higher-grade construction with a premium feel — best fit for outdoor kitchens, dining areas, and outdoor living rooms. Choose from three decorative rafter-tail end cuts: Scallop, Miter, or Bevel.",
+        specs: [
+          { label: "Vendor", value: "Duralum" },
+          { label: "Material", value: "High-grade aluminum, solid panel" },
+          { label: "Rafter-Tail Cuts", value: "Scallop · Miter · Bevel" },
+          { label: "Configurations", value: "Attached or Freestanding" },
+          { label: "Best For", value: "Outdoor kitchens, dining, living rooms" },
+        ],
+        image: "https://lh3.googleusercontent.com/d/1r5hl_AV0g_iYrqEpDu2n2fQKydvclrYm",
+        images: [
+          "https://lh3.googleusercontent.com/d/13Ds8x8qydwJ5cip1yvxWMXD-kZK3AAn0",
+          "https://lh3.googleusercontent.com/d/16NTqEeHYY9XulWBwkuAPUQ8jY6sh138Q",
+        ],
+      },
+      {
+        name: "Cantilever (Two-Post) Pergola",
+        subtitle: "Modern footprint — two outer posts, wall-mounted on the home side",
+        tier: "standard",
+        badges: ["Two-Post", "Clean Look", "Compact Patios"],
+        description: "A two-post or cantilever pergola uses only two support posts on the outer edge, with the structure supported by the home's wall on the other side. The result is a cleaner, more open footprint — great for smaller patios or where post placement is limited.",
+        specs: [
+          { label: "Posts", value: "2 (outer edge only)" },
+          { label: "Other Side", value: "Wall-mounted to the home" },
+          { label: "Available As", value: "Lattice or Solid finish" },
+          { label: "Best For", value: "Smaller patios, modern look, minimal posts" },
+        ],
+        image: "https://lh3.googleusercontent.com/d/14gB-ANPUozQkReaLXpCRcWRDecJZ-mmh",
+        images: [
+          "https://lh3.googleusercontent.com/d/1Kp5vEPZ232_mEupIYV6WQge1z3QU6qiS",
+        ],
+      },
+      {
         name: "Insulated Patio Cover",
-        subtitle: "Duralum Monterey Insulated",
+        subtitle: "Duralum Monterey Insulated — Specialty",
         tier: "premium",
+        hidden: true,
         badges: ["Best Heat Control", "Hidden Wiring"],
-        description: "Designed for stronger heat control with insulated panels. Includes hidden internal raceways that allow for ceiling fans, light fixtures, and electrical without exposed conduit.",
+        description: "Specialty solid cover with insulated panels. Includes hidden internal raceways for ceiling fans, light fixtures, and electrical without exposed conduit. Reveal when a client signals interest in heat control or extensive add-ons.",
         specs: [
           { label: "Material", value: "Insulated aluminum panels" },
           { label: "Wiring", value: "Hidden internal raceways" },
-          { label: "Best For", value: "Outdoor living rooms, kitchens, work-from-home spaces" },
+          { label: "Best For", value: "Outdoor living rooms with heavy add-ons" },
         ],
         image: "https://lh3.googleusercontent.com/d/1Wm6u-dM7Hcc9AkUeHCA9MJ17TwzTzjlB",
-        note: "⚠️ Internal note: Confirm which Duralum system types Viva installs for electrical/fan/light add-ons.",
+        note: "Specialty upsell. Reveal when the client asks about insulated panels or wants extensive add-ons (fans, lights, electrical).",
       },
     ],
 
-    twoPostSection: {
-      title: "Two-Post / Cantilever Pergola",
-      description: "A two-post or cantilever pergola uses only two support posts on the outer edge, with the structure cantilevering from the home's wall. It creates a cleaner, more open feel.",
-      keyPoints: [
-        "Uses only two support posts instead of four.",
-        "Creates a cleaner, more open feel under the cover.",
-        "Typically attached to the home structure for support.",
-        "Good option for smaller patios or when post placement is limited.",
+    configurations: {
+      title: "Attached or Freestanding",
+      description: "Every Duralum pergola we install can be configured one of two ways. This is a layout decision — independent of the type (Lattice, Solid, or Cantilever).",
+      items: [
+        {
+          name: "Attached",
+          subtitle: "Connected to the home structure",
+          badges: ["Most Common", "Seamless Look"],
+          points: [
+            "Mounts directly to the fascia or wall of the home.",
+            "Creates a natural extension of indoor living space.",
+            "Most common configuration for backyard patios.",
+          ],
+          image: "https://lh3.googleusercontent.com/d/1nv-q_VA_0_a-llCQVnY9rMDeljZjyLDX",
+        },
+        {
+          name: "Freestanding",
+          subtitle: "Independent structure",
+          badges: ["Flexible Placement", "Pool Areas"],
+          points: [
+            "Stands independently with its own post system.",
+            "Ideal for pool areas, garden features, or detached seating zones.",
+            "Offers more placement flexibility in the yard.",
+          ],
+          image: "https://lh3.googleusercontent.com/d/1ItDyaa8CF8LkHc5HnLPsFyUpM2Mz7x7o",
+        },
       ],
-      confirmationNeeded: "Confirm the exact term Viva wants to use for this product in client-facing materials.",
-      image: "https://lh3.googleusercontent.com/d/14gB-ANPUozQkReaLXpCRcWRDecJZ-mmh",
     },
 
     addOns: [
-      { name: "Recessed Lighting", description: "Built-in LED lighting for evening use.", icon: "light" },
-      { name: "Ceiling Fans", description: "Outdoor-rated fans for air circulation.", icon: "fan" },
-      { name: "Electrical Access", description: "Outlets and wiring for appliances or speakers.", icon: "electric" },
-      { name: "Privacy Screens", description: "Side panels for wind protection or privacy.", icon: "screen" },
-      { name: "Gutters & Drainage", description: "Integrated drainage for solid covers.", icon: "gutter" },
+      {
+        name: "Recessed Lighting",
+        description: "Built-in LED lighting integrated into the underside of the cover.",
+        icon: "light",
+        details: [
+          "Used for ambient evening lighting on the patio.",
+          "On insulated covers (Monterey), wiring runs through hidden raceways — no exposed conduit.",
+          "On non-insulated covers, surface-mounted conduit is the standard alternative.",
+        ],
+      },
+      {
+        name: "Ceiling Fans",
+        description: "Outdoor-rated ceiling fans for air circulation under the cover.",
+        icon: "fan",
+        details: [
+          "Standard outdoor-rated fan, mounted to the ceiling beam.",
+          "Requires planned electrical access during installation.",
+          "Insulated covers (Monterey) hide the wiring inside the panel for a cleaner look.",
+        ],
+      },
+      {
+        name: "Electrical Access",
+        description: "Outlets and wiring for appliances, speakers, fans, or lights.",
+        icon: "electric",
+        details: [
+          "Plan electrical at install time to avoid surface conduit later.",
+          "Outlets are commonly placed near corner posts or on the wall-mount side.",
+          "Requires permit and licensed electrician — Viva coordinates the trade.",
+        ],
+      },
+      {
+        name: "Privacy Screens",
+        description: "Side panels for wind protection, sun blocking, or privacy.",
+        icon: "screen",
+        details: [
+          "Lattice or solid side-screen panels.",
+          "Encloses one or two sides of the pergola for partial privacy.",
+          "Decorative cut options available.",
+        ],
+      },
+      {
+        name: "Gutters & Drainage",
+        description: "Integrated gutter and drainage system, primarily for solid covers.",
+        icon: "gutter",
+        details: [
+          "Channels rainwater runoff away from the patio.",
+          "Standard on most solid cover installs in monsoon-zone properties.",
+          "Lattice covers don't require gutters but can have them as an option.",
+        ],
+      },
     ],
 
     colorOptions: {
-      note: "Duralum offers a range of standard and premium colors for all patio cover systems.",
+      note: "Duralum offers a defined palette across all patio cover systems. Color and rafter-tail cut selections are part of the close — clients love seeing the options.",
       categories: [
         { label: "Standard Colors", items: ["White", "Sandstone", "Adobe", "Brown"] },
-        { label: "Premium / Wood-Grain Finishes", items: ["Knotwood finishes available — confirm exact options with Duralum rep"] },
-        { label: "Rafter-Tail Styles", items: ["Multiple decorative rafter-tail end cuts available on solid models"] },
+        { label: "Premium / Wood-Grain Finishes", items: ["Knotwood wood-grain finishes — confirm exact options with Duralum rep before quoting"] },
+        { label: "Rafter-Tail End Cuts (Solid Pergolas)", items: ["Scallop Cut", "Miter Cut", "Bevel Cut"] },
       ],
-      placeholder: "Final color swatch images pending — replace with vendor-provided assets.",
+      placeholder: "Final color swatch images pending — replace with vendor-provided assets from Duralum.",
     },
 
     faqs: [
@@ -233,11 +290,13 @@ const SERVICES = [
     ],
 
     internalNotes: [
-      "Confirm exact Duralum system types Viva installs (lattice, solid, insulated, or all three).",
-      "Confirm whether two-post/cantilever is offered and what term to use in client materials.",
-      "Obtain Duralum color swatch images for the color options section.",
-      "Select 5–10 best installed pergola photos from Google Drive (folders: Categories/Pergolas — Lattice, Cantilever, 4k aluminum).",
-      "Clarify which add-ons require the Monterey insulated system vs. other systems.",
+      "Vendor: Duralum (https://duralum.com) — primary source for color/finish/cut options.",
+      "Local partner for complex installs: AZ Sun Covers (https://azsuncovers.com).",
+      "Research reference for the team: AlumaWood Patio (https://alumawoodpatio.com).",
+      "Verify image-to-product assignments next time a real install is photographed — current images are best-categorized but should be confirmed against actual product types.",
+      "Confirm exact Knotwood premium color names + pricing before quoting wood-grain finishes.",
+      "Add-on availability depends on system: Insulated (Monterey) supports hidden wiring; non-insulated needs surface conduit.",
+      "Solid pergola end-cuts: Scallop / Miter / Bevel — scalloping is the most decorative; miter is clean modern; bevel is a 45° straight finish.",
     ],
   },
 
